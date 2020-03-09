@@ -11,6 +11,32 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
+import ImageModal from "./ImageModal";
+
+const animals = [
+  {
+    name: "Rufus",
+    type: "Dog",
+    breed: "Jack Russel Terrier",
+    image: "../assets/orange-cat.jpg",
+    liked: false
+  },
+  {
+    name: "LadyBird",
+    type: "Dog",
+    breed: "Jack Russel Terrier",
+    image: "../assets/orange-cat.jpg",
+    liked: false
+  },
+  {
+    name: "Percy",
+    type: "Naked Mole Rat",
+    breed: "Jack Russel Terrier",
+    image: "../assets/orange-cat.jpg",
+    liked: false
+  }
+];
+
 const Animal = props => {
   const [imageModalVisible, setImageModalVisible] = useState(false);
   const [checked, setChecked] = useState("checkcircleo");
@@ -37,7 +63,12 @@ const Animal = props => {
       </View>
       <TouchableOpacity
         onPress={() => {
-          props.loadProfile(true);
+          props.navigation.navigate({
+            routeName: "AnimalProfile",
+            params: {
+              name: props.animal.name
+            }
+          });
         }}
       >
         <View>
@@ -50,20 +81,11 @@ const Animal = props => {
           <AntDesign name={checked} size={32} color="blue" />
         </View>
       </TouchableOpacity>
-      <Modal animationType="slide" visible={imageModalVisible}>
-        <View style={styles.fullAnimalImageContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              setImageModalVisible(!imageModalVisible);
-            }}
-          >
-            <Image
-              style={styles.fullAnimalImage}
-              source={require("../assets/orange-cat.jpg")}
-            />
-          </TouchableOpacity>
-        </View>
-      </Modal>
+
+      <ImageModal
+        imageModalVisible={imageModalVisible}
+        setImageModalVisible={setImageModalVisible}
+      />
     </View>
   );
 };
