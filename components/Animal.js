@@ -2,91 +2,69 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  Button,
   StyleSheet,
   Image,
   TouchableOpacity,
-  Modal,
   Dimensions
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import ImageModal from "./ImageModal";
 
-const animals = [
-  {
-    name: "Rufus",
-    type: "Dog",
-    breed: "Jack Russel Terrier",
-    image: "../assets/orange-cat.jpg",
-    liked: false
-  },
-  {
-    name: "LadyBird",
-    type: "Dog",
-    breed: "Jack Russel Terrier",
-    image: "../assets/orange-cat.jpg",
-    liked: false
-  },
-  {
-    name: "Percy",
-    type: "Naked Mole Rat",
-    breed: "Jack Russel Terrier",
-    image: "../assets/orange-cat.jpg",
-    liked: false
-  }
-];
-
 const Animal = props => {
   const [imageModalVisible, setImageModalVisible] = useState(false);
-  const [checked, setChecked] = useState("checkcircleo");
-  const [check, setCheck] = useState(false);
-
-  const handleCheck = () => {
-    check ? setChecked("checkcircle") : setChecked("checkcircleo");
-    setCheck(!check);
-  };
 
   return (
-    <View style={styles.animalContainer}>
-      <View style={styles.imageContainer}>
-        <TouchableOpacity
-          onPress={() => {
-            setImageModalVisible(true);
-          }}
-        >
-          <Image
-            style={styles.animalImage}
-            source={require("../assets/orange-cat.jpg")}
-          />
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity
-        onPress={() => {
-          props.navigation.navigate({
-            routeName: "AnimalProfile",
-            params: {
-              name: props.animal.name
-            }
-          });
-        }}
-      >
-        <View>
-          <Text style={styles.animalName}>{props.animal.name}</Text>
-          <Text>{props.animal.type}</Text>
+    <TouchableOpacity
+      onPress={() => {
+        props.navigation.navigate({
+          routeName: "AnimalProfile",
+          params: {
+            animal: props.animal
+          }
+        });
+      }}
+    >
+      <View style={styles.animalContainer}>
+        <View style={styles.imageContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              setImageModalVisible(true);
+            }}
+          >
+            <Image
+              style={styles.animalImage}
+              source={require("../assets/orange-cat.jpg")}
+            />
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleCheck}>
-        <View style={styles.likeButton}>
-          <AntDesign name={checked} size={32} color="blue" />
+        <View style={styles.animalInfo}>
+          <View>
+            <Text style={styles.animalNameText}>{props.animal.name}</Text>
+          </View>
+          <View style={styles.animalType}>
+            <Text style={styles.animalTypeText}>{props.animal.type}</Text>
+          </View>
         </View>
-      </TouchableOpacity>
 
-      <ImageModal
-        imageModalVisible={imageModalVisible}
-        setImageModalVisible={setImageModalVisible}
-      />
-    </View>
+        <TouchableOpacity
+          onPress={() => props.handleCheckPress(props.animal.id)}
+        >
+          <View style={styles.likeButton}>
+            <AntDesign
+              name={props.animal.liked ? "heart" : "hearto"}
+              size={32}
+              color="#3a7ebf"
+            />
+          </View>
+        </TouchableOpacity>
+
+        <ImageModal
+          imageModalVisible={imageModalVisible}
+          setImageModalVisible={setImageModalVisible}
+        />
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -95,16 +73,36 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginVertical: 10,
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#72bcd4",
+    marginHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5
   },
   imageContainer: {
-    marginRight: 50,
-    marginLeft: 15
+    marginRight: 10,
+    marginLeft: 15,
+    flex: 2
   },
   animalImage: {
     height: 75,
     width: 75,
     borderRadius: 50
+  },
+  animalInfo: {
+    flex: 3,
+    alignItems: "flex-start"
+  },
+  animalType: {
+    backgroundColor: "#3a7ebf",
+    borderRadius: 3,
+    paddingVertical: 2,
+    paddingHorizontal: 5
+  },
+  animalTypeText: {
+    color: "white",
+    textAlign: "center"
   },
   fullAnimalImageContainer: {
     flex: 1,
@@ -117,10 +115,16 @@ const styles = StyleSheet.create({
     marginVertical: Math.round(Dimensions.get("window").height) / 6
   },
   animalName: {
-    fontSize: 20
+    paddingBottom: 10
+  },
+  animalNameText: {
+    fontSize: 20,
+    fontFamily: "source-sans-semi-bold",
+    color: "white"
   },
   likeButton: {
-    marginHorizontal: 15
+    padding: 15,
+    flex: 1
   }
 });
 

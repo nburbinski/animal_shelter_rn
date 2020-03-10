@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import ImageModal from "../components/ImageModal";
+import HeaderButton from "../components/HeaderButton";
 
 const AnimalProfileScreen = props => {
   const [imageModalVisible, setImageModalVisible] = useState(false);
 
-  const animalName = props.navigation.getParam("name");
+  const animal = props.navigation.getParam("animal");
 
   return (
     <View style={styles.profileContainer}>
@@ -22,7 +24,7 @@ const AnimalProfileScreen = props => {
           />
         </TouchableOpacity>
       </View>
-      <Text style={styles.animalName}>{animalName}</Text>
+      <Text style={styles.animalName}>{animal.name}</Text>
       {/* <View style={styles.animalTypeContainer}>
         <Text style={styles.animalTypeText}>{props.animal.type}</Text>
       </View>
@@ -36,10 +38,19 @@ const AnimalProfileScreen = props => {
 };
 
 AnimalProfileScreen.navigationOptions = navigationData => {
-  const animalName = navigationData.navigation.getParam("name");
+  const animal = navigationData.navigation.getParam("animal");
 
   return {
-    headerTitle: animalName
+    headerTitle: animal.name,
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Like"
+          iconName={animal.liked ? "heart" : "hearto"}
+          onPress={() => {}}
+        />
+      </HeaderButtons>
+    )
   };
 };
 

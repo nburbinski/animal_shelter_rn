@@ -1,43 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView } from "react-native";
 
 import Animal from "./Animal";
 
-// Demo List
-const animals = [
-  {
-    name: "Rufus",
-    type: "Dog",
-    breed: "Jack Russel Terrier",
-    image: "../assets/orange-cat.jpg",
-    liked: false
-  },
-  {
-    name: "LadyBird",
-    type: "Dog",
-    breed: "Jack Russel Terrier",
-    image: "../assets/orange-cat.jpg",
-    liked: false
-  },
-  {
-    name: "Percy",
-    type: "Naked Mole Rat",
-    breed: "Jack Russel Terrier",
-    image: "../assets/orange-cat.jpg",
-    liked: false
-  }
-];
-
 const AnimalList = props => {
+  const handleCheckPress = id => {
+    const test = props.animals.map(animal =>
+      animal.id === id ? { ...animal, liked: !animal.liked } : animal
+    );
+    props.setAnimals(test);
+  };
+
   return (
     <ScrollView>
-      {animals.map(animal => (
+      {props.animals.map(animal => (
         <Animal
-          key={animal.name}
+          key={animal.id}
           animal={animal}
           loadProfile={props.loadProfile}
           selectAnimal={props.selectAnimal}
           navigation={props.navigation}
+          handleCheckPress={handleCheckPress}
         />
       ))}
     </ScrollView>
