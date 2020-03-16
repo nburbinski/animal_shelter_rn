@@ -7,7 +7,7 @@ import AnimalList from "../components/AnimalList";
 import HeaderButton from "../components/HeaderButton";
 
 const AnimalListScreen = props => {
-  const animals = useSelector(state => state.animals.animals);
+  const animals = useSelector(state => state.animals.filteredAnimals);
 
   return (
     <View style={styles.animalList}>

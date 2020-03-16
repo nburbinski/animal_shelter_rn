@@ -7,6 +7,9 @@ import {
   Switch,
   TouchableOpacity
 } from "react-native";
+import { useDispatch } from "react-redux";
+
+import { setFilters } from "../store/actions/actions";
 
 const FilterScreen = props => {
   const [isType, setIsType] = useState(false);
@@ -14,6 +17,20 @@ const FilterScreen = props => {
 
   const [type, setType] = useState("Dog");
   const [breed, setBreed] = useState("Dog");
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = () => {
+    const appliedFilters = {
+      isType,
+      isBreed,
+      type,
+      breed
+    };
+
+    dispatch(setFilters(appliedFilters));
+    props.navigation.navigate("Animals");
+  };
 
   return (
     <View style={styles.container}>
@@ -31,7 +48,7 @@ const FilterScreen = props => {
       >
         <Picker.Item label="Dog" value="dog" />
         <Picker.Item label="Cat" value="cat" />
-        <Picker.Item label="Naked Mole Rat" value="nmr" />
+        <Picker.Item label="Naked Mole Rat" value="naked mole rat" />
       </Picker>
       <View style={styles.filterContainer}>
         <Text style={styles.filterTitle}>Breed: </Text>
@@ -49,11 +66,7 @@ const FilterScreen = props => {
         <Picker.Item label="Cat" value="cat" />
         <Picker.Item label="Naked Mole Rat" value="nmr" />
       </Picker>
-      <TouchableOpacity
-        onPress={() => {
-          props.navigation.navigate("Animals");
-        }}
-      >
+      <TouchableOpacity onPress={handleSubmit}>
         <View style={styles.submitButton}>
           <Text style={styles.submitText}>Apply Filters</Text>
         </View>

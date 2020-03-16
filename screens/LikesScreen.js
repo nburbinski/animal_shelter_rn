@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import AnimalList from "../components/AnimalList";
 
 const LikesScreen = props => {
-  const animals = useSelector(state => state.animals.animals);
+  const animals = useSelector(state => state.animals.filteredAnimals);
 
   return (
     <View>
