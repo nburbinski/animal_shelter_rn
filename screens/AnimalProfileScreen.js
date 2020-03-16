@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
@@ -9,14 +9,26 @@ import {
   ScrollView
 } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { useDispatch } from "react-redux";
 
 import ImageModal from "../components/ImageModal";
 import HeaderButton from "../components/HeaderButton";
+import { toggleLike } from "../store/actions/actions";
 
 const AnimalProfileScreen = props => {
   const [imageModalVisible, setImageModalVisible] = useState(false);
 
   const animal = props.navigation.getParam("animal");
+
+  const dispatch = useDispatch();
+
+  const handleCheckPress = useCallback(() => {
+    dispatch(toggleLike(props.animal.id));
+  });
+
+  useEffect(() => {
+    props.navigation.setParams({ toggleLike: handleCheckPress });
+  }, [dispatch]);
 
   return (
     <ScrollView>
@@ -66,7 +78,7 @@ AnimalProfileScreen.navigationOptions = navigationData => {
         <Item
           title="Like"
           iconName={animal.liked ? "heart" : "hearto"}
-          onPress={() => {}}
+          onPress={navigationData.navigation.getParam("toggleLike")}
         />
       </HeaderButtons>
     )

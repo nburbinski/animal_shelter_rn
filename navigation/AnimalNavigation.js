@@ -37,19 +37,22 @@ const AnimalTabsNavigator = createBottomTabNavigator(
         }
       }
     },
-    Search: {
-      screen: SearchScreen,
-      navigationOptions: {
-        tabBarOptions: {
-          showLabel: false
-        },
-        tabBarIcon: tabInfo => {
-          return (
-            <AntDesign name="search1" size={32} color={tabInfo.tintColor} />
-          );
-        }
-      }
-    },
+    // Search: {
+    //   screen: SearchScreen,
+    //   navigationOptions: {
+    //     tabBarOnPress: event => {
+    //       event.defaultHandler;
+    //     },
+    //     tabBarOptions: {
+    //       showLabel: false
+    //     },
+    //     tabBarIcon: tabInfo => {
+    //       return (
+    //         <AntDesign name="search1" size={32} color={tabInfo.tintColor} />
+    //       );
+    //     }
+    //   }
+    // },
     Likes: {
       screen: LikesNavigator,
       navigationOptions: {

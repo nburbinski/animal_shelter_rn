@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
+import ReduxThunk from "redux-thunk";
 
 import AnimalNavigator from "./navigation/AnimalNavigation";
 import { animalReducer } from "./store/reducers/animalReducer";
@@ -15,7 +16,7 @@ const fechFonts = () => {
 };
 
 const rootReducer = combineReducers({ animals: animalReducer });
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 export default function App() {
   const [dataLoaded, setDataLoaded] = useState(false);

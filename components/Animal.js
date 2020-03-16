@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
@@ -20,6 +20,10 @@ const Animal = props => {
   const handleCheckPress = useCallback(() => {
     dispatch(toggleLike(props.animal.id));
   });
+
+  useEffect(() => {
+    props.navigation.setParams({ toggleLike: handleCheckPress });
+  }, [dispatch]);
 
   return (
     <TouchableOpacity
