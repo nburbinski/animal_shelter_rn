@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  ScrollView
+} from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import ImageModal from "../components/ImageModal";
@@ -11,29 +19,40 @@ const AnimalProfileScreen = props => {
   const animal = props.navigation.getParam("animal");
 
   return (
-    <View style={styles.profileContainer}>
-      <View style={styles.imageContainer}>
-        <TouchableOpacity
-          onPress={() => {
-            setImageModalVisible(true);
-          }}
-        >
-          <Image
-            style={styles.animalImage}
-            source={require("../assets/orange-cat.jpg")}
+    <ScrollView>
+      <View style={styles.profileContainer}>
+        <View style={styles.imageContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              setImageModalVisible(true);
+            }}
+          >
+            <Image style={styles.animalImage} source={{ uri: animal.image }} />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.animalName}>{animal.name}</Text>
+        <View style={styles.animalTypeContainer}>
+          <Text style={styles.animalTypeText}>{animal.type}</Text>
+        </View>
+        <Text>{animal.breed}</Text>
+        <View style={styles.galleryContainer}>
+          <FlatList
+            horizontal={true}
+            data={animal.gallery}
+            renderItem={itemData => (
+              <Image
+                style={styles.galleryImage}
+                source={{ uri: itemData.item }}
+              />
+            )}
           />
-        </TouchableOpacity>
+        </View>
+        <ImageModal
+          imageModalVisible={imageModalVisible}
+          setImageModalVisible={setImageModalVisible}
+        />
       </View>
-      <Text style={styles.animalName}>{animal.name}</Text>
-      {/* <View style={styles.animalTypeContainer}>
-        <Text style={styles.animalTypeText}>{props.animal.type}</Text>
-      </View>
-      <Text>{props.animal.breed}</Text> */}
-      <ImageModal
-        imageModalVisible={imageModalVisible}
-        setImageModalVisible={setImageModalVisible}
-      />
-    </View>
+    </ScrollView>
   );
 };
 
@@ -81,6 +100,14 @@ const styles = StyleSheet.create({
   },
   animalTypeText: {
     color: "white"
+  },
+  galleryContainer: {
+    flex: 1
+  },
+  galleryImage: {
+    height: 100,
+    width: 100,
+    margin: 5
   }
 });
 

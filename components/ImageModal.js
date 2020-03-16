@@ -19,7 +19,9 @@ const ImageModal = props => {
         >
           <Image
             style={styles.fullAnimalImage}
-            source={require("../assets/orange-cat.jpg")}
+            source={{
+              uri: props.url
+            }}
           />
         </TouchableOpacity>
       </View>

@@ -1,41 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { View } from "react-native";
+import { useSelector } from "react-redux";
 
 import AnimalList from "../components/AnimalList";
 
 const LikesScreen = props => {
-  const [animals, setAnimals] = useState([
-    {
-      id: "1",
-      name: "Rufus",
-      type: "Dog",
-      breed: "Jack Russel Terrier",
-      image: "../assets/orange-cat.jpg",
-      liked: true
-    },
-    {
-      id: "2",
-      name: "LadyBird",
-      type: "Dog",
-      breed: "Jack Russel Terrier",
-      image: "../assets/orange-cat.jpg",
-      liked: false
-    },
-    {
-      id: "3",
-      name: "Percy",
-      type: "Naked Mole Rat",
-      breed: "Jack Russel Terrier",
-      image: "../assets/orange-cat.jpg",
-      liked: false
-    }
-  ]);
+  const animals = useSelector(state => state.animals.animals);
 
   return (
     <View>
       <AnimalList
         animals={animals.filter(animal => animal.liked === true)}
-        setAnimals={setAnimals}
         loadProfile={props.loadProfile}
         selectAnimal={props.selectAnimal}
         navigation={props.navigation}

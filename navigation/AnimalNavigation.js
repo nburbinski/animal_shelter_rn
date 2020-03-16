@@ -11,10 +11,12 @@ import AnimalListScreen from "../screens/AnimalListScreen";
 import AnimalProfileScreen from "../screens/AnimalProfileScreen";
 import LikesScreen from "../screens/LikesScreen";
 import SearchScreen from "../screens/SearchScreen";
+import FilterScreen from "../screens/FilterScreen";
 
 const AnimalNavigator = createStackNavigator({
   Animals: AnimalListScreen,
-  AnimalProfile: AnimalProfileScreen
+  AnimalProfile: AnimalProfileScreen,
+  Filter: FilterScreen
 });
 
 const LikesNavigator = createStackNavigator({

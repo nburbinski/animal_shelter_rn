@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -8,11 +8,18 @@ import {
   Dimensions
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
 
+import { toggleLike } from "../store/actions/actions";
 import ImageModal from "./ImageModal";
 
 const Animal = props => {
   const [imageModalVisible, setImageModalVisible] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleCheckPress = useCallback(() => {
+    dispatch(toggleLike(props.animal.id));
+  });
 
   return (
     <TouchableOpacity
@@ -34,7 +41,7 @@ const Animal = props => {
           >
             <Image
               style={styles.animalImage}
-              source={require("../assets/orange-cat.jpg")}
+              source={{ uri: props.animal.image }}
             />
           </TouchableOpacity>
         </View>
@@ -47,9 +54,7 @@ const Animal = props => {
           </View>
         </View>
 
-        <TouchableOpacity
-          onPress={() => props.handleCheckPress(props.animal.id)}
-        >
+        <TouchableOpacity onPress={handleCheckPress}>
           <View style={styles.likeButton}>
             <AntDesign
               name={props.animal.liked ? "heart" : "hearto"}
@@ -60,6 +65,7 @@ const Animal = props => {
         </TouchableOpacity>
 
         <ImageModal
+          url={props.animal.image}
           imageModalVisible={imageModalVisible}
           setImageModalVisible={setImageModalVisible}
         />
@@ -77,8 +83,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     backgroundColor: "#72bcd4",
     marginHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 5
+    paddingVertical: 7,
+    borderRadius: 5,
+    elevation: 2
   },
   imageContainer: {
     marginRight: 10,
@@ -124,7 +131,8 @@ const styles = StyleSheet.create({
   },
   likeButton: {
     padding: 15,
-    flex: 1
+    flex: 1,
+    justifyContent: "center"
   }
 });
 
