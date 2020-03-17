@@ -21,14 +21,6 @@ const AnimalListScreen = props => {
     loadAnimals();
   }, [dispatch]);
 
-  useEffect(() => {
-    const willFocusSub = props.navigation.addListener("willFocus", loadAnimals);
-
-    return () => {
-      willFocusSub.remove();
-    };
-  }, [loadAnimals]);
-
   if (isLoading) {
     return (
       <View style={styles.loading}>

@@ -20,7 +20,7 @@ const FilterScreen = props => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = () => {
+  const handleApply = () => {
     const appliedFilters = {
       isType,
       isBreed,
@@ -30,6 +30,18 @@ const FilterScreen = props => {
 
     dispatch(setFilters(appliedFilters));
     props.navigation.navigate("Animals");
+  };
+
+  const handleReset = () => {
+    setIsBreed(false);
+    setIsType(false);
+    const appliedFilters = {
+      isType,
+      isBreed,
+      type,
+      breed
+    };
+    dispatch(setFilters(appliedFilters));
   };
 
   return (
@@ -66,11 +78,18 @@ const FilterScreen = props => {
         <Picker.Item label="Cat" value="cat" />
         <Picker.Item label="Naked Mole Rat" value="nmr" />
       </Picker>
-      <TouchableOpacity onPress={handleSubmit}>
-        <View style={styles.submitButton}>
-          <Text style={styles.submitText}>Apply Filters</Text>
-        </View>
-      </TouchableOpacity>
+      <View style={styles.buttons}>
+        <TouchableOpacity onPress={handleApply}>
+          <View style={styles.submitButton}>
+            <Text style={styles.submitText}>Apply Filters</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleReset}>
+          <View style={styles.submitButton}>
+            <Text style={styles.submitText}>Reset Filters</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -95,11 +114,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 5,
-    marginTop: 10
+    marginTop: 10,
+    marginHorizontal: 10
   },
   submitText: {
     color: "white",
     fontFamily: "source-sans-semi-bold"
+  },
+  buttons: {
+    flexDirection: "row"
   }
 });
 

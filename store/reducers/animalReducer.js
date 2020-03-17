@@ -39,8 +39,9 @@ export const animalReducer = (state = initialState, action) => {
           return false;
         if (appliedFilters.isType && animal.type !== appliedFilters.type)
           return false;
-
-        return true;
+        else {
+          return true;
+        }
       });
       return { ...state, filteredAnimals: filteredAnimals };
     default:
