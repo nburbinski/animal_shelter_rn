@@ -53,7 +53,13 @@ const Animal = props => {
           <View>
             <Text style={styles.animalNameText}>{props.animal.name}</Text>
           </View>
-          <View style={styles.animalType}>
+          <View
+            style={{
+              backgroundColor:
+                props.animal.type === "Dog" ? "#26547C" : "#EF476F",
+              ...styles.animalType
+            }}
+          >
             <Text style={styles.animalTypeText}>{props.animal.type}</Text>
           </View>
         </View>
@@ -63,7 +69,7 @@ const Animal = props => {
             <AntDesign
               name={props.animal.liked ? "heart" : "hearto"}
               size={32}
-              color="#3a7ebf"
+              color="#F2353E"
             />
           </View>
         </TouchableOpacity>
@@ -85,11 +91,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     justifyContent: "space-between",
-    backgroundColor: "#72bcd4",
+    backgroundColor: "#ffffff",
     marginHorizontal: 10,
     paddingVertical: 7,
     borderRadius: 5,
-    elevation: 2
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
   },
   imageContainer: {
     marginRight: 10,
@@ -106,7 +119,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start"
   },
   animalType: {
-    backgroundColor: "#3a7ebf",
     borderRadius: 3,
     paddingVertical: 2,
     paddingHorizontal: 5
@@ -131,7 +143,8 @@ const styles = StyleSheet.create({
   animalNameText: {
     fontSize: 20,
     fontFamily: "source-sans-semi-bold",
-    color: "white"
+    color: "#000000",
+    marginBottom: 2
   },
   likeButton: {
     padding: 15,

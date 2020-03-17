@@ -56,11 +56,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     justifyContent: "space-between",
-    backgroundColor: "#72bcd4",
+    backgroundColor: "#ffffff",
     marginHorizontal: 10,
     paddingVertical: 7,
     borderRadius: 5,
-    elevation: 2
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
   },
   shelterInfo: {
     flex: 3,
@@ -72,7 +79,7 @@ const styles = StyleSheet.create({
   shelterNameText: {
     fontSize: 20,
     fontFamily: "source-sans-semi-bold",
-    color: "white"
+    color: "#000000"
   },
   shelterAddress: {
     paddingHorizontal: 10

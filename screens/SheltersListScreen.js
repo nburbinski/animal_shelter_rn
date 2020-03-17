@@ -62,7 +62,8 @@ ShelterListScreen.navigationOptions = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   shelterList: {
-    flex: 1
+    flex: 1,
+    margin: 5
   },
   loading: {
     justifyContent: "center",

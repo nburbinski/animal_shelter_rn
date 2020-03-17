@@ -16,9 +16,10 @@ import HeaderButton from "../components/HeaderButton";
 import { toggleLike } from "../store/actions/actions";
 
 const AnimalProfileScreen = props => {
-  const [imageModalVisible, setImageModalVisible] = useState(false);
-
   const animal = props.navigation.getParam("animal");
+
+  const [image, setImage] = useState(animal.image);
+  const [imageModalVisible, setImageModalVisible] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -36,6 +37,7 @@ const AnimalProfileScreen = props => {
         <View style={styles.imageContainer}>
           <TouchableOpacity
             onPress={() => {
+              setImage(animal.image);
               setImageModalVisible(true);
             }}
           >
@@ -53,14 +55,22 @@ const AnimalProfileScreen = props => {
             data={animal.gallery}
             key={animal.id}
             renderItem={itemData => (
-              <Image
-                style={styles.galleryImage}
-                source={{ uri: itemData.item }}
-              />
+              <TouchableOpacity
+                onPress={() => {
+                  setImage(itemData.item);
+                  setImageModalVisible(true);
+                }}
+              >
+                <Image
+                  style={styles.galleryImage}
+                  source={{ uri: itemData.item }}
+                />
+              </TouchableOpacity>
             )}
           />
         </View>
         <ImageModal
+          url={image}
           imageModalVisible={imageModalVisible}
           setImageModalVisible={setImageModalVisible}
         />

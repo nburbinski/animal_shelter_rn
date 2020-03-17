@@ -1,15 +1,21 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  ScrollView
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import { fetchAnimals } from "../store/actions/actions";
 import AnimalList from "../components/AnimalList";
 
 const ShelterProfileScreen = props => {
-  const shelter = props.navigation.getParam("shelter");
-
   const [isLoading, setIsLoading] = useState(false);
+  const shelter = props.navigation.getParam("shelter");
   const animals = useSelector(state => state.animals.filteredAnimals);
+
   const dispatch = useDispatch();
 
   const loadAnimals = useCallback(async () => {
@@ -39,26 +45,39 @@ const ShelterProfileScreen = props => {
   }
 
   return (
-    <View style={styles.profileContainer}>
-      <View style={styles.shelterInfo}>
-        <Text style={styles.shelterName}>{shelter.name}</Text>
-        <Text>{shelter.address}</Text>
+    <ScrollView>
+      <View style={styles.profileContainer}>
+        <View style={styles.shelterInfo}>
+          <Text style={styles.shelterName}>{shelter.name}</Text>
+          <Text>{shelter.address}</Text>
+        </View>
+        <View style={styles.animalList}>
+          <AnimalList
+            loadProfile={props.loadProfile}
+            selectAnimal={props.selectAnimal}
+            navigation={props.navigation}
+            animals={animals}
+          />
+        </View>
       </View>
-      <View style={styles.animalList}>
-        <AnimalList
-          loadProfile={props.loadProfile}
-          selectAnimal={props.selectAnimal}
-          navigation={props.navigation}
-          animals={animals}
-        />
-      </View>
-    </View>
+    </ScrollView>
   );
+};
+
+ShelterProfileScreen.navigationOptions = ({ navigation }) => {
+  return {
+    headerTitle: "Shelter Profile",
+    headerTitleStyle: {
+      fontFamily: "source-sans",
+      fontSize: 20
+    }
+  };
 };
 
 const styles = StyleSheet.create({
   animalList: {
-    flex: 1
+    flex: 1,
+    marginHorizontal: 5
   },
   loading: {
     justifyContent: "center",
@@ -69,7 +88,9 @@ const styles = StyleSheet.create({
     flex: 1
   },
   shelterInfo: {
-    alignItems: "center"
+    alignItems: "center",
+    paddingHorizontal: 5,
+    marginVertical: 5
   },
   shelterName: {
     fontSize: 25,
