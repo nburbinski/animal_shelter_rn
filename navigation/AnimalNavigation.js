@@ -19,11 +19,21 @@ const AnimalNavigator = createStackNavigator({
   ShelterProfile: {
     screen: ShelterProfileScreen,
     navigationOptions: {
-      gestureEnabled: true
+      headerBackTitle: null,
+      headerBackImage: () => {
+        return <AntDesign name="back" size={24} />;
+      }
     }
   },
-  Animals: AnimalListScreen,
-  AnimalProfile: AnimalProfileScreen,
+  AnimalProfile: {
+    screen: AnimalProfileScreen,
+    navigationOptions: {
+      headerBackTitle: null,
+      headerBackImage: () => {
+        return <AntDesign name="back" size={24} />;
+      }
+    }
+  },
   Filter: FilterScreen
 });
 

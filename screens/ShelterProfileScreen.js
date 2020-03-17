@@ -4,10 +4,12 @@ import {
   Text,
   StyleSheet,
   ActivityIndicator,
-  ScrollView
+  SafeAreaView
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
+import HeaderButton from "../components/HeaderButton";
 import { fetchAnimals } from "../store/actions/actions";
 import AnimalList from "../components/AnimalList";
 
@@ -45,7 +47,7 @@ const ShelterProfileScreen = props => {
   }
 
   return (
-    <ScrollView>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.profileContainer}>
         <View style={styles.shelterInfo}>
           <Text style={styles.shelterName}>{shelter.name}</Text>
@@ -60,7 +62,7 @@ const ShelterProfileScreen = props => {
           />
         </View>
       </View>
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -70,7 +72,18 @@ ShelterProfileScreen.navigationOptions = ({ navigation }) => {
     headerTitleStyle: {
       fontFamily: "source-sans",
       fontSize: 20
-    }
+    },
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="filter"
+          iconName="filter"
+          onPress={() => {
+            navigation.navigate({ routeName: "Filter" });
+          }}
+        />
+      </HeaderButtons>
+    )
   };
 };
 

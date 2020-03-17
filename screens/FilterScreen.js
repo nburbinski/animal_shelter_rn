@@ -30,7 +30,7 @@ const FilterScreen = props => {
     };
 
     dispatch(setFilters(appliedFilters));
-    props.navigation.navigate("Animals");
+    props.navigation.goBack();
   };
 
   const handleReset = () => {
@@ -43,6 +43,7 @@ const FilterScreen = props => {
       isCat
     };
     dispatch(setFilters(appliedFilters));
+    props.navigation.goBack();
   };
 
   return (

@@ -53,9 +53,9 @@ const AnimalProfileScreen = props => {
           <FlatList
             horizontal={true}
             data={animal.gallery}
-            key={animal.id}
             renderItem={itemData => (
               <TouchableOpacity
+                id={animal.id}
                 onPress={() => {
                   setImage(itemData.item);
                   setImageModalVisible(true);
