@@ -8,39 +8,30 @@ const initialState = {
 export const animalReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_ANIMALS: {
-      return { ...state, filteredAnimals: action.animals };
+      return {
+        ...state,
+        animals: action.animals,
+        filteredAnimals: action.animals
+      };
     }
     case TOGGLE_LIKE:
-      const newAnimalState = state.animals.map(animal =>
+      const animals = [...state.animals];
+      const newAnimalState = animals.map(animal =>
         animal.id === action.animalID
           ? { ...animal, liked: !animal.liked }
           : animal
       );
-      const newFilteredState = state.filteredAnimals.map(animal =>
+      const newfilteredAnimals = [...state.filteredAnimals];
+      const newFilteredState = newfilteredAnimals.map(animal =>
         animal.id === action.animalID
           ? { ...animal, liked: !animal.liked }
           : animal
       );
-      const existingIndex = state.likedAnimals.findIndex(
-        animal => animal.id === action.animalID
-      );
-      if (existingIndex >= 0) {
-        const updatedLikedAnimals = [...state.likedAnimals];
-        updatedLikedAnimals.splice(existingIndex, 1);
-        return {
-          animals: newAnimalState,
-          filteredAnimals: newFilteredState,
-          likedAnimals: updatedLikedAnimals
-        };
-      } else {
-        return {
-          animals: newAnimalState,
-          filteredAnimals: newFilteredState,
-          likedAnimals: state.likedAnimals.concat(
-            state.animals.find(animal => animal.id === action.animalID)
-          )
-        };
-      }
+      return {
+        ...state,
+        animals: newAnimalState,
+        filteredAnimals: newFilteredState
+      };
     case SET_FILTERS:
       const appliedFilters = action.filters;
       const filteredAnimals = state.animals.filter(animal => {

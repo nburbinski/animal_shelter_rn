@@ -18,7 +18,7 @@ const Animal = props => {
   const dispatch = useDispatch();
 
   const handleCheckPress = useCallback(() => {
-    dispatch(toggleLike(props.animal.id));
+    dispatch(toggleLike(props.animal.id, props.animal.liked));
   });
 
   useEffect(() => {

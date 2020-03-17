@@ -2,7 +2,6 @@ import Animal from "../../models/animal";
 
 export const TOGGLE_LIKE = "TOGGLE_LIKE";
 export const SET_FILTERS = "SET_FILTERS";
-export const FILTERED_LIST = "FILTERED_LIST";
 export const SET_ANIMALS = "SET_ANIMALS";
 
 export const fetchAnimals = () => {
@@ -36,16 +35,25 @@ export const fetchAnimals = () => {
   };
 };
 
-export const toggleLike = id => {
-  return {
-    type: TOGGLE_LIKE,
-    animalID: id
-  };
-};
+export const toggleLike = (id, liked) => {
+  return async dispatch => {
+    await fetch(
+      `https://animal-shelter-6a4a9.firebaseio.com/animals/${id}.json`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          liked: !liked
+        })
+      }
+    );
 
-export const filteredList = () => {
-  return {
-    type: FILTERED_LIST
+    dispatch({
+      type: TOGGLE_LIKE,
+      animalID: id
+    });
   };
 };
 

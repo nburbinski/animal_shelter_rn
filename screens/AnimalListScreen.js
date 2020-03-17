@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, View, ActivityIndicator } from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
+import { StyleSheet, View, ActivityIndicator, Text } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAnimals } from "../store/actions/actions";
@@ -11,19 +11,36 @@ const AnimalListScreen = props => {
   const animals = useSelector(state => state.animals.filteredAnimals);
   const dispatch = useDispatch();
 
+  const loadAnimals = useCallback(async () => {
+    setIsLoading(true);
+    await dispatch(fetchAnimals());
+    setIsLoading(false);
+  });
+
   useEffect(() => {
-    const loadAnimals = async () => {
-      setIsLoading(true);
-      await dispatch(fetchAnimals());
-      setIsLoading(false);
-    };
     loadAnimals();
   }, [dispatch]);
+
+  useEffect(() => {
+    const willFocusSub = props.navigation.addListener("willFocus", loadAnimals);
+
+    return () => {
+      willFocusSub.remove();
+    };
+  }, [loadAnimals]);
 
   if (isLoading) {
     return (
       <View style={styles.loading}>
         <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  if (!isLoading && animals.length === 0) {
+    return (
+      <View style={styles.loading}>
+        <Text>No animals found!</Text>
       </View>
     );
   }

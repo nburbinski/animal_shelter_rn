@@ -23,7 +23,7 @@ const AnimalProfileScreen = props => {
   const dispatch = useDispatch();
 
   const handleCheckPress = useCallback(() => {
-    dispatch(toggleLike(props.animal.id));
+    dispatch(toggleLike(animal.id, animal.liked));
   });
 
   useEffect(() => {
@@ -51,6 +51,7 @@ const AnimalProfileScreen = props => {
           <FlatList
             horizontal={true}
             data={animal.gallery}
+            key={animal.id}
             renderItem={itemData => (
               <Image
                 style={styles.galleryImage}

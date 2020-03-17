@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View } from "react-native";
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 
 import AnimalList from "../components/AnimalList";
 
 const LikesScreen = props => {
-  useEffect(() => {
-    const animals = useSelector(state => state.animals.animals);
-  }, []);
+  const animals = useSelector(state => state.animals.animals);
 
   return (
     <View>
