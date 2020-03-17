@@ -1,8 +1,33 @@
 import Animal from "../../models/animal";
+import Shelter from "../../models/shelter";
 
 export const TOGGLE_LIKE = "TOGGLE_LIKE";
 export const SET_FILTERS = "SET_FILTERS";
 export const SET_ANIMALS = "SET_ANIMALS";
+export const SET_SHELTERS = "SET_SHELTERS";
+
+export const fetchShelters = () => {
+  return async dispatch => {
+    const response = await fetch(
+      "https://animal-shelter-6a4a9.firebaseio.com/shelters.json"
+    );
+
+    const resData = await response.json();
+
+    const loadedShelters = [];
+
+    for (const key in resData) {
+      loadedShelters.push(
+        new Shelter(key, resData[key].name, resData[key].address)
+      );
+    }
+
+    dispatch({
+      type: SET_SHELTERS,
+      shelters: loadedShelters
+    });
+  };
+};
 
 export const fetchAnimals = () => {
   return async dispatch => {

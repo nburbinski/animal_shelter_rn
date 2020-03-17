@@ -9,14 +9,15 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 
+import Button from "../components/Button";
 import { setFilters } from "../store/actions/actions";
 
 const FilterScreen = props => {
   const [isType, setIsType] = useState(false);
   const [isBreed, setIsBreed] = useState(false);
 
-  const [type, setType] = useState("Dog");
-  const [breed, setBreed] = useState("Dog");
+  const [isDog, setIsDog] = useState(false);
+  const [isCat, setIsCat] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -24,8 +25,8 @@ const FilterScreen = props => {
     const appliedFilters = {
       isType,
       isBreed,
-      type,
-      breed
+      isDog,
+      isCat
     };
 
     dispatch(setFilters(appliedFilters));
@@ -38,8 +39,8 @@ const FilterScreen = props => {
     const appliedFilters = {
       isType,
       isBreed,
-      type,
-      breed
+      isDog,
+      isCat
     };
     dispatch(setFilters(appliedFilters));
   };
@@ -53,15 +54,16 @@ const FilterScreen = props => {
           onValueChange={newValue => setIsType(newValue)}
         />
       </View>
-      <Picker
-        style={{ display: isType ? "flex" : "none", ...styles.picker }}
-        selectedValue={type}
-        onValueChange={(itemValue, itemIndex) => setType(itemValue)}
-      >
-        <Picker.Item label="Dog" value="dog" />
-        <Picker.Item label="Cat" value="cat" />
-        <Picker.Item label="Naked Mole Rat" value="naked mole rat" />
-      </Picker>
+
+      <View style={{ display: isType ? "flex" : "none", ...styles.buttons }}>
+        <Button isTrue={isDog} setIsTrue={setIsDog}>
+          Dog
+        </Button>
+        <Button isTrue={isCat} setIsTrue={setIsCat}>
+          Cat
+        </Button>
+      </View>
+
       <View style={styles.filterContainer}>
         <Text style={styles.filterTitle}>Breed: </Text>
         <Switch
@@ -69,15 +71,11 @@ const FilterScreen = props => {
           onValueChange={newValue => setIsBreed(newValue)}
         />
       </View>
-      <Picker
-        style={{ display: isBreed ? "flex" : "none", ...styles.picker }}
-        selectedValue={breed}
-        onValueChange={(itemValue, itemIndex) => setBreed(itemValue)}
-      >
-        <Picker.Item label="Dog" value="dog" />
-        <Picker.Item label="Cat" value="cat" />
-        <Picker.Item label="Naked Mole Rat" value="nmr" />
-      </Picker>
+
+      <View
+        style={{ display: isBreed ? "flex" : "none", ...styles.buttons }}
+      ></View>
+
       <View style={styles.buttons}>
         <TouchableOpacity onPress={handleApply}>
           <View style={styles.submitButton}>
@@ -122,7 +120,8 @@ const styles = StyleSheet.create({
     fontFamily: "source-sans-semi-bold"
   },
   buttons: {
-    flexDirection: "row"
+    flexDirection: "row",
+    marginVertical: 10
   }
 });
 

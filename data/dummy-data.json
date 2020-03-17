@@ -1,4 +1,18 @@
 {
+  "shelters": [
+    {
+      "name": "Orange County Animal Services",
+      "address": "2769 Conroy Rd, Orlando, FL 32839"
+    },
+    {
+      "name": "Seminole County Animal Services",
+      "address": "232 Eslinger Way, Sanford, FL 32773"
+    },
+    {
+      "name": "Pet Rescue By Judy",
+      "address": "401 South Laurel Ave, Sanford, FL 32771"
+    }
+  ],
   "animals": [
     {
       "name": "Rufus",

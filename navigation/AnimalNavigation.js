@@ -7,13 +7,21 @@ import { createBottomTabNavigator } from "react-navigation-tabs";
 import { AntDesign } from "@expo/vector-icons";
 
 // Screen Imports
+import ShelterListScreen from "../screens/SheltersListScreen";
+import ShelterProfileScreen from "../screens/ShelterProfileScreen";
 import AnimalListScreen from "../screens/AnimalListScreen";
 import AnimalProfileScreen from "../screens/AnimalProfileScreen";
 import LikesScreen from "../screens/LikesScreen";
-import SearchScreen from "../screens/SearchScreen";
 import FilterScreen from "../screens/FilterScreen";
 
 const AnimalNavigator = createStackNavigator({
+  Shelters: ShelterListScreen,
+  ShelterProfile: {
+    screen: ShelterProfileScreen,
+    navigationOptions: {
+      gestureEnabled: true
+    }
+  },
   Animals: AnimalListScreen,
   AnimalProfile: AnimalProfileScreen,
   Filter: FilterScreen
@@ -37,22 +45,6 @@ const AnimalTabsNavigator = createBottomTabNavigator(
         }
       }
     },
-    // Search: {
-    //   screen: SearchScreen,
-    //   navigationOptions: {
-    //     tabBarOnPress: event => {
-    //       event.defaultHandler;
-    //     },
-    //     tabBarOptions: {
-    //       showLabel: false
-    //     },
-    //     tabBarIcon: tabInfo => {
-    //       return (
-    //         <AntDesign name="search1" size={32} color={tabInfo.tintColor} />
-    //       );
-    //     }
-    //   }
-    // },
     Likes: {
       screen: LikesNavigator,
       navigationOptions: {

@@ -1,8 +1,15 @@
-import { TOGGLE_LIKE, SET_FILTERS, SET_ANIMALS } from "../actions/actions";
+import {
+  TOGGLE_LIKE,
+  SET_FILTERS,
+  SET_ANIMALS,
+  SET_SHELTERS
+} from "../actions/actions";
 
 const initialState = {
+  shelters: [],
   animals: [],
-  filteredAnimals: []
+  filteredAnimals: [],
+  filters: []
 };
 
 export const animalReducer = (state = initialState, action) => {
@@ -14,6 +21,11 @@ export const animalReducer = (state = initialState, action) => {
         filteredAnimals: action.animals
       };
     }
+    case SET_SHELTERS:
+      return {
+        ...state,
+        shelters: action.shelters
+      };
     case TOGGLE_LIKE:
       const animals = [...state.animals];
       const newAnimalState = animals.map(animal =>
@@ -35,11 +47,13 @@ export const animalReducer = (state = initialState, action) => {
     case SET_FILTERS:
       const appliedFilters = action.filters;
       const filteredAnimals = state.animals.filter(animal => {
-        if (appliedFilters.isBreed && animal.breed !== appliedFilters.breed)
-          return false;
-        if (appliedFilters.isType && animal.type !== appliedFilters.type)
-          return false;
-        else {
+        if (appliedFilters.isType) {
+          if (appliedFilters.isDog && animal.type !== "Dog") return false;
+          if (appliedFilters.isCat && animal.type !== "Cat") return false;
+          else {
+            return true;
+          }
+        } else {
           return true;
         }
       });
