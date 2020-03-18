@@ -26,75 +26,91 @@ const Animal = props => {
   }, [dispatch]);
 
   return (
-    <TouchableOpacity
-      onPress={() => {
-        props.navigation.navigate({
-          routeName: "AnimalProfile",
-          params: {
-            animal: props.animal
-          }
-        });
-      }}
-    >
-      <View style={styles.animalContainer}>
-        <View style={styles.imageContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              setImageModalVisible(true);
-            }}
-          >
-            <Image
-              style={styles.animalImage}
-              source={{ uri: props.animal.image }}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.animalInfo}>
-          <View>
-            <Text style={styles.animalNameText}>{props.animal.name}</Text>
+    <View>
+      <TouchableOpacity
+        onPress={() => {
+          props.navigation.navigate({
+            routeName: "AnimalProfile",
+            params: {
+              animal: props.animal
+            }
+          });
+        }}
+      >
+        <View style={styles.animalContainer}>
+          <View style={styles.imageContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                setImageModalVisible(true);
+              }}
+            >
+              <Image
+                style={styles.animalImage}
+                source={{ uri: props.animal.image }}
+              />
+            </TouchableOpacity>
           </View>
-          <View
-            style={{
-              backgroundColor:
-                props.animal.type === "Dog" ? "#26547C" : "#EF476F",
-              ...styles.animalType
-            }}
-          >
-            <Text style={styles.animalTypeText}>{props.animal.type}</Text>
+          <View style={styles.animalInfo}>
+            <View>
+              <Text style={styles.animalNameText}>{props.animal.name}</Text>
+            </View>
+            <View
+              style={{
+                backgroundColor:
+                  props.animal.type === "Dog" ? "#26547C" : "#EF476F",
+                ...styles.animalType
+              }}
+            >
+              <Text style={styles.animalTypeText}>{props.animal.type}</Text>
+            </View>
+            <TouchableOpacity onPress={handleCheckPress}>
+              <View style={styles.likeButton}>
+                <AntDesign
+                  name={props.animal.liked ? "heart" : "hearto"}
+                  size={32}
+                  color="#F2353E"
+                />
+              </View>
+            </TouchableOpacity>
           </View>
-        </View>
 
-        <TouchableOpacity onPress={handleCheckPress}>
-          <View style={styles.likeButton}>
-            <AntDesign
-              name={props.animal.liked ? "heart" : "hearto"}
-              size={32}
-              color="#F2353E"
-            />
-          </View>
-        </TouchableOpacity>
-
-        <ImageModal
-          url={props.animal.image}
-          imageModalVisible={imageModalVisible}
-          setImageModalVisible={setImageModalVisible}
-        />
-      </View>
-    </TouchableOpacity>
+          <ImageModal
+            url={props.animal.image}
+            imageModalVisible={imageModalVisible}
+            setImageModalVisible={setImageModalVisible}
+          />
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   animalContainer: {
-    flexDirection: "row",
     marginVertical: 10,
     alignItems: "center",
     justifyContent: "center",
+    height: 150,
+    width: 150,
     justifyContent: "space-between",
     backgroundColor: "#ffffff",
-    marginHorizontal: 10,
-    paddingVertical: 7,
+    marginTop: 40,
+    marginHorizontal: 15,
     borderRadius: 5,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  imageContainer: {
+    marginRight: 10,
+    marginLeft: 15,
     elevation: 2,
     shadowColor: "#000",
     shadowOffset: {
@@ -104,19 +120,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84
   },
-  imageContainer: {
-    marginRight: 10,
-    marginLeft: 15,
-    flex: 2
-  },
   animalImage: {
     height: 75,
     width: 75,
     borderRadius: 50
   },
   animalInfo: {
-    flex: 3,
-    alignItems: "flex-start"
+    alignItems: "center"
   },
   animalType: {
     borderRadius: 3,
@@ -128,7 +138,6 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   fullAnimalImageContainer: {
-    flex: 1,
     backgroundColor: "black"
   },
   fullAnimalImage: {
@@ -148,8 +157,8 @@ const styles = StyleSheet.create({
   },
   likeButton: {
     padding: 15,
-    flex: 1,
-    justifyContent: "center"
+    marginBottom: 10,
+    alignItems: "center"
   }
 });
 

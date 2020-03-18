@@ -1,5 +1,5 @@
 class Animal {
-  constructor(id, breed, gallery, image, liked, name, type) {
+  constructor(id, breed, gallery, image, liked, name, type, about, cats, dogs) {
     this.id = id;
     this.breed = breed;
     this.gallery = gallery;
@@ -7,6 +7,9 @@ class Animal {
     this.liked = liked;
     this.name = name;
     this.type = type;
+    this.about = about;
+    this.cats = cats;
+    this.dogs = dogs;
   }
 }
 

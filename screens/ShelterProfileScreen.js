@@ -4,7 +4,8 @@ import {
   Text,
   StyleSheet,
   ActivityIndicator,
-  SafeAreaView
+  SafeAreaView,
+  Image
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
@@ -53,6 +54,7 @@ const ShelterProfileScreen = props => {
           <Text style={styles.shelterName}>{shelter.name}</Text>
           <Text>{shelter.address}</Text>
         </View>
+
         <View style={styles.animalList}>
           <AnimalList
             loadProfile={props.loadProfile}

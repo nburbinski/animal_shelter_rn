@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View, ActivityIndicator, Text } from "react-native";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { useSelector, useDispatch } from "react-redux";
 
 import { fetchShelters } from "../store/actions/actions";
 import ShelterList from "../components/ShelterList";
-import HeaderButton from "../components/HeaderButton";
 
 const ShelterListScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +12,7 @@ const ShelterListScreen = props => {
 
   const loadShelters = useCallback(async () => {
     setIsLoading(true);
-    dispatch(fetchShelters());
+    await dispatch(fetchShelters());
     setIsLoading(false);
   });
 

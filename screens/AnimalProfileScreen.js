@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { useDispatch } from "react-redux";
+import { AntDesign } from "@expo/vector-icons";
 
 import ImageModal from "../components/ImageModal";
 import HeaderButton from "../components/HeaderButton";
@@ -34,41 +35,83 @@ const AnimalProfileScreen = props => {
   return (
     <ScrollView>
       <View style={styles.profileContainer}>
-        <View style={styles.imageContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              setImage(animal.image);
-              setImageModalVisible(true);
-            }}
-          >
-            <Image style={styles.animalImage} source={{ uri: animal.image }} />
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.animalName}>{animal.name}</Text>
-        <View style={styles.animalTypeContainer}>
-          <Text style={styles.animalTypeText}>{animal.type}</Text>
-        </View>
-        <Text>{animal.breed}</Text>
-        <View style={styles.galleryContainer}>
-          <FlatList
-            horizontal={true}
-            data={animal.gallery}
-            renderItem={itemData => (
-              <TouchableOpacity
-                id={animal.id}
-                onPress={() => {
-                  setImage(itemData.item);
-                  setImageModalVisible(true);
+        <View style={styles.topContainer}>
+          <View style={styles.imageContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                setImage(animal.image);
+                setImageModalVisible(true);
+              }}
+            >
+              <Image
+                style={styles.animalImage}
+                source={{ uri: animal.image }}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.animalInfoContainer}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Text style={styles.animalName}>{animal.name}</Text>
+              <View
+                style={{
+                  backgroundColor:
+                    animal.type === "Dog" ? "#26547C" : "#EF476F",
+                  ...styles.animalTypeContainer
                 }}
               >
-                <Image
-                  style={styles.galleryImage}
-                  source={{ uri: itemData.item }}
-                />
-              </TouchableOpacity>
-            )}
-          />
+                <Text style={styles.animalTypeText}>{animal.type}</Text>
+              </View>
+            </View>
+            <Text>{animal.breed}</Text>
+          </View>
+          <View style={styles.goodWithContainer}>
+            <Text style={styles.animalDetailsTitle}>Good with Cats? </Text>
+            <View>
+              <AntDesign
+                name={animal.cats ? "check" : "close"}
+                size={20}
+                color={animal.cats ? "#06D6A0" : "#F2353E"}
+              />
+            </View>
+            <Text style={styles.animalDetailsTitle}>Good with Dogs? </Text>
+            <View>
+              <AntDesign
+                name={animal.dogs ? "check" : "close"}
+                size={20}
+                color={animal.dogs ? "#06D6A0" : "#F2353E"}
+              />
+            </View>
+          </View>
         </View>
+
+        <View style={styles.animalDetailsContainer}>
+          <View style={styles.about}>
+            <Text style={styles.animalDetailsTitle}>About: </Text>
+            <Text style={{ flex: 1, flexWrap: "wrap" }}>{animal.about}</Text>
+          </View>
+
+          <View style={styles.galleryContainer}>
+            <FlatList
+              horizontal={true}
+              data={animal.gallery}
+              renderItem={itemData => (
+                <TouchableOpacity
+                  id={animal.id}
+                  onPress={() => {
+                    setImage(itemData.item);
+                    setImageModalVisible(true);
+                  }}
+                >
+                  <Image
+                    style={styles.galleryImage}
+                    source={{ uri: itemData.item }}
+                  />
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        </View>
+
         <ImageModal
           url={image}
           imageModalVisible={imageModalVisible}
@@ -99,11 +142,24 @@ AnimalProfileScreen.navigationOptions = navigationData => {
 const styles = StyleSheet.create({
   profileContainer: {
     flex: 1,
+    backgroundColor: "#FFFFFF",
+    margin: 15,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    paddingVertical: 7.5
+  },
+  topContainer: {
     alignItems: "center"
   },
   imageContainer: {
     alignItems: "center",
-    marginVertical: 15
+    marginVertical: 10
   },
   animalImage: {
     height: 150,
@@ -114,12 +170,28 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontFamily: "source-sans-semi-bold"
   },
+  animalInfoContainer: {
+    alignItems: "center",
+    marginVertical: 10
+  },
   animalTypeContainer: {
-    backgroundColor: "steelblue",
+    borderRadius: 3,
     paddingVertical: 2,
-    paddingHorizontal: 4,
-    marginBottom: 2,
-    borderRadius: 2
+    paddingHorizontal: 5,
+    marginHorizontal: 5
+  },
+  animalDetailsContainer: {
+    textAlign: "left",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    padding: 10
+  },
+  animalDetailsTitle: {
+    fontFamily: "source-sans-semi-bold"
+  },
+  goodWithContainer: {
+    flexDirection: "row",
+    alignItems: "center"
   },
   animalTypeText: {
     color: "white"
@@ -131,6 +203,11 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     margin: 5
+  },
+  about: {
+    flexDirection: "row",
+    marginBottom: 5,
+    marginLeft: 5
   }
 });
 

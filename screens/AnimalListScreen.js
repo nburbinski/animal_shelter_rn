@@ -1,25 +1,35 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { StyleSheet, View, ActivityIndicator, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  Text,
+  FlatList
+} from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { useSelector, useDispatch } from "react-redux";
+
 import { fetchAnimals } from "../store/actions/actions";
-import AnimalList from "../components/AnimalList";
+import Animal from "../components/Animal";
 import HeaderButton from "../components/HeaderButton";
 
 const AnimalListScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
   const animals = useSelector(state => state.animals.filteredAnimals);
   const dispatch = useDispatch();
 
   const loadAnimals = useCallback(async () => {
-    setIsLoading(true);
+    setIsRefreshing(true);
     await dispatch(fetchAnimals());
-    setIsLoading(false);
+    setIsRefreshing(false);
   });
 
   useEffect(() => {
-    loadAnimals();
-  }, [dispatch]);
+    setIsLoading(true);
+    loadAnimals().then(setIsLoading(false));
+  }, []);
 
   if (isLoading) {
     return (
@@ -39,11 +49,19 @@ const AnimalListScreen = props => {
 
   return (
     <View style={styles.animalList}>
-      <AnimalList
-        loadProfile={props.loadProfile}
-        selectAnimal={props.selectAnimal}
-        navigation={props.navigation}
-        animals={animals}
+      <FlatList
+        onRefresh={loadAnimals}
+        refreshing={isRefreshing}
+        data={animals}
+        renderItem={animal => (
+          <Animal
+            id={animal.id}
+            animal={animal.item}
+            loadProfile={props.loadProfile}
+            selectAnimal={props.selectAnimal}
+            navigation={props.navigation}
+          />
+        )}
       />
     </View>
   );

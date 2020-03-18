@@ -1,15 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Dimensions
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 
 import { toggleLike } from "../store/actions/actions";
+import ImageModal from "./ImageModal";
 
 const Shelter = props => {
   const dispatch = useDispatch();
@@ -43,6 +37,12 @@ const Shelter = props => {
               {props.shelter.address}
             </Text>
           </View>
+          <View style={styles.shelterImageContainer}>
+            <Image
+              style={styles.shelterImage}
+              source={{ uri: props.shelter.image }}
+            />
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -68,6 +68,18 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84
+  },
+  shelterImageContainer: {
+    width: "100%",
+    height: "60%",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    overflow: "hidden",
+    paddingHorizontal: 5
+  },
+  shelterImage: {
+    width: "100%",
+    height: "100%"
   },
   shelterInfo: {
     flex: 3,

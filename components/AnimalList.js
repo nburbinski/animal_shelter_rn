@@ -1,23 +1,32 @@
 import React from "react";
-import { FlatList } from "react-native";
+import { FlatList, View, StyleSheet } from "react-native";
 
 import Animal from "./Animal";
 
 const AnimalList = props => {
   return (
-    <FlatList
-      data={props.animals}
-      renderItem={animal => (
-        <Animal
-          id={animal.id}
-          animal={animal.item}
-          loadProfile={props.loadProfile}
-          selectAnimal={props.selectAnimal}
-          navigation={props.navigation}
-        />
-      )}
-    />
+    <View style={styles.listContainer}>
+      <FlatList
+        data={props.animals}
+        numColumns={2}
+        renderItem={animal => (
+          <Animal
+            id={animal.id}
+            animal={animal.item}
+            loadProfile={props.loadProfile}
+            selectAnimal={props.selectAnimal}
+            navigation={props.navigation}
+          />
+        )}
+      />
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  listContainer: {
+    alignItems: "center"
+  }
+});
 
 export default AnimalList;

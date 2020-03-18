@@ -18,7 +18,12 @@ export const fetchShelters = () => {
 
     for (const key in resData) {
       loadedShelters.push(
-        new Shelter(key, resData[key].name, resData[key].address)
+        new Shelter(
+          key,
+          resData[key].name,
+          resData[key].address,
+          resData[key].image
+        )
       );
     }
 
@@ -48,7 +53,10 @@ export const fetchAnimals = () => {
           resData[key].image,
           resData[key].liked,
           resData[key].name,
-          resData[key].type
+          resData[key].type,
+          resData[key].about,
+          resData[key].cats,
+          resData[key].dogs
         )
       );
     }
