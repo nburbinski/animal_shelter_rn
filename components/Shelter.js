@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
-
 import { toggleLike } from "../store/actions/actions";
 
 const Shelter = props => {
@@ -77,7 +76,7 @@ const styles = StyleSheet.create({
   },
   shelterImageContainer: {
     width: "100%",
-    height: "60%",
+    height: 80,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     overflow: "hidden",
@@ -85,7 +84,8 @@ const styles = StyleSheet.create({
   },
   shelterImage: {
     width: "100%",
-    height: "100%"
+    height: "100%",
+    resizeMode: "cover"
   },
   shelterInfo: {
     flex: 3,

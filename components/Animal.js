@@ -57,7 +57,11 @@ const Animal = props => {
             <View
               style={{
                 backgroundColor:
-                  props.animal.type === "Dog" ? "#26547C" : "#EF476F",
+                  props.animal.type === "Dog"
+                    ? "#26547C"
+                    : props.animal.type === "Cat"
+                    ? "#06D6A0"
+                    : "#EF476F",
                 ...styles.animalType
               }}
             >
@@ -87,6 +91,7 @@ const Animal = props => {
 
 const styles = StyleSheet.create({
   animalContainer: {
+    paddingBottom: 20,
     marginVertical: 10,
     alignItems: "center",
     justifyContent: "center",
@@ -156,7 +161,7 @@ const styles = StyleSheet.create({
     marginBottom: 2
   },
   likeButton: {
-    padding: 15,
+    padding: 10,
     marginBottom: 10,
     alignItems: "center"
   }

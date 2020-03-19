@@ -48,10 +48,15 @@ export const animalReducer = (state = initialState, action) => {
       const appliedFilters = action.filters;
       const filteredAnimals = state.animals.filter(animal => {
         if (appliedFilters.isType) {
-          if (appliedFilters.isDog && animal.type !== "Dog") return false;
-          if (appliedFilters.isCat && animal.type !== "Cat") return false;
-          else {
+          if (appliedFilters.isDog && animal.type === "Dog") return true;
+          else if (appliedFilters.isCat && animal.type === "Cat") return true;
+          else if (
+            appliedFilters.isNakedMoleRat &&
+            animal.type === "Naked Mole Rat"
+          )
             return true;
+          else {
+            return false;
           }
         } else {
           return true;

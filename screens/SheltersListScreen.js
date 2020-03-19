@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { StyleSheet, View, ActivityIndicator, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  Text,
+  SafeAreaView
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import { fetchShelters } from "../store/actions/actions";
@@ -61,8 +67,8 @@ ShelterListScreen.navigationOptions = ({ navigation }) => {
 const styles = StyleSheet.create({
   shelterList: {
     flex: 1,
-    padding: 5,
-    backgroundColor: "#FFFFFF"
+    backgroundColor: "#FFFFFF",
+    paddingBottom: 15
   },
   loading: {
     justifyContent: "center",

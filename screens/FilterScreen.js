@@ -18,6 +18,7 @@ const FilterScreen = props => {
 
   const [isDog, setIsDog] = useState(false);
   const [isCat, setIsCat] = useState(false);
+  const [isNakedMoleRat, setIsNakedMoleRat] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -26,7 +27,8 @@ const FilterScreen = props => {
       isType,
       isBreed,
       isDog,
-      isCat
+      isCat,
+      isNakedMoleRat
     };
 
     dispatch(setFilters(appliedFilters));
@@ -40,7 +42,8 @@ const FilterScreen = props => {
       isType,
       isBreed,
       isDog,
-      isCat
+      isCat,
+      isNakedMoleRat
     };
     dispatch(setFilters(appliedFilters));
     props.navigation.goBack();
@@ -63,6 +66,9 @@ const FilterScreen = props => {
         <Button isTrue={isCat} setIsTrue={setIsCat}>
           Cat
         </Button>
+        <Button isTrue={isNakedMoleRat} setIsTrue={setIsNakedMoleRat}>
+          Naked Mole Rat
+        </Button>
       </View>
 
       <View style={styles.filterContainer}>
@@ -84,8 +90,8 @@ const FilterScreen = props => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleReset}>
-          <View style={styles.submitButton}>
-            <Text style={styles.submitText}>Reset Filters</Text>
+          <View style={styles.resetButton}>
+            <Text style={styles.resetText}>Reset Filters</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -94,19 +100,26 @@ const FilterScreen = props => {
 };
 
 const styles = StyleSheet.create({
-  container: { margin: 20, flex: 1, alignItems: "center" },
+  container: {
+    padding: 20,
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "#FFFFFF"
+  },
   filterContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "60%",
-    alignItems: "center"
+    alignItems: "center",
+    marginBottom: 10
   },
   picker: {
     height: 50,
     width: "60%"
   },
   filterTitle: {
-    fontSize: 20
+    fontSize: 20,
+    fontFamily: "source-sans-semi-bold"
   },
   submitButton: {
     backgroundColor: "blue",
@@ -114,10 +127,38 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 5,
     marginTop: 10,
-    marginHorizontal: 10
+    marginHorizontal: 10,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
+  },
+  resetButton: {
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 5,
+    marginTop: 10,
+    marginHorizontal: 10,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
   },
   submitText: {
     color: "white",
+    fontFamily: "source-sans-semi-bold"
+  },
+  resetText: {
+    color: "blue",
     fontFamily: "source-sans-semi-bold"
   },
   buttons: {

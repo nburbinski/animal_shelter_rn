@@ -10,13 +10,13 @@ const Button = props => {
     >
       <View
         style={{
-          backgroundColor: props.isTrue ? "blue" : "white",
+          backgroundColor: props.isTrue ? "#26547C" : "white",
           ...styles.buttonContainer
         }}
       >
         <Text
           style={{
-            color: props.isTrue ? "white" : "blue",
+            color: props.isTrue ? "white" : "#26547C",
             ...styles.buttonText
           }}
         >
@@ -32,8 +32,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 5,
-    marginTop: 10,
-    marginHorizontal: 10
+    marginBottom: 10,
+    marginHorizontal: 10,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
   },
   buttonText: {
     fontFamily: "source-sans-semi-bold",

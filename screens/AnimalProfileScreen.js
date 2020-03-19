@@ -10,6 +10,7 @@ import {
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { useDispatch } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
+import Gallery from "react-native-image-gallery";
 
 import ImageModal from "../components/ImageModal";
 import HeaderButton from "../components/HeaderButton";
@@ -49,7 +50,12 @@ const AnimalProfileScreen = props => {
             <Text style={styles.animalName}>{animal.name}</Text>
             <View
               style={{
-                backgroundColor: animal.type === "Dog" ? "#26547C" : "#EF476F",
+                backgroundColor:
+                  animal.type === "Dog"
+                    ? "#26547C"
+                    : animal.type === "Cat"
+                    ? "#06D6A0"
+                    : "#EF476F",
                 ...styles.animalTypeContainer
               }}
             >

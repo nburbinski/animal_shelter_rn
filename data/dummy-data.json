@@ -34,13 +34,14 @@
     },
     {
       "name": "LadyBird",
-      "type": "Dog",
-      "breed": "Jack Russel Terrier",
-      "image": "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+      "type": "Cat",
+      "breed": "Tuxedo",
+      "image": "https://cattime.com/assets/uploads/2017/10/tuxedo-cat-2-e1569622438857-1280x720.jpg",
       "gallery": [
-        "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
-        "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
-        "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg"
+        "https://cattime.com/assets/uploads/2017/10/tuxedo-cat-2-e1569622438857-1280x720.jpg",
+        "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/40932710/1/?bust=1518458312",
+        "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/40932710/3/?bust=1518458348&width=720",
+        "https://pet-uploads.adoptapet.com/a/4/9/313504258.jpg"
       ],
       "liked": false,
       "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
@@ -109,7 +110,7 @@
     },
     {
       "name": "Percy",
-      "type": "Naked Mole Rat",
+      "type": "Cat",
       "breed": "Jack Russel Terrier",
       "image": "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg",
       "gallery": [
