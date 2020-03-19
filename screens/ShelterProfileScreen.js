@@ -100,12 +100,21 @@ const styles = StyleSheet.create({
     flex: 1
   },
   profileContainer: {
+    backgroundColor: "#FFFFFF",
     flex: 1
   },
   shelterInfo: {
     alignItems: "center",
     paddingHorizontal: 5,
-    marginVertical: 5
+    paddingVertical: 10,
+    backgroundColor: "#FFFFFF",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
   },
   shelterName: {
     fontSize: 25,

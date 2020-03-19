@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
@@ -9,33 +8,37 @@ import { AntDesign } from "@expo/vector-icons";
 // Screen Imports
 import ShelterListScreen from "../screens/SheltersListScreen";
 import ShelterProfileScreen from "../screens/ShelterProfileScreen";
-import AnimalListScreen from "../screens/AnimalListScreen";
 import AnimalProfileScreen from "../screens/AnimalProfileScreen";
 import LikesScreen from "../screens/LikesScreen";
 import FilterScreen from "../screens/FilterScreen";
 
-const AnimalNavigator = createStackNavigator({
-  Shelters: ShelterListScreen,
-  ShelterProfile: {
-    screen: ShelterProfileScreen,
-    navigationOptions: {
-      headerBackTitle: null,
+import Icon from "../components/Icon";
+
+const AnimalNavigator = createStackNavigator(
+  {
+    Shelters: {
+      screen: ShelterListScreen,
+      navigationOptions: {
+        headerBackTitle: null
+      }
+    },
+    ShelterProfile: {
+      screen: ShelterProfileScreen
+    },
+    AnimalProfile: {
+      screen: AnimalProfileScreen
+    },
+    Filter: FilterScreen
+  },
+  {
+    defaultNavigationOptions: {
+      headerBackTitle: " ",
       headerBackImage: () => {
-        return <AntDesign name="back" size={24} />;
+        return <Icon />;
       }
     }
-  },
-  AnimalProfile: {
-    screen: AnimalProfileScreen,
-    navigationOptions: {
-      headerBackTitle: null,
-      headerBackImage: () => {
-        return <AntDesign name="back" size={24} />;
-      }
-    }
-  },
-  Filter: FilterScreen
-});
+  }
+);
 
 const LikesNavigator = createStackNavigator({
   Likes: LikesScreen,

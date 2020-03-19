@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 
 import { toggleLike } from "../store/actions/actions";
-import ImageModal from "./ImageModal";
 
 const Shelter = props => {
   const dispatch = useDispatch();
@@ -29,14 +28,21 @@ const Shelter = props => {
     >
       <View style={styles.shelterContainer}>
         <View style={styles.shelterInfo}>
-          <View style={styles.shelterName}>
-            <Text style={styles.shelterNameText}>{props.shelter.name}</Text>
+          <View
+            style={{
+              flex: 1
+            }}
+          >
+            <View style={styles.shelterName}>
+              <Text style={styles.shelterNameText}>{props.shelter.name}</Text>
+            </View>
+            <View style={styles.shelterAddress}>
+              <Text style={styles.shelterAddressText}>
+                {props.shelter.address}
+              </Text>
+            </View>
           </View>
-          <View style={styles.shelterAddress}>
-            <Text style={styles.shelterAddressText}>
-              {props.shelter.address}
-            </Text>
-          </View>
+
           <View style={styles.shelterImageContainer}>
             <Image
               style={styles.shelterImage}
@@ -52,13 +58,13 @@ const Shelter = props => {
 const styles = StyleSheet.create({
   shelterContainer: {
     flexDirection: "row",
-    marginVertical: 10,
     alignItems: "center",
     justifyContent: "center",
     justifyContent: "space-between",
     backgroundColor: "#ffffff",
+    marginTop: 10,
     marginHorizontal: 10,
-    paddingVertical: 7,
+    paddingVertical: 10,
     borderRadius: 5,
     elevation: 2,
     shadowColor: "#000",
@@ -86,7 +92,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start"
   },
   shelterName: {
-    paddingHorizontal: 5
+    paddingHorizontal: 10
   },
   shelterNameText: {
     fontSize: 20,
