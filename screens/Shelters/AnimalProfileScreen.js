@@ -10,11 +10,10 @@ import {
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { useDispatch } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
-import Gallery from "react-native-image-gallery";
 
-import ImageModal from "../components/ImageModal";
-import HeaderButton from "../components/HeaderButton";
-import { toggleLike } from "../store/actions/actions";
+import ImageModal from "../../components/ImageModal";
+import HeaderButton from "../../components/HeaderButton";
+import { toggleLike } from "../../store/actions/actions";
 
 const AnimalProfileScreen = props => {
   const animal = props.navigation.getParam("animal");
@@ -29,7 +28,9 @@ const AnimalProfileScreen = props => {
   });
 
   useEffect(() => {
-    props.navigation.setParams({ toggleLike: handleCheckPress });
+    props.navigation.setParams({
+      toggleLike: handleCheckPress
+    });
   }, [dispatch]);
 
   return (

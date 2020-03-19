@@ -9,8 +9,8 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 
-import Button from "../components/Button";
-import { setFilters } from "../store/actions/actions";
+import Button from "../../components/Button";
+import { setFilters } from "../../store/actions/actions";
 
 const FilterScreen = props => {
   const [isType, setIsType] = useState(false);

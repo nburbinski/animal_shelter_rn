@@ -1,15 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import {
-  StyleSheet,
-  View,
-  ActivityIndicator,
-  Text,
-  SafeAreaView
-} from "react-native";
+import { StyleSheet, View, ActivityIndicator, Text } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchShelters } from "../store/actions/actions";
-import ShelterList from "../components/ShelterList";
+import { fetchShelters } from "../../store/actions/actions";
+import ShelterList from "../../components/ShelterList";
 
 const ShelterListScreen = props => {
   const [isLoading, setIsLoading] = useState(false);

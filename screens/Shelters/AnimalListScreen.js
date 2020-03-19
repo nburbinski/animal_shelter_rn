@@ -9,9 +9,9 @@ import {
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchAnimals } from "../store/actions/actions";
-import Animal from "../components/Animal";
-import HeaderButton from "../components/HeaderButton";
+import { fetchAnimals } from "../../store/actions/actions";
+import Animal from "../../components/Animal";
+import HeaderButton from "../../components/HeaderButton";
 
 const AnimalListScreen = props => {
   const [isLoading, setIsLoading] = useState(false);

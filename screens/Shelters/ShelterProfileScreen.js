@@ -12,9 +12,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import MapView, { Marker } from "react-native-maps";
 
-import HeaderButton from "../components/HeaderButton";
-import { fetchAnimals } from "../store/actions/actions";
-import AnimalList from "../components/AnimalList";
+import HeaderButton from "../../components/HeaderButton";
+import { fetchAnimals } from "../../store/actions/actions";
+import AnimalList from "../../components/AnimalList";
 import { GOOGLE_API_KEY } from "react-native-dotenv";
 
 const ShelterProfileScreen = props => {
