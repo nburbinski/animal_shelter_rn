@@ -9,7 +9,7 @@ import {
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchAnimals } from "../../store/actions/actions";
+import { fetchAnimals } from "../../store/actions/shelterActions";
 import Animal from "../../components/Animal";
 import HeaderButton from "../../components/HeaderButton";
 

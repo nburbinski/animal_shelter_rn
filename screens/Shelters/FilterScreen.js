@@ -10,7 +10,7 @@ import {
 import { useDispatch } from "react-redux";
 
 import Button from "../../components/Button";
-import { setFilters } from "../../store/actions/actions";
+import { setFilters } from "../../store/actions/shelterActions";
 
 const FilterScreen = props => {
   const [isType, setIsType] = useState(false);

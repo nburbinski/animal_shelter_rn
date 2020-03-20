@@ -13,7 +13,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import ImageModal from "../../components/ImageModal";
 import HeaderButton from "../../components/HeaderButton";
-import { toggleLike } from "../../store/actions/actions";
+import { toggleLike } from "../../store/actions/shelterActions";
 
 const AnimalProfileScreen = props => {
   const animal = props.navigation.getParam("animal");
@@ -28,9 +28,7 @@ const AnimalProfileScreen = props => {
   });
 
   useEffect(() => {
-    props.navigation.setParams({
-      toggleLike: handleCheckPress
-    });
+    props.navigation.setParams({ toggleLike: handleCheckPress });
   }, [dispatch]);
 
   return (
@@ -125,6 +123,8 @@ const AnimalProfileScreen = props => {
 
 AnimalProfileScreen.navigationOptions = navigationData => {
   const animal = navigationData.navigation.getParam("animal");
+  const toggleLike = navigationData.navigation.getParam("toggleLike");
+  let liked = animal.liked;
 
   return {
     headerTitle: animal.name,
@@ -132,8 +132,8 @@ AnimalProfileScreen.navigationOptions = navigationData => {
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Like"
-          iconName={animal.liked ? "heart" : "hearto"}
-          onPress={navigationData.navigation.getParam("toggleLike")}
+          iconName={liked ? "heart" : "hearto"}
+          onPress={(toggleLike, (liked = !liked))}
         />
       </HeaderButtons>
     )

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View, ActivityIndicator, Text } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchShelters } from "../../store/actions/actions";
+import { fetchShelters } from "../../store/actions/shelterActions";
 import ShelterList from "../../components/ShelterList";
 
 const ShelterListScreen = props => {

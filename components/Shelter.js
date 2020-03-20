@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
-import { toggleLike } from "../store/actions/actions";
+import { toggleLike } from "../store/actions/shelterActions";
 
 const Shelter = props => {
   const dispatch = useDispatch();

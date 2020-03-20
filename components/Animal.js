@@ -10,7 +10,7 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 
-import { toggleLike } from "../store/actions/actions";
+import { toggleLike } from "../store/actions/shelterActions";
 import ImageModal from "./ImageModal";
 
 const Animal = props => {

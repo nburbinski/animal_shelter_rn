@@ -5,6 +5,7 @@ export const TOGGLE_LIKE = "TOGGLE_LIKE";
 export const SET_FILTERS = "SET_FILTERS";
 export const SET_ANIMALS = "SET_ANIMALS";
 export const SET_SHELTERS = "SET_SHELTERS";
+export const ADD_ANIMAL = "ADD_ANIMAL";
 
 export const fetchShelters = () => {
   return async dispatch => {
@@ -94,5 +95,30 @@ export const setFilters = filtersSettings => {
   return {
     type: SET_FILTERS,
     filters: filtersSettings
+  };
+};
+
+export const addAnimal = animal => {
+  return async dispatch => {
+    await fetch(`https://animal-shelter-6a4a9.firebaseio.com/animals.json`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: animal.name,
+        type: animal.type,
+        breed: animal.breed,
+        about: animal.about,
+        image: animal.image,
+        gallery: animal.gallery,
+        cats: animal.cats,
+        dogs: animal.dogs
+      })
+    });
+    dispatch({
+      type: ADD_ANIMAL,
+      animal: animal
+    });
   };
 };

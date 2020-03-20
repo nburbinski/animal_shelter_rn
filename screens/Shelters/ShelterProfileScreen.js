@@ -13,7 +13,7 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import MapView, { Marker } from "react-native-maps";
 
 import HeaderButton from "../../components/HeaderButton";
-import { fetchAnimals } from "../../store/actions/actions";
+import { fetchAnimals } from "../../store/actions/shelterActions";
 import AnimalList from "../../components/AnimalList";
 import { GOOGLE_API_KEY } from "react-native-dotenv";
 
@@ -68,7 +68,7 @@ const ShelterProfileScreen = props => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
       <View style={styles.shelterInfo}>
         <Text style={styles.shelterName}>{shelter.name}</Text>
         <Text>{shelter.address}</Text>
@@ -147,7 +147,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   profileContainer: {
-    backgroundColor: "#FFFFFF",
     flex: 1
   },
   shelterInfo: {

@@ -3,7 +3,7 @@ import {
   SET_FILTERS,
   SET_ANIMALS,
   SET_SHELTERS
-} from "../actions/actions";
+} from "../actions/shelterActions";
 
 const initialState = {
   shelters: [],

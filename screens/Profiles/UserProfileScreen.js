@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const ProfileScreen = props => {
+const UserProfileScreen = props => {
   return (
     <View style={styles.container}>
       <Text> Welcome !</Text>
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProfileScreen;
+export default UserProfileScreen;
