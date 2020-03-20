@@ -5,6 +5,8 @@ const UserProfileScreen = props => {
   return (
     <View style={styles.container}>
       <Text> Welcome !</Text>
+      <Text>Username: </Text>
+      <Text>Edit Shelter Details</Text>
       <TouchableOpacity
         onPress={() => {
           props.navigation.navigate("AnimalForm");
@@ -42,7 +44,8 @@ const styles = StyleSheet.create({
       height: 2
     },
     shadowOpacity: 0.25,
-    shadowRadius: 3.84
+    shadowRadius: 3.84,
+    margin: 15
   },
   buttonText: {
     fontSize: 20,
