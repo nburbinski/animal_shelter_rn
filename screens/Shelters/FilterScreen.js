@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Picker,
-  Switch,
-  TouchableOpacity
-} from "react-native";
+import { View, Text, StyleSheet, Switch, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 
 import Button from "../../components/Button";
@@ -20,6 +13,8 @@ const FilterScreen = props => {
   const [isCat, setIsCat] = useState(false);
   const [isNakedMoleRat, setIsNakedMoleRat] = useState(false);
 
+  const animals = props.navigation.getParam("animals");
+
   const dispatch = useDispatch();
 
   const handleApply = () => {
@@ -31,7 +26,7 @@ const FilterScreen = props => {
       isNakedMoleRat
     };
 
-    dispatch(setFilters(appliedFilters));
+    dispatch(setFilters(appliedFilters, animals));
     props.navigation.goBack();
   };
 
@@ -45,7 +40,7 @@ const FilterScreen = props => {
       isCat,
       isNakedMoleRat
     };
-    dispatch(setFilters(appliedFilters));
+    dispatch(setFilters(appliedFilters, animals));
     props.navigation.goBack();
   };
 

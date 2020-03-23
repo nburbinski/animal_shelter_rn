@@ -43,7 +43,11 @@ export const shelterReducer = (state = initialState, action) => {
 
     case SET_FILTERS:
       const appliedFilters = action.filters;
-      const filteredAnimals = state.animals.filter(animal => {
+      if (!appliedFilters) {
+        return { ...state, filteredAnimals: action.animals };
+      }
+
+      const filteredAnimals = action.animals.filter(animal => {
         if (appliedFilters.isType) {
           if (appliedFilters.isDog && animal.type === "Dog") return true;
           else if (appliedFilters.isCat && animal.type === "Cat") return true;

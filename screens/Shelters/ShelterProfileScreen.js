@@ -5,21 +5,27 @@ import {
   StyleSheet,
   ActivityIndicator,
   SafeAreaView,
-  Dimensions,
-  FlatList
+  Dimensions
 } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import MapView, { Marker } from "react-native-maps";
+import { useDispatch, useSelector } from "react-redux";
 
 import HeaderButton from "../../components/HeaderButton";
 import AnimalList from "../../components/AnimalList";
 import { GOOGLE_API_KEY } from "react-native-dotenv";
+import { setFilters } from "../../store/actions/shelterActions";
 
 const ShelterProfileScreen = props => {
   const [isMapLoading, setIsMapLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
   const shelter = props.navigation.getParam("shelter");
+
+  const dispatch = useDispatch();
+
+  const animals = useSelector(state => state.shelter.filteredAnimals);
 
   const getCoordinates = async () => {
     setIsMapLoading(true);
@@ -33,8 +39,15 @@ const ShelterProfileScreen = props => {
     setIsMapLoading(false);
   };
 
+  const setAnimals = async () => {
+    await dispatch(setFilters(null, shelter.animals));
+  };
+
   useEffect(() => {
     getCoordinates();
+    setAnimals();
+    setIsLoading(false);
+    props.navigation.setParams({ animals: shelter.animals });
   }, []);
 
   return (
@@ -65,20 +78,28 @@ const ShelterProfileScreen = props => {
           </MapView>
         )}
 
-        <View style={styles.animalList}>
-          <AnimalList
-            loadProfile={props.loadProfile}
-            selectAnimal={props.selectAnimal}
-            navigation={props.navigation}
-            animals={shelter.animals}
-          />
-        </View>
+        {isLoading ? (
+          <View style={styles.mapStyle}>
+            <ActivityIndicator size="large" />
+          </View>
+        ) : (
+          <View style={styles.animalList}>
+            <AnimalList
+              loadProfile={props.loadProfile}
+              selectAnimal={props.selectAnimal}
+              navigation={props.navigation}
+              animals={animals}
+            />
+          </View>
+        )}
       </SafeAreaView>
     </View>
   );
 };
 
 ShelterProfileScreen.navigationOptions = ({ navigation }) => {
+  const animals = navigation.getParam("animals");
+
   return {
     headerTitle: "Shelter Profile",
     headerTitleStyle: {
@@ -91,7 +112,12 @@ ShelterProfileScreen.navigationOptions = ({ navigation }) => {
           title="filter"
           iconName="filter"
           onPress={() => {
-            navigation.navigate({ routeName: "Filter" });
+            navigation.navigate({
+              routeName: "Filter",
+              params: {
+                animals: animals
+              }
+            });
           }}
         />
       </HeaderButtons>

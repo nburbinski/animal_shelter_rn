@@ -70,10 +70,11 @@ export const toggleLike = animal => {
   };
 };
 
-export const setFilters = filtersSettings => {
+export const setFilters = (filtersSettings, animals) => {
   return {
     type: SET_FILTERS,
-    filters: filtersSettings
+    filters: filtersSettings,
+    animals: animals
   };
 };
 
