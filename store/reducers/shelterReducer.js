@@ -15,7 +15,6 @@ const initialState = {
 export const shelterReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_LIKES:
-      console.log(action.animals);
       return {
         ...state,
         liked: action.animals

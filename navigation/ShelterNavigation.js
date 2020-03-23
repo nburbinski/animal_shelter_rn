@@ -56,9 +56,6 @@ const UserNavigator = createStackNavigator({
 });
 
 const ShelterTabsNavigator = createBottomTabNavigator({
-  Startup: {
-    screen: StartupScreen
-  },
   Shelters: {
     screen: ShelterNavigator,
     navigationOptions: {

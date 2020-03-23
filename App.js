@@ -5,7 +5,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 
-import AnimalNavigator from "./navigation/AnimalNavigation";
+import ShelterNavigator from "./navigation/ShelterNavigation";
 import { shelterReducer } from "./store/reducers/shelterReducer";
 import { profileReducer } from "./store/reducers/profileReducer";
 
@@ -33,7 +33,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <AnimalNavigator />
+      <ShelterNavigator />
     </Provider>
   );
 }
