@@ -8,7 +8,7 @@ import {
   Dimensions
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { toggleLike } from "../store/actions/shelterActions";
 import ImageModal from "./ImageModal";
@@ -18,8 +18,19 @@ const Animal = props => {
   const dispatch = useDispatch();
 
   const handleCheckPress = useCallback(() => {
-    dispatch(toggleLike(props.animal.id, props.animal.liked));
+    dispatch(toggleLike(props.animal));
   });
+
+  const isLiked = () => {
+    const liked = useSelector(state => state.shelter.liked);
+    const existingIndex = liked.findIndex(a => a.name === props.animal.name);
+
+    if (existingIndex < 0) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
   useEffect(() => {
     props.navigation.setParams({ toggleLike: handleCheckPress });
@@ -70,7 +81,7 @@ const Animal = props => {
             <TouchableOpacity onPress={handleCheckPress}>
               <View style={styles.likeButton}>
                 <AntDesign
-                  name={props.animal.liked ? "heart" : "hearto"}
+                  name={isLiked() ? "heart" : "hearto"}
                   size={32}
                   color="#F2353E"
                 />

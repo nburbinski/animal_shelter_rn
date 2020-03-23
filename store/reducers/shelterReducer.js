@@ -1,49 +1,47 @@
 import {
   TOGGLE_LIKE,
   SET_FILTERS,
-  SET_ANIMALS,
-  SET_SHELTERS
+  SET_SHELTERS,
+  SET_LIKES
 } from "../actions/shelterActions";
 
 const initialState = {
   shelters: [],
-  animals: [],
   filteredAnimals: [],
-  filters: []
+  filters: [],
+  liked: []
 };
 
-export const animalReducer = (state = initialState, action) => {
+export const shelterReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_ANIMALS: {
+    case SET_LIKES:
+      console.log(action.animals);
       return {
         ...state,
-        animals: action.animals,
-        filteredAnimals: action.animals
+        liked: action.animals
       };
-    }
     case SET_SHELTERS:
       return {
         ...state,
         shelters: action.shelters
       };
     case TOGGLE_LIKE:
-      const animals = [...state.animals];
-      const newAnimalState = animals.map(animal =>
-        animal.id === action.animalID
-          ? { ...animal, liked: !animal.liked }
-          : animal
+      const existingIndex = state.liked.findIndex(
+        animal => animal.name === action.animal.name
       );
-      const newfilteredAnimals = [...state.filteredAnimals];
-      const newFilteredState = newfilteredAnimals.map(animal =>
-        animal.id === action.animalID
-          ? { ...animal, liked: !animal.liked }
-          : animal
-      );
-      return {
-        ...state,
-        animals: newAnimalState,
-        filteredAnimals: newFilteredState
-      };
+
+      if (existingIndex >= 0) {
+        const newLikedState = [...state.liked];
+        newLikedState.splice(existingIndex, 1);
+
+        return {
+          ...state,
+          liked: newLikedState
+        };
+      } else {
+        return { ...state, liked: state.liked.concat(action.animal) };
+      }
+
     case SET_FILTERS:
       const appliedFilters = action.filters;
       const filteredAnimals = state.animals.filter(animal => {

@@ -6,7 +6,8 @@ import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 
 import AnimalNavigator from "./navigation/AnimalNavigation";
-import { animalReducer } from "./store/reducers/animalReducer";
+import { shelterReducer } from "./store/reducers/shelterReducer";
+import { profileReducer } from "./store/reducers/profileReducer";
 
 const fechFonts = () => {
   return Font.loadAsync({
@@ -15,24 +16,15 @@ const fechFonts = () => {
   });
 };
 
-const rootReducer = combineReducers({ animals: animalReducer });
+const rootReducer = combineReducers({
+  shelter: shelterReducer,
+  profile: profileReducer
+});
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 export default function App() {
   const [dataLoaded, setDataLoaded] = useState(false);
 
-  // curl -d "grant_type=client_credentials&client_id=NOBl1N5lKPTdvwbNPeqUCdbs9dQMOYEnH3LPxdGcBsBvt6uwWQ&client_secret=jGB07f9LutmT04gOctg3mkGLpSTItaMqj4MH2P9o" https://api.petfinder.com/v2/oauth2/token
-
-  useEffect(() => {
-    fetch("https://dog.ceo/api/breeds/image/random")
-      .then(response => {
-        response.json();
-      })
-
-      .catch(error => {
-        console.error(error);
-      });
-  }, []);
   if (!dataLoaded) {
     return (
       <AppLoading startAsync={fechFonts} onFinish={() => setDataLoaded(true)} />

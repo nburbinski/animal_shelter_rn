@@ -1,26 +1,46 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useSelector } from "react-redux";
 
 const UserProfileScreen = props => {
+  const token = useSelector(state => state.profile.token);
+
   return (
     <View style={styles.container}>
       <Text> Welcome !</Text>
       <Text>Username: </Text>
       <Text>Edit Shelter Details</Text>
-      <TouchableOpacity
-        onPress={() => {
-          props.navigation.navigate("AnimalForm");
-        }}
-      >
-        <View style={styles.button}>
-          <Text> Add an animal? </Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>Logout</Text>
-        </View>
-      </TouchableOpacity>
+      <View>
+        {token ? (
+          <View>
+            <TouchableOpacity
+              onPress={() => {
+                props.navigation.navigate("AnimalForm");
+              }}
+            >
+              <View style={styles.button}>
+                <Text> Add an animal? </Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>Logout</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate("Auth");
+            }}
+          >
+            <View style={styles.button}>
+              <Text> Login </Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 };

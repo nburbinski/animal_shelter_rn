@@ -98,7 +98,7 @@ const AnimalInputScreen = props => {
 
   const submitHandler = useCallback(async () => {
     try {
-      const imageRes = await fetch(formState.inputValues.image);
+      await fetch(formState.inputValues.image);
     } catch (err) {
       console.log(err.message);
       Alert.alert("Image URL Invalid!", "Please input a proper Image URL.", [
@@ -115,7 +115,7 @@ const AnimalInputScreen = props => {
     }
 
     dispatch(addAnimal(formState.inputValues));
-    props.navigation.goBack();
+    // props.navigation.goBack();
   }, [dispatch, formState]);
   return (
     <KeyboardAvoidingView
@@ -266,16 +266,16 @@ AnimalInputScreen.navigationOptions = navigationData => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    paddingHorizontal: 25,
     flex: 1,
     alignItems: "center",
     backgroundColor: "#FFFFFF"
   },
   input: {
-    paddingHorizontal: 2,
-    paddingVertical: 5,
-    borderBottomColor: "#ccc",
-    borderBottomWidth: 1
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    backgroundColor: "#EAEAEA",
+    borderRadius: 5
   },
   label: {
     marginVertical: 8,

@@ -107,6 +107,7 @@ const AnimalProfileScreen = props => {
                   </TouchableOpacity>
                 </View>
               )}
+              keyExtractor={item => item}
             />
           </View>
         </View>
@@ -124,7 +125,6 @@ const AnimalProfileScreen = props => {
 AnimalProfileScreen.navigationOptions = navigationData => {
   const animal = navigationData.navigation.getParam("animal");
   const toggleLike = navigationData.navigation.getParam("toggleLike");
-  let liked = animal.liked;
 
   return {
     headerTitle: animal.name,
@@ -132,8 +132,8 @@ AnimalProfileScreen.navigationOptions = navigationData => {
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Like"
-          iconName={liked ? "heart" : "hearto"}
-          onPress={(toggleLike, (liked = !liked))}
+          iconName={animal.liked ? "heart" : "hearto"}
+          onPress={toggleLike}
         />
       </HeaderButtons>
     )

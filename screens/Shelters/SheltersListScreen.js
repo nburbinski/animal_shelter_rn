@@ -7,7 +7,7 @@ import ShelterList from "../../components/ShelterList";
 
 const ShelterListScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
-  const shelters = useSelector(state => state.animals.shelters);
+  const shelters = useSelector(state => state.shelter.shelters);
   const dispatch = useDispatch();
 
   const loadShelters = useCallback(async () => {

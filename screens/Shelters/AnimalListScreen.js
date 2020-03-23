@@ -17,7 +17,7 @@ const AnimalListScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const animals = useSelector(state => state.animals.filteredAnimals);
+  const animals = useSelector(state => state.shelter.filteredAnimals);
   const dispatch = useDispatch();
 
   const loadAnimals = useCallback(async () => {

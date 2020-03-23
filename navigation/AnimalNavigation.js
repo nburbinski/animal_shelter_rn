@@ -13,16 +13,17 @@ import LikesScreen from "../screens/LikesScreen";
 import FilterScreen from "../screens/Shelters/FilterScreen";
 import UserProfileScreen from "../screens/Profiles/UserProfileScreen";
 import AuthScreen from "../screens/Profiles/AuthScreen";
+import StartupScreen from "../screens/StartupScreen";
 
 import Icon from "../components/Icon";
 import AnimalInputScreen from "../screens/Profiles/AnimalInputScreen";
 
-const AnimalNavigator = createStackNavigator(
+const ShelterNavigator = createStackNavigator(
   {
     Shelters: {
       screen: ShelterListScreen,
       navigationOptions: {
-        headerBackTitle: null
+        headerLeft: () => null
       }
     },
     ShelterProfile: {
@@ -54,9 +55,12 @@ const UserNavigator = createStackNavigator({
   AnimalForm: AnimalInputScreen
 });
 
-const AnimalTabsNavigator = createBottomTabNavigator({
-  Animals: {
-    screen: AnimalNavigator,
+const ShelterTabsNavigator = createBottomTabNavigator({
+  Startup: {
+    screen: StartupScreen
+  },
+  Shelters: {
+    screen: ShelterNavigator,
     navigationOptions: {
       tabBarOptions: {
         showLabel: false
@@ -92,4 +96,4 @@ const AnimalTabsNavigator = createBottomTabNavigator({
   }
 });
 
-export default createAppContainer(AnimalTabsNavigator);
+export default createAppContainer(ShelterTabsNavigator);

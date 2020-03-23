@@ -3,125 +3,345 @@
     {
       "name": "Orange County Animal Services",
       "address": "2769 Conroy Rd, Orlando, FL 32839",
-      "image": "https://lh3.googleusercontent.com/proxy/itbJi_wna3IhP98cIJxuNyLJWrvQDQ3RqBEqnuMVA9L8MVxNSdMpT01Mg_7lgtXu5D_gfmtyDkFCchU2PJf7sALRScZuUlVfGkvcEJDEGgd39PBkSswQfC_DZjIyVB6CP3wTnsK_2qlXUsUUyNfGd4I"
+      "image": "https://lh3.googleusercontent.com/proxy/itbJi_wna3IhP98cIJxuNyLJWrvQDQ3RqBEqnuMVA9L8MVxNSdMpT01Mg_7lgtXu5D_gfmtyDkFCchU2PJf7sALRScZuUlVfGkvcEJDEGgd39PBkSswQfC_DZjIyVB6CP3wTnsK_2qlXUsUUyNfGd4I",
+      "uID": "GiFVqUoaY3e6rLYc0VxmBbpesGQ2",
+      "animals": [
+        {
+          "name": "Rufus",
+          "type": "Dog",
+          "breed": "Jack Russel Terrier",
+          "image": "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg",
+          "gallery": [
+            "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg",
+            "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg",
+            "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg"
+          ],
+          "liked": true,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": true,
+          "dogs": true
+        },
+        {
+          "name": "LadyBird",
+          "type": "Cat",
+          "breed": "Tuxedo",
+          "image": "https://cattime.com/assets/uploads/2017/10/tuxedo-cat-2-e1569622438857-1280x720.jpg",
+          "gallery": [
+            "https://cattime.com/assets/uploads/2017/10/tuxedo-cat-2-e1569622438857-1280x720.jpg",
+            "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/40932710/1/?bust=1518458312",
+            "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/40932710/3/?bust=1518458348&width=720",
+            "https://pet-uploads.adoptapet.com/a/4/9/313504258.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": true,
+          "dogs": true
+        },
+        {
+          "name": "Percy",
+          "type": "Naked Mole Rat",
+          "breed": "Jack Russel Terrier",
+          "image": "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+          "gallery": [
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": true,
+          "dogs": true
+        },
+        {
+          "name": "Bongo",
+          "type": "Dog",
+          "breed": "Schauzer",
+          "image": "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg",
+          "gallery": [
+            "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg",
+            "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg",
+            "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": true,
+          "dogs": true
+        },
+        {
+          "name": "Percy",
+          "type": "Naked Mole Rat",
+          "breed": "Jack Russel Terrier",
+          "image": "https://s.abcnews.com/images/US/dog-shelter-cage-gty-jt-190812_hpMain_16x9_992.jpg",
+          "gallery": [
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": true,
+          "dogs": false
+        },
+        {
+          "name": "Percy",
+          "type": "Naked Mole Rat",
+          "breed": "Jack Russel Terrier",
+          "image": "https://s.abcnews.com/images/US/dog-shelter-cage-gty-jt-190812_hpMain_16x9_992.jpg",
+          "gallery": [
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": false,
+          "dogs": false
+        },
+        {
+          "name": "Percy",
+          "type": "Cat",
+          "breed": "Jack Russel Terrier",
+          "image": "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg",
+          "gallery": [
+            "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg",
+            "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg",
+            "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": false,
+          "dogs": true
+        }
+      ]
     },
     {
       "name": "Seminole County Animal Services",
       "address": "232 Eslinger Way, Sanford, FL 32773",
-      "image": "https://www.wmmo.com/rw/Pub/p7/WMMO/2016/10/12/Images/Animals_Services_Wall_Design_Picked.jpg"
+      "image": "https://www.wmmo.com/rw/Pub/p7/WMMO/2016/10/12/Images/Animals_Services_Wall_Design_Picked.jpg",
+      "uID": "OR90zTtL95W5UtD7jOMJzwaQUtX2",
+      "animals": [
+        {
+          "name": "Rufus",
+          "type": "Dog",
+          "breed": "Jack Russel Terrier",
+          "image": "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg",
+          "gallery": [
+            "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg",
+            "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg",
+            "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg"
+          ],
+          "liked": true,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": true,
+          "dogs": true
+        },
+        {
+          "name": "LadyBird",
+          "type": "Cat",
+          "breed": "Tuxedo",
+          "image": "https://cattime.com/assets/uploads/2017/10/tuxedo-cat-2-e1569622438857-1280x720.jpg",
+          "gallery": [
+            "https://cattime.com/assets/uploads/2017/10/tuxedo-cat-2-e1569622438857-1280x720.jpg",
+            "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/40932710/1/?bust=1518458312",
+            "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/40932710/3/?bust=1518458348&width=720",
+            "https://pet-uploads.adoptapet.com/a/4/9/313504258.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": true,
+          "dogs": true
+        },
+        {
+          "name": "Percy",
+          "type": "Naked Mole Rat",
+          "breed": "Jack Russel Terrier",
+          "image": "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+          "gallery": [
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": true,
+          "dogs": true
+        },
+        {
+          "name": "Bongo",
+          "type": "Dog",
+          "breed": "Schauzer",
+          "image": "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg",
+          "gallery": [
+            "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg",
+            "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg",
+            "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": true,
+          "dogs": true
+        },
+        {
+          "name": "Percy",
+          "type": "Naked Mole Rat",
+          "breed": "Jack Russel Terrier",
+          "image": "https://s.abcnews.com/images/US/dog-shelter-cage-gty-jt-190812_hpMain_16x9_992.jpg",
+          "gallery": [
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": true,
+          "dogs": false
+        },
+        {
+          "name": "Percy",
+          "type": "Naked Mole Rat",
+          "breed": "Jack Russel Terrier",
+          "image": "https://s.abcnews.com/images/US/dog-shelter-cage-gty-jt-190812_hpMain_16x9_992.jpg",
+          "gallery": [
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": false,
+          "dogs": false
+        },
+        {
+          "name": "Percy",
+          "type": "Cat",
+          "breed": "Jack Russel Terrier",
+          "image": "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg",
+          "gallery": [
+            "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg",
+            "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg",
+            "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": false,
+          "dogs": true
+        }
+      ]
     },
     {
       "name": "Pet Rescue By Judy",
       "address": "401 South Laurel Ave, Sanford, FL 32771",
-      "image": "https://www.mikejdesign.com/wp-content/uploads/2015/11/logo3.jpg"
-    }
-  ],
-  "animals": [
-    {
-      "name": "Rufus",
-      "type": "Dog",
-      "breed": "Jack Russel Terrier",
-      "image": "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg",
-      "gallery": [
-        "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg",
-        "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg",
-        "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg"
-      ],
-      "liked": true,
-      "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
-      "cats": true,
-      "dogs": true
-    },
-    {
-      "name": "LadyBird",
-      "type": "Cat",
-      "breed": "Tuxedo",
-      "image": "https://cattime.com/assets/uploads/2017/10/tuxedo-cat-2-e1569622438857-1280x720.jpg",
-      "gallery": [
-        "https://cattime.com/assets/uploads/2017/10/tuxedo-cat-2-e1569622438857-1280x720.jpg",
-        "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/40932710/1/?bust=1518458312",
-        "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/40932710/3/?bust=1518458348&width=720",
-        "https://pet-uploads.adoptapet.com/a/4/9/313504258.jpg"
-      ],
-      "liked": false,
-      "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
-      "cats": true,
-      "dogs": true
-    },
-    {
-      "name": "Percy",
-      "type": "Naked Mole Rat",
-      "breed": "Jack Russel Terrier",
-      "image": "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
-      "gallery": [
-        "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
-        "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
-        "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg"
-      ],
-      "liked": false,
-      "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
-      "cats": true,
-      "dogs": true
-    },
-    {
-      "name": "Bongo",
-      "type": "Dog",
-      "breed": "Schauzer",
-      "image": "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg",
-      "gallery": [
-        "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg",
-        "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg",
-        "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg"
-      ],
-      "liked": false,
-      "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
-      "cats": true,
-      "dogs": true
-    },
-    {
-      "name": "Percy",
-      "type": "Naked Mole Rat",
-      "breed": "Jack Russel Terrier",
-      "image": "https://s.abcnews.com/images/US/dog-shelter-cage-gty-jt-190812_hpMain_16x9_992.jpg",
-      "gallery": [
-        "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
-        "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
-        "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg"
-      ],
-      "liked": false,
-      "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
-      "cats": true,
-      "dogs": false
-    },
-    {
-      "name": "Percy",
-      "type": "Naked Mole Rat",
-      "breed": "Jack Russel Terrier",
-      "image": "https://s.abcnews.com/images/US/dog-shelter-cage-gty-jt-190812_hpMain_16x9_992.jpg",
-      "gallery": [
-        "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
-        "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
-        "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg"
-      ],
-      "liked": false,
-      "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
-      "cats": false,
-      "dogs": false
-    },
-    {
-      "name": "Percy",
-      "type": "Cat",
-      "breed": "Jack Russel Terrier",
-      "image": "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg",
-      "gallery": [
-        "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg",
-        "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg",
-        "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg"
-      ],
-      "liked": false,
-      "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
-      "cats": false,
-      "dogs": true
+
+      "image": "https://www.mikejdesign.com/wp-content/uploads/2015/11/logo3.jpg",
+      "uID": "vC83Wn3IXiendOlIhsc39Zw29rA3",
+      "animals": [
+        {
+          "name": "Rufus",
+          "type": "Dog",
+          "breed": "Jack Russel Terrier",
+          "image": "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg",
+          "gallery": [
+            "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg",
+            "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg",
+            "https://www.atlantic-county.org/animal-shelter/images/BamBam_8552.jpg"
+          ],
+          "liked": true,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": true,
+          "dogs": true
+        },
+        {
+          "name": "LadyBird",
+          "type": "Cat",
+          "breed": "Tuxedo",
+          "image": "https://cattime.com/assets/uploads/2017/10/tuxedo-cat-2-e1569622438857-1280x720.jpg",
+          "gallery": [
+            "https://cattime.com/assets/uploads/2017/10/tuxedo-cat-2-e1569622438857-1280x720.jpg",
+            "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/40932710/1/?bust=1518458312",
+            "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/40932710/3/?bust=1518458348&width=720",
+            "https://pet-uploads.adoptapet.com/a/4/9/313504258.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": true,
+          "dogs": true
+        },
+        {
+          "name": "Percy",
+          "type": "Naked Mole Rat",
+          "breed": "Jack Russel Terrier",
+          "image": "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+          "gallery": [
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": true,
+          "dogs": true
+        },
+        {
+          "name": "Bongo",
+          "type": "Dog",
+          "breed": "Schauzer",
+          "image": "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg",
+          "gallery": [
+            "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg",
+            "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg",
+            "https://images-ra.adoptapet.com/seo/1/ff/837_ff.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": true,
+          "dogs": true
+        },
+        {
+          "name": "Percy",
+          "type": "Naked Mole Rat",
+          "breed": "Jack Russel Terrier",
+          "image": "https://s.abcnews.com/images/US/dog-shelter-cage-gty-jt-190812_hpMain_16x9_992.jpg",
+          "gallery": [
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": true,
+          "dogs": false
+        },
+        {
+          "name": "Percy",
+          "type": "Naked Mole Rat",
+          "breed": "Jack Russel Terrier",
+          "image": "https://s.abcnews.com/images/US/dog-shelter-cage-gty-jt-190812_hpMain_16x9_992.jpg",
+          "gallery": [
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg",
+            "https://i.pinimg.com/originals/71/70/9d/71709dd49a99fbc76d7bcbd1576548e6.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": false,
+          "dogs": false
+        },
+        {
+          "name": "Percy",
+          "type": "Cat",
+          "breed": "Jack Russel Terrier",
+          "image": "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg",
+          "gallery": [
+            "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg",
+            "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg",
+            "https://images.dog.ceo/breeds/schnauzer-giant/n02097130_3215.jpg"
+          ],
+          "liked": false,
+          "about": "Rufus is VERY playful, with a pawsion for tennis balls, he seeking an owner that isn't afraid of the outdoors, but more importantly isn't afraid of pets.",
+          "cats": false,
+          "dogs": true
+        }
+      ]
     }
   ]
 }

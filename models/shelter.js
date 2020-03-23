@@ -1,9 +1,11 @@
 class Shelter {
-  constructor(id, name, address, image) {
-    this.id = id;
+  constructor(key, name, address, image, animals, uID) {
+    this.id = key;
     this.name = name;
     this.address = address;
     this.image = image;
+    this.animals = animals;
+    this.uID = uID;
   }
 }
 
