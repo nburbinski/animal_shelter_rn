@@ -1,4 +1,4 @@
-import { AUTH } from "../actions/profileActions";
+import { AUTH, LOGOUT } from "../actions/profileActions";
 
 const initialState = {
   token: null,
@@ -12,7 +12,8 @@ export const profileReducer = (state = initialState, action) => {
         token: action.token,
         userId: action.userId
       };
-
+    case LOGOUT:
+      return initialState;
     default:
       return state;
   }

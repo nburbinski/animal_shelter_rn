@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useCallback } from "react";
+import React, { useState, useReducer, useCallback, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -10,7 +10,7 @@ import {
   Alert,
   ActivityIndicator
 } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const INPUT_UPDATE = "INPUT_UPDATE";
 
@@ -42,7 +42,20 @@ const formReducer = (state, action) => {
 const AuthScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const token = useSelector(state => state.profile.token);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    props.navigation.setParams({ isSignUp: isSignUp });
+
+    setIsLoading(true);
+    try {
+      if (token) props.navigation.navigate("Profile");
+    } catch (err) {
+      console.log(err);
+    }
+    setIsLoading(false);
+  }, []);
 
   const [formState, dispatchForm] = useReducer(formReducer, {
     inputValues: {
@@ -91,89 +104,99 @@ const AuthScreen = props => {
       );
     }
     setIsLoading(false);
-    props.navigation.goBack();
+    props.navigation.navigate("Profile");
   };
 
-  if (isLoading) {
+  if (!isLoading) {
     return (
-      <View style={styles.loading}>
-        <ActivityIndicator size="large" />
-      </View>
+      <KeyboardAvoidingView
+        behavior={"padding"}
+        keyboardVerticalOffset={50}
+        style={{ flex: 1, backgroundColor: "white" }}
+      >
+        <ScrollView>
+          <View style={styles.container}>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Email</Text>
+              <TextInput
+                id="email"
+                label="e-mail"
+                keyboardType="email-address"
+                required
+                style={styles.input}
+                autoCapitalize="none"
+                value={formState.inputValues.email}
+                onChangeText={textChangeHandler.bind(this, "email")}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Password</Text>
+              <TextInput
+                id="password"
+                label="password"
+                secureTextEntry
+                required
+                style={styles.input}
+                autoCapitalize="none"
+                style={styles.input}
+                value={formState.inputValues.password}
+                onChangeText={textChangeHandler.bind(this, "password")}
+              />
+            </View>
+
+            <View style={{ flexDirection: "row" }}>
+              <TouchableOpacity style={{ flex: 1 }} onPress={submitHandler}>
+                <View
+                  style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "#FFFFFF",
+                    marginTop: 20,
+                    ...styles.button
+                  }}
+                >
+                  <Text>{isSignUp ? "Sign Up" : "Login"}</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{ flex: 1 }}
+                onPress={() => {
+                  setIsSignUp(!isSignUp);
+                  props.navigation.setParams({ isSignUp: !isSignUp });
+                }}
+              >
+                <View
+                  style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "#FFFFFF",
+                    marginTop: 20,
+                    ...styles.button
+                  }}
+                >
+                  <Text>{`Switch to ${isSignUp ? "Login" : "Sign Up"}`}</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={"padding"}
-      keyboardVerticalOffset={50}
-      style={{ flex: 1, backgroundColor: "white" }}
-    >
-      <ScrollView>
-        <View style={styles.container}>
-          <Text>{isSignUp ? "Sign Up!" : "Login"}</Text>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Email</Text>
-            <TextInput
-              id="email"
-              label="e-mail"
-              keyboardType="email-address"
-              required
-              style={styles.input}
-              autoCapitalize="none"
-              value={formState.inputValues.email}
-              onChangeText={textChangeHandler.bind(this, "email")}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Password</Text>
-            <TextInput
-              id="password"
-              label="password"
-              secureTextEntry
-              required
-              style={styles.input}
-              autoCapitalize="none"
-              style={styles.input}
-              value={formState.inputValues.password}
-              onChangeText={textChangeHandler.bind(this, "password")}
-            />
-          </View>
-
-          <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity style={{ flex: 1 }} onPress={submitHandler}>
-              <View
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  backgroundColor: "#FFFFFF",
-                  marginTop: 20,
-                  ...styles.button
-                }}
-              >
-                <Text>Login</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{ flex: 1 }}
-              onPress={() => setIsSignUp(!isSignUp)}
-            >
-              <View
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  backgroundColor: "#FFFFFF",
-                  marginTop: 20,
-                  ...styles.button
-                }}
-              >
-                <Text>{`Switch to ${isSignUp ? "Login" : "Sign Up"}`}</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+    <View style={styles.loading}>
+      <ActivityIndicator size="large" />
+    </View>
   );
+};
+
+AuthScreen.navigationOptions = navigationData => {
+  const isSignUp = navigationData.navigation.getParam("isSignUp");
+
+  return {
+    headerTitle: isSignUp ? "Sign Up" : "Login"
+  };
 };
 
 const styles = StyleSheet.create({

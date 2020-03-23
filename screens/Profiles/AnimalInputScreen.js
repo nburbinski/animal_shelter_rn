@@ -115,7 +115,7 @@ const AnimalInputScreen = props => {
     }
 
     dispatch(addAnimal(formState.inputValues));
-    // props.navigation.goBack();
+    props.navigation.goBack();
   }, [dispatch, formState]);
   return (
     <KeyboardAvoidingView
@@ -267,6 +267,7 @@ AnimalInputScreen.navigationOptions = navigationData => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 25,
+    paddingBottom: 20,
     flex: 1,
     alignItems: "center",
     backgroundColor: "#FFFFFF"

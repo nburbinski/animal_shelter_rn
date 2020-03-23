@@ -1,45 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { AntDesign } from "@expo/vector-icons";
+
+import { logout } from "../../store/actions/profileActions";
 
 const UserProfileScreen = props => {
-  const token = useSelector(state => state.profile.token);
+  const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    dispatch(logout());
+    props.navigation.navigate("Auth");
+  };
 
   return (
     <View style={styles.container}>
-      <Text> Welcome !</Text>
-      <Text>Username: </Text>
-      <Text>Edit Shelter Details</Text>
-      <View>
-        {token ? (
-          <View>
-            <TouchableOpacity
-              onPress={() => {
-                props.navigation.navigate("AnimalForm");
-              }}
-            >
-              <View style={styles.button}>
-                <Text> Add an animal? </Text>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-              <View style={styles.button}>
-                <Text style={styles.buttonText}>Logout</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        ) : (
+      <View style={{ width: "100%" }}>
+        <View style={{ width: "100%" }}>
           <TouchableOpacity
+            style={{ alignItems: "center" }}
             onPress={() => {
-              props.navigation.navigate("Auth");
+              props.navigation.navigate("AnimalForm");
             }}
           >
             <View style={styles.button}>
-              <Text> Login </Text>
+              <AntDesign name={"plussquareo"} size={32} color="darkgrey" />
+              <Text style={styles.text}>Add an animal? </Text>
             </View>
           </TouchableOpacity>
-        )}
+
+          <TouchableOpacity onPress={() => {}} style={{ alignItems: "center" }}>
+            <View style={styles.button}>
+              <AntDesign name={"edit"} size={32} color="darkgrey" />
+              <Text style={styles.text}>Edit Shelter Details</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={handleLogout}
+            style={{ alignItems: "center" }}
+          >
+            <View style={styles.button}>
+              <AntDesign name={"logout"} size={32} color="darkgrey" />
+              <Text style={styles.text}>Logout</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -47,14 +53,13 @@ const UserProfileScreen = props => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    padding: 10,
     flex: 1,
-    alignItems: "center",
     backgroundColor: "#FFFFFF"
   },
   button: {
     backgroundColor: "white",
-    paddingVertical: 5,
+    paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 5,
     elevation: 2,
@@ -65,11 +70,16 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    margin: 15
+    width: "95%",
+    marginVertical: 10,
+    flexDirection: "row",
+    alignItems: "center"
   },
-  buttonText: {
-    fontSize: 20,
-    fontFamily: "source-sans"
+  text: {
+    textAlign: "center",
+    fontFamily: "source-sans",
+    marginHorizontal: 10,
+    fontSize: 15
   }
 });
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { createAppContainer } from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { AntDesign } from "@expo/vector-icons";
@@ -13,7 +13,6 @@ import LikesScreen from "../screens/LikesScreen";
 import FilterScreen from "../screens/Shelters/FilterScreen";
 import UserProfileScreen from "../screens/Profiles/UserProfileScreen";
 import AuthScreen from "../screens/Profiles/AuthScreen";
-import StartupScreen from "../screens/StartupScreen";
 
 import Icon from "../components/Icon";
 import AnimalInputScreen from "../screens/Profiles/AnimalInputScreen";
@@ -49,10 +48,18 @@ const LikesNavigator = createStackNavigator({
   AnimalProfile: AnimalProfileScreen
 });
 
-const UserNavigator = createStackNavigator({
+const ProfileNavigator = createStackNavigator({
   Profile: UserProfileScreen,
-  Auth: AuthScreen,
   AnimalForm: AnimalInputScreen
+});
+
+const AuthScreenNavigator = createStackNavigator({
+  Auth: AuthScreen
+});
+
+const AuthNavigator = createSwitchNavigator({
+  Auth: AuthScreenNavigator,
+  Profile: ProfileNavigator
 });
 
 const ShelterTabsNavigator = createBottomTabNavigator({
@@ -80,7 +87,7 @@ const ShelterTabsNavigator = createBottomTabNavigator({
     }
   },
   User: {
-    screen: UserNavigator,
+    screen: AuthNavigator,
     navigationOptions: {
       tabBarOptions: {
         showLabel: false,

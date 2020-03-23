@@ -2,6 +2,7 @@ import { AsyncStorage } from "react-native";
 export const SIGNUP = "SIGNUP";
 export const LOGIN = "LOGIN";
 export const AUTH = "AUTH";
+export const LOGOUT = "LOGOUT";
 
 import { FIREBASE_API_KEY } from "react-native-dotenv";
 
@@ -14,7 +15,7 @@ export const authenticate = (token, userId) => {
 };
 
 export const signup = (email, password) => {
-  return async disptach => {
+  return async dispatch => {
     try {
       const res = await fetch(
         `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_API_KEY}`,
@@ -33,7 +34,7 @@ export const signup = (email, password) => {
 
       const resData = await res.json();
 
-      authenticate(resData.idToken, resData.localId);
+      dispatch(authenticate(resData.idToken, resData.localId));
 
       const expDate = new Date(
         new Date().getTime() + parseInt(resData.expresIn) * 1000
@@ -46,7 +47,7 @@ export const signup = (email, password) => {
 };
 
 export const login = (email, password) => {
-  return async disptach => {
+  return async dispatch => {
     try {
       const res = await fetch(
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API_KEY}`,
@@ -64,18 +65,29 @@ export const login = (email, password) => {
       );
 
       const resData = await res.json();
-      authenticate(resData.idToken, resData.localId);
+      dispatch(authenticate(resData.idToken, resData.localId));
 
-      const newTime = parseInt(
-        new Date().getTime() + parseInt(resData.expresIn) * 1000
-      );
+      const newTime = new Date().getTime() + parseInt(resData.expiresIn) * 1000;
 
       const expDate = new Date(newTime);
-      console.log(expDate);
       saveDataToStorage(resData.idToken, resData.localId, expDate);
     } catch (error) {
       console.log(error.message);
     }
+  };
+};
+
+export const logout = () => {
+  AsyncStorage.setItem(
+    "userData",
+    JSON.stringify({
+      token: null,
+      userId: null,
+      expDate: null
+    })
+  );
+  return {
+    type: LOGOUT
   };
 };
 
