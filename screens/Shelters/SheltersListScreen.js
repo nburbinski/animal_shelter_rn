@@ -61,7 +61,7 @@ const ShelterListScreen = props => {
   if (isLoading) {
     return (
       <View style={styles.loading}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );
   }
@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
   loading: {
     justifyContent: "center",
     alignItems: "center",
-    flex: 1
+    flex: 1,
+    backgroundColor: "white"
   }
 });
 

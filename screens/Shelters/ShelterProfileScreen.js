@@ -59,7 +59,7 @@ const ShelterProfileScreen = props => {
       <SafeAreaView style={styles.profileContainer}>
         {isMapLoading ? (
           <View style={styles.mapStyle}>
-            <ActivityIndicator size="large" />
+            <ActivityIndicator size="large" color="#0000ff" />
           </View>
         ) : (
           <MapView
@@ -80,7 +80,7 @@ const ShelterProfileScreen = props => {
 
         {isLoading ? (
           <View style={styles.mapStyle}>
-            <ActivityIndicator size="large" />
+            <ActivityIndicator size="large" color="#0000ff" />
           </View>
         ) : (
           <View style={styles.animalList}>
@@ -134,7 +134,8 @@ const styles = StyleSheet.create({
   loading: {
     justifyContent: "center",
     alignItems: "center",
-    flex: 1
+    flex: 1,
+    backgroundColor: "white"
   },
   profileContainer: {
     flex: 1
@@ -161,7 +162,8 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
     height: 100,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "white"
   }
 });
 
