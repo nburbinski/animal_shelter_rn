@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback } from "react";
+import React, { useReducer, useCallback, useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -50,6 +50,7 @@ const formReducer = (state, action) => {
 
 const AnimalInputScreen = props => {
   const dispatch = useDispatch();
+  const [error, setError] = useState();
 
   const [formState, dispatchForm] = useReducer(formReducer, {
     inputValues: {
@@ -73,6 +74,12 @@ const AnimalInputScreen = props => {
 
     formIsValid: false
   });
+
+  useEffect(() => {
+    if (error) {
+      Alert.alert("An error occurred!", error, [{ text: "Okay" }]);
+    }
+  }, [error]);
 
   const textChangeHandler = (inputIdentifier, text) => {
     let isValid = false;
@@ -100,7 +107,6 @@ const AnimalInputScreen = props => {
     try {
       await fetch(formState.inputValues.image);
     } catch (err) {
-      console.log(err.message);
       Alert.alert("Image URL Invalid!", "Please input a proper Image URL.", [
         { text: "Okay" }
       ]);
@@ -114,8 +120,12 @@ const AnimalInputScreen = props => {
       return;
     }
 
-    dispatch(addAnimal(formState.inputValues));
-    props.navigation.goBack();
+    try {
+      dispatch(addAnimal(formState.inputValues));
+      props.navigation.goBack();
+    } catch (error) {
+      setError(error.message);
+    }
   }, [dispatch, formState]);
   return (
     <KeyboardAvoidingView

@@ -107,7 +107,6 @@ const AnimalProfileScreen = props => {
                   </TouchableOpacity>
                 </View>
               )}
-              keyExtractor={item => item}
             />
           </View>
         </View>

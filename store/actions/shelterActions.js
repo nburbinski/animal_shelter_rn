@@ -85,33 +85,35 @@ export const addAnimal = animal => {
     const shelters = getState().animals.shelters;
     const shelter = shelters.find(shelter => shelter.uID === uID);
 
-    try {
-      await fetch(
-        `https://animal-shelter-6a4a9.firebaseio.com/shelters/${shelter.id}/animals.json?auth=${token}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            name: animal.name,
-            type: animal.type,
-            breed: animal.breed,
-            about: animal.about,
-            image: animal.image,
-            gallery: animal.gallery,
-            cats: animal.cats,
-            dogs: animal.dogs
-          })
-        }
-      );
-      dispatch({
-        type: ADD_ANIMAL,
-        animal: animal
-      });
-    } catch (err) {
-      console.log(err);
+    const res = await fetch(
+      `https://animal-shelter-6a4a9.firebaseio.com/shelters/${shelter.id}/animals.json?auth=${token}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: animal.name,
+          type: animal.type,
+          breed: animal.breed,
+          about: animal.about,
+          image: animal.image,
+          gallery: animal.gallery,
+          cats: animal.cats,
+          dogs: animal.dogs
+        })
+      }
+    );
+
+    if (!res.ok) {
+      const resData = await res.json();
+      throw new Error(resData.error.message);
     }
+
+    dispatch({
+      type: ADD_ANIMAL,
+      animal: animal
+    });
   };
 };
 

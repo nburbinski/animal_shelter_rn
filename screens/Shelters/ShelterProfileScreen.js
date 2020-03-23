@@ -106,22 +106,23 @@ ShelterProfileScreen.navigationOptions = ({ navigation }) => {
       fontFamily: "source-sans",
       fontSize: 20
     },
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item
-          title="filter"
-          iconName="filter"
-          onPress={() => {
-            navigation.navigate({
-              routeName: "Filter",
-              params: {
-                animals: animals
-              }
-            });
-          }}
-        />
-      </HeaderButtons>
-    )
+    headerRight: () =>
+      animals ? (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <Item
+            title="filter"
+            iconName="filter"
+            onPress={() => {
+              navigation.navigate({
+                routeName: "Filter",
+                params: {
+                  animals: animals
+                }
+              });
+            }}
+          />
+        </HeaderButtons>
+      ) : null
   };
 };
 

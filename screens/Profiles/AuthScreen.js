@@ -40,22 +40,24 @@ const formReducer = (state, action) => {
 };
 
 const AuthScreen = props => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [error, setError] = useState();
   const token = useSelector(state => state.profile.token);
   const dispatch = useDispatch();
 
   useEffect(() => {
     props.navigation.setParams({ isSignUp: isSignUp });
+    if (token) props.navigation.navigate("Profile");
 
-    setIsLoading(true);
-    try {
-      if (token) props.navigation.navigate("Profile");
-    } catch (err) {
-      console.log(err);
-    }
     setIsLoading(false);
   }, []);
+
+  useEffect(() => {
+    if (error) {
+      Alert.alert("An error occurred!", error, [{ text: "Okay" }]);
+    }
+  }, [error]);
 
   const [formState, dispatchForm] = useReducer(formReducer, {
     inputValues: {
@@ -85,7 +87,7 @@ const AuthScreen = props => {
     [dispatchForm]
   );
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     setIsLoading(true);
     if (!formState.formIsValid) {
       Alert.alert("Input Invalid!", "Please check the errors in the form.", [
@@ -94,17 +96,27 @@ const AuthScreen = props => {
       setIsLoading(false);
       return;
     }
+    let action;
     if (isSignUp) {
-      dispatch(
-        signup(formState.inputValues.email, formState.inputValues.password)
+      action = signup(
+        formState.inputValues.email,
+        formState.inputValues.password
       );
     } else {
-      dispatch(
-        login(formState.inputValues.email, formState.inputValues.password)
+      action = login(
+        formState.inputValues.email,
+        formState.inputValues.password
       );
     }
-    setIsLoading(false);
-    props.navigation.navigate("Profile");
+    setError(null);
+    setIsLoading(true);
+    try {
+      await dispatch(action);
+      props.navigation.navigate("Profile");
+    } catch (err) {
+      setError(err.message);
+      setIsLoading(false);
+    }
   };
 
   if (!isLoading) {
@@ -195,7 +207,11 @@ AuthScreen.navigationOptions = navigationData => {
   const isSignUp = navigationData.navigation.getParam("isSignUp");
 
   return {
-    headerTitle: isSignUp ? "Sign Up" : "Login"
+    headerTitle: isSignUp ? "Sign Up" : "Login",
+    headerTitleStyle: {
+      fontFamily: "source-sans",
+      fontSize: 28
+    }
   };
 };
 
