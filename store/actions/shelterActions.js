@@ -7,6 +7,8 @@ export const SET_FILTERS = "SET_FILTERS";
 export const SET_ANIMALS = "SET_ANIMALS";
 export const SET_SHELTERS = "SET_SHELTERS";
 export const ADD_ANIMAL = "ADD_ANIMAL";
+export const ADD_SHELTER = "ADD_SHELTER";
+
 export const SET_LIKES = "SET_LIKES";
 
 export const fetchShelters = () => {
@@ -78,11 +80,42 @@ export const setFilters = (filtersSettings, animals) => {
   };
 };
 
+export const addShelter = animal => {
+  return async (dispatch, getState) => {
+    const token = getState().profile.token;
+
+    const res = await fetch(
+      `https://animal-shelter-6a4a9.firebaseio.com/shelters.json?auth=${token}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: animal.name,
+          address: animal.address,
+          image: animal.image
+        })
+      }
+    );
+
+    if (!res.ok) {
+      const resData = await res.json();
+      throw new Error(resData.error.message);
+    }
+
+    dispatch({
+      type: ADD_SHELTER,
+      animal: animal
+    });
+  };
+};
+
 export const addAnimal = animal => {
   return async (dispatch, getState) => {
     const token = getState().profile.token;
     const uID = getState().profile.userId;
-    const shelters = getState().animals.shelters;
+    const shelters = getState().shelters.shelters;
     const shelter = shelters.find(shelter => shelter.uID === uID);
 
     const res = await fetch(

@@ -13,6 +13,8 @@ import LikesScreen from "../screens/LikesScreen";
 import FilterScreen from "../screens/Shelters/FilterScreen";
 import UserProfileScreen from "../screens/Profiles/UserProfileScreen";
 import AuthScreen from "../screens/Profiles/AuthScreen";
+import ShelterInputScreen from "../screens/Profiles/ShelterInputScreen";
+import ShelterEditScreen from "../screens/Profiles/ShelterEditScreen";
 
 import Icon from "../components/Icon";
 import AnimalInputScreen from "../screens/Profiles/AnimalInputScreen";
@@ -50,7 +52,9 @@ const LikesNavigator = createStackNavigator({
 
 const ProfileNavigator = createStackNavigator({
   Profile: UserProfileScreen,
-  AnimalForm: AnimalInputScreen
+  AnimalForm: AnimalInputScreen,
+  ShelterForm: ShelterInputScreen,
+  ShelterEdit: ShelterEditScreen
 });
 
 const AuthScreenNavigator = createStackNavigator({

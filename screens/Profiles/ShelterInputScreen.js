@@ -11,7 +11,8 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 
-import { addAnimal } from "../../store/actions/shelterActions";
+import ImageSelector from "../../components/ImageSelector";
+import { addShelter } from "../../store/actions/shelterActions";
 
 const INPUT_UPDATE = "INPUT_UPDATE";
 const BOOLEAN_UPDATE = "BOOLEAN_UPDATE";
@@ -48,28 +49,21 @@ const formReducer = (state, action) => {
   return state;
 };
 
-const AnimalInputScreen = props => {
+const ShelterInputScreen = props => {
   const dispatch = useDispatch();
   const [error, setError] = useState();
+  const [imageTaken, setImageTaken] = useState("");
 
   const [formState, dispatchForm] = useReducer(formReducer, {
     inputValues: {
       name: "",
-      type: "",
-      breed: "",
-      image: "",
-      gallery: "",
-      about: "",
-      cats: false,
-      dogs: false
+      address: "",
+      image: imageTaken
     },
     inputValidities: {
       name: false,
-      type: false,
-      breed: false,
-      image: false,
-      gallery: false,
-      about: false
+      address: false,
+      image: true
     },
 
     formIsValid: false
@@ -94,15 +88,6 @@ const AnimalInputScreen = props => {
     });
   };
 
-  const booleanChangeHandler = (inputIdentifier, value) => {
-    dispatchForm({
-      type: BOOLEAN_UPDATE,
-      value: !value,
-      isValid: true,
-      input: inputIdentifier
-    });
-  };
-
   const submitHandler = useCallback(async () => {
     try {
       await fetch(formState.inputValues.image);
@@ -121,7 +106,7 @@ const AnimalInputScreen = props => {
     }
 
     try {
-      dispatch(addAnimal(formState.inputValues));
+      dispatch(addShelter(formState.inputValues));
       props.navigation.goBack();
     } catch (error) {
       setError(error.message);
@@ -145,98 +130,19 @@ const AnimalInputScreen = props => {
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.label}>Type</Text>
+            <Text style={styles.label}>Address</Text>
             <TextInput
               style={styles.input}
-              value={formState.inputValues.type}
-              onChangeText={textChangeHandler.bind(this, "type")}
+              value={formState.inputValues.address}
+              onChangeText={textChangeHandler.bind(this, "address")}
             />
           </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Breed</Text>
-            <TextInput
-              style={styles.input}
-              value={formState.inputValues.breed}
-              onChangeText={textChangeHandler.bind(this, "breed")}
+          <View style={{ ...styles.inputContainer, flexDirection: "row" }}>
+            <Text style={{ ...styles.label, marginRight: 15 }}>Image</Text>
+            <ImageSelector
+              imageTaken={imageTaken}
+              setImageTaken={setImageTaken}
             />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Image URL</Text>
-            <TextInput
-              style={styles.input}
-              value={formState.inputValues.image}
-              onChangeText={textChangeHandler.bind(this, "image")}
-              textContentType="URL"
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Gallery Image URLs</Text>
-            <TextInput
-              style={styles.input}
-              value={formState.inputValues.gallery}
-              onChangeText={textChangeHandler.bind(this, "gallery")}
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>About</Text>
-            <TextInput
-              style={styles.input}
-              multiline
-              numberOfLines={3}
-              value={formState.inputValues.about}
-              onChangeText={textChangeHandler.bind(this, "about")}
-            />
-          </View>
-
-          <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity
-              onPress={() =>
-                booleanChangeHandler("cats", formState.inputValues.cats)
-              }
-            >
-              <View
-                style={{
-                  backgroundColor: formState.inputValues.cats
-                    ? "#26547C"
-                    : "white",
-                  ...styles.button
-                }}
-              >
-                <Text
-                  style={{
-                    color: formState.inputValues.cats ? "white" : "#26547C"
-                  }}
-                >
-                  Good with Cats?
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() =>
-                booleanChangeHandler("dogs", formState.inputValues.dogs)
-              }
-            >
-              <View
-                style={{
-                  backgroundColor: formState.inputValues.dogs
-                    ? "#26547C"
-                    : "white",
-                  ...styles.button
-                }}
-              >
-                <Text
-                  style={{
-                    color: formState.inputValues.dogs ? "white" : "#26547C"
-                  }}
-                >
-                  Good with dogs?
-                </Text>
-              </View>
-            </TouchableOpacity>
           </View>
 
           <View
@@ -268,9 +174,9 @@ const AnimalInputScreen = props => {
   );
 };
 
-AnimalInputScreen.navigationOptions = navigationData => {
+ShelterInputScreen.navigationOptions = navigationData => {
   return {
-    headerTitle: "Add an animal"
+    headerTitle: "Add a shelter"
   };
 };
 
@@ -315,4 +221,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AnimalInputScreen;
+export default ShelterInputScreen;

@@ -31,11 +31,12 @@ export const signup = (email, password) => {
       }
     );
 
-    const resData = await res.json();
-
-    if (!resData.ok) {
+    if (!res.ok) {
+      const resData = await res.json();
       throw new Error(resData.error.message);
     }
+
+    const resData = await res.json();
     dispatch(authenticate(resData.idToken, resData.localId));
 
     const expDate = new Date(

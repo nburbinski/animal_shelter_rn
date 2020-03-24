@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 
 import { logout } from "../../store/actions/profileActions";
 
 const UserProfileScreen = props => {
+  const uID = useSelector(state => state.profile.userId);
+  const shelters = useSelector(state => state.shelter.shelters);
+  const shelter = shelters.find(shelter => shelter.uID === uID);
+
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
@@ -17,24 +21,49 @@ const UserProfileScreen = props => {
     <View style={styles.container}>
       <View style={{ width: "100%" }}>
         <View style={{ width: "100%" }}>
-          <TouchableOpacity
-            style={{ alignItems: "center" }}
-            onPress={() => {
-              props.navigation.navigate("AnimalForm");
-            }}
-          >
-            <View style={styles.button}>
-              <AntDesign name={"plussquareo"} size={32} color="darkgrey" />
-              <Text style={styles.text}>Add an animal? </Text>
+          {shelter ? (
+            <View>
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate({
+                    routeName: "ShelterEdit",
+                    params: { shelter: shelter }
+                  });
+                }}
+                style={{ alignItems: "center" }}
+              >
+                <View style={styles.button}>
+                  <AntDesign name={"edit"} size={32} color="darkgrey" />
+                  <Text style={styles.text}>
+                    {console.log(shelter)}Edit Shelter Details
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{ alignItems: "center" }}
+                onPress={() => {
+                  props.navigation.navigate("AnimalForm");
+                }}
+              >
+                <View style={styles.button}>
+                  <AntDesign name={"plussquareo"} size={32} color="darkgrey" />
+                  <Text style={styles.text}>Add an animal? </Text>
+                </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => {}} style={{ alignItems: "center" }}>
-            <View style={styles.button}>
-              <AntDesign name={"edit"} size={32} color="darkgrey" />
-              <Text style={styles.text}>Edit Shelter Details</Text>
-            </View>
-          </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() => {
+                props.navigation.navigate("ShelterForm");
+              }}
+              style={{ alignItems: "center" }}
+            >
+              <View style={styles.button}>
+                <AntDesign name={"plussquareo"} size={32} color="darkgrey" />
+                <Text style={styles.text}>Create a Shelter!</Text>
+              </View>
+            </TouchableOpacity>
+          )}
 
           <TouchableOpacity
             onPress={handleLogout}

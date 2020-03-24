@@ -93,7 +93,7 @@ const AnimalProfileScreen = props => {
               horizontal={true}
               data={animal.gallery}
               renderItem={itemData => (
-                <View key={itemData.item}>
+                <View>
                   <TouchableOpacity
                     onPress={() => {
                       setImage(itemData.item);
@@ -107,6 +107,7 @@ const AnimalProfileScreen = props => {
                   </TouchableOpacity>
                 </View>
               )}
+              keyExtractor={item => item}
             />
           </View>
         </View>
