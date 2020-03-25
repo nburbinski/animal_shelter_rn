@@ -207,11 +207,7 @@ AuthScreen.navigationOptions = navigationData => {
   const isSignUp = navigationData.navigation.getParam("isSignUp");
 
   return {
-    headerTitle: isSignUp ? "Sign Up" : "Login",
-    headerTitleStyle: {
-      fontFamily: "source-sans",
-      fontSize: 28
-    }
+    headerTitle: isSignUp ? "Sign Up" : "Login"
   };
 };
 

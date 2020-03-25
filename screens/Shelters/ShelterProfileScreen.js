@@ -113,10 +113,6 @@ ShelterProfileScreen.navigationOptions = ({ navigation }) => {
 
   return {
     headerTitle: "Shelter Profile",
-    headerTitleStyle: {
-      fontFamily: "source-sans",
-      fontSize: 20
-    },
     headerRight: () =>
       animals ? (
         <HeaderButtons HeaderButtonComponent={HeaderButton}>

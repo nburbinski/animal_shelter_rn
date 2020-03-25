@@ -80,11 +80,7 @@ const ShelterListScreen = props => {
 
 ShelterListScreen.navigationOptions = ({ navigation }) => {
   return {
-    headerTitle: "Animal Shelters",
-    headerTitleStyle: {
-      fontFamily: "source-sans",
-      fontSize: 28
-    }
+    headerTitle: "Animal Shelters"
   };
 };
 

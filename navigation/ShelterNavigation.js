@@ -38,6 +38,11 @@ const ShelterNavigator = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerBackTitle: " ",
+      headerTitleStyle: {
+        fontFamily: "source-sans-semi-bold",
+        fontSize: 28,
+        color: "#357DED"
+      },
       headerBackImage: () => {
         return <Icon />;
       }
@@ -45,21 +50,66 @@ const ShelterNavigator = createStackNavigator(
   }
 );
 
-const LikesNavigator = createStackNavigator({
-  Likes: LikesScreen,
-  AnimalProfile: AnimalProfileScreen
-});
+const LikesNavigator = createStackNavigator(
+  {
+    Likes: LikesScreen,
+    AnimalProfile: AnimalProfileScreen
+  },
+  {
+    defaultNavigationOptions: {
+      headerBackTitle: " ",
+      headerTitleStyle: {
+        fontFamily: "source-sans-semi-bold",
+        fontSize: 28,
+        color: "#357DED"
+      },
+      headerBackImage: () => {
+        return <Icon />;
+      }
+    }
+  }
+);
 
-const ProfileNavigator = createStackNavigator({
-  Profile: UserProfileScreen,
-  AnimalForm: AnimalInputScreen,
-  ShelterForm: ShelterInputScreen,
-  ShelterEdit: ShelterEditScreen
-});
+const ProfileNavigator = createStackNavigator(
+  {
+    Profile: UserProfileScreen,
+    AnimalForm: AnimalInputScreen,
+    ShelterForm: ShelterInputScreen,
+    ShelterEdit: ShelterEditScreen
+  },
+  {
+    defaultNavigationOptions: {
+      headerBackTitle: " ",
+      headerTitleStyle: {
+        fontFamily: "source-sans-semi-bold",
+        fontSize: 28,
+        color: "#357DED"
+      },
+      headerBackImage: () => {
+        return <Icon />;
+      }
+    }
+  }
+);
 
-const AuthScreenNavigator = createStackNavigator({
-  Auth: AuthScreen
-});
+const AuthScreenNavigator = createStackNavigator(
+  {
+    Auth: AuthScreen
+  },
+  {
+    defaultNavigationOptions: {
+      headerBackTitle: " ",
+      headerTitleStyle: {
+        fontFamily: "source-sans-semi-bold",
+        fontSize: 28,
+        color: "#357DED"
+      },
+      headerBackImage: () => {
+        return <Icon />;
+      }
+    }
+  }
+);
 
 const AuthNavigator = createSwitchNavigator({
   Auth: AuthScreenNavigator,

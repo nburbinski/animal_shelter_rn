@@ -36,11 +36,7 @@ const LikesScreen = props => {
 
 LikesScreen.navigationOptions = navigationData => {
   return {
-    headerTitle: "Likes",
-    headerTitleStyle: {
-      fontFamily: "source-sans",
-      fontSize: 28
-    }
+    headerTitle: "Likes"
   };
 };
 
