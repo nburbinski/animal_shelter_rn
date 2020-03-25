@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 
 import ImageModal from "../../components/ImageModal";
@@ -11,6 +11,7 @@ import { toggleLike } from "../../store/actions/shelterActions";
 const AnimalProfileScreen = props => {
   const animal = props.navigation.getParam("animal");
   const url = props.navigation.getParam("url");
+  const liked = useSelector(state => state.shelter.liked);
 
   const [image, setImage] = useState(animal.image);
   const [imageModalVisible, setImageModalVisible] = useState(false);
@@ -18,12 +19,26 @@ const AnimalProfileScreen = props => {
   const dispatch = useDispatch();
 
   const handleCheckPress = useCallback(() => {
-    dispatch(toggleLike(animal.id, animal.liked));
+    dispatch(toggleLike(animal));
   });
 
+  const checkIfLiked = () => {
+    const existingIndex = liked.findIndex(a => a.name === animal.name);
+
+    if (existingIndex < 0) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   useEffect(() => {
-    props.navigation.setParams({ toggleLike: handleCheckPress });
-  }, [dispatch]);
+    const isLiked = checkIfLiked();
+    props.navigation.setParams({
+      toggleLike: handleCheckPress,
+      isLiked: isLiked
+    });
+  }, [liked]);
 
   return (
     <View style={styles.profileContainer}>
@@ -61,7 +76,7 @@ const AnimalProfileScreen = props => {
           <Text>{animal.breed}</Text>
           <View style={styles.about}>
             <Text style={{ textAlign: "center", color: "#6e6e6e" }}>
-              {animal.about}
+              {animal.about ? animal.about : "No additional info added..."}
             </Text>
           </View>
         </View>
@@ -91,6 +106,7 @@ const AnimalProfileScreen = props => {
 AnimalProfileScreen.navigationOptions = navigationData => {
   const animal = navigationData.navigation.getParam("animal");
   const toggleLike = navigationData.navigation.getParam("toggleLike");
+  const isLiked = navigationData.navigation.getParam("isLiked");
 
   return {
     headerTitle: animal.name,
@@ -98,7 +114,7 @@ AnimalProfileScreen.navigationOptions = navigationData => {
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Like"
-          iconName={animal.liked ? "heart" : "hearto"}
+          iconName={isLiked ? "heart" : "hearto"}
           onPress={toggleLike}
         />
       </HeaderButtons>
@@ -139,7 +155,7 @@ const styles = StyleSheet.create({
   },
   animalInfoContainer: {
     alignItems: "center",
-    marginVertical: 10
+    marginTop: 10
   },
   animalTypeContainer: {
     borderRadius: 3,
