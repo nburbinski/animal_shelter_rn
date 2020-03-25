@@ -34,7 +34,7 @@ const AnimalListScreen = props => {
   if (isLoading) {
     return (
       <View style={styles.loading}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#3281FF" />
       </View>
     );
   }

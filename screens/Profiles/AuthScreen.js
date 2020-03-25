@@ -156,22 +156,20 @@ const AuthScreen = props => {
               />
             </View>
 
-            <View style={{ flexDirection: "row" }}>
-              <TouchableOpacity style={{ flex: 1 }} onPress={submitHandler}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <TouchableOpacity onPress={submitHandler}>
                 <View
                   style={{
-                    justifyContent: "center",
-                    alignItems: "center",
-                    backgroundColor: "#FFFFFF",
-                    marginTop: 20,
+                    backgroundColor: "#3281FF",
                     ...styles.button
                   }}
                 >
-                  <Text>{isSignUp ? "Sign Up" : "Login"}</Text>
+                  <Text style={{ color: "#FFFFFF", ...styles.buttonText }}>
+                    {isSignUp ? "Sign Up" : "Login"}
+                  </Text>
                 </View>
               </TouchableOpacity>
               <TouchableOpacity
-                style={{ flex: 1 }}
                 onPress={() => {
                   setIsSignUp(!isSignUp);
                   props.navigation.setParams({ isSignUp: !isSignUp });
@@ -179,14 +177,13 @@ const AuthScreen = props => {
               >
                 <View
                   style={{
-                    justifyContent: "center",
-                    alignItems: "center",
                     backgroundColor: "#FFFFFF",
-                    marginTop: 20,
                     ...styles.button
                   }}
                 >
-                  <Text>{`Switch to ${isSignUp ? "Login" : "Sign Up"}`}</Text>
+                  <Text
+                    style={{ color: "#3281FF", ...styles.buttonText }}
+                  >{`Switch to ${isSignUp ? "Login" : "Sign Up"}`}</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -198,7 +195,7 @@ const AuthScreen = props => {
 
   return (
     <View style={styles.loading}>
-      <ActivityIndicator size="large" color="#0000ff" />
+      <ActivityIndicator size="large" color="#3281FF" />
     </View>
   );
 };
@@ -221,19 +218,25 @@ const styles = StyleSheet.create({
   input: {
     paddingHorizontal: 15,
     paddingVertical: 10,
-    backgroundColor: "#EAEAEA",
-    borderRadius: 5
+    backgroundColor: "#D8E7FF",
+    borderRadius: 5,
+    marginLeft: 10,
+    width: "80%"
   },
   label: {
     marginVertical: 8,
-    fontFamily: "source-sans-semi-bold"
+    fontFamily: "source-sans-semi-bold",
+    textAlign: "center"
   },
   inputContainer: {
     width: "100%",
-    padding: 10
+    padding: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end"
   },
   button: {
-    marginHorizontal: 20,
+    marginHorizontal: 15,
     paddingHorizontal: 5,
     paddingHorizontal: 10,
     elevation: 2,
@@ -245,14 +248,20 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     paddingVertical: 7.5,
-    margin: 5,
-    borderRadius: 5
+    marginVertical: 20,
+    borderRadius: 5,
+    width: 125
   },
   loading: {
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
     backgroundColor: "white"
+  },
+  buttonText: {
+    letterSpacing: 1,
+    textTransform: "uppercase",
+    textAlign: "center"
   }
 });
 

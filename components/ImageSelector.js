@@ -70,7 +70,7 @@ const ImageSelector = ({ textChangeHandler }) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "darkgrey",
+    backgroundColor: "#D8E7FF",
     justifyContent: "center",
     alignItems: "center",
     width: 100,

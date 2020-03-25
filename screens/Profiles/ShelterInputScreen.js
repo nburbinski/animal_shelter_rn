@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
   input: {
     paddingHorizontal: 15,
     paddingVertical: 10,
-    backgroundColor: "#EAEAEA",
+    backgroundColor: "#D8E7FF",
     borderRadius: 5
   },
   label: {

@@ -198,14 +198,14 @@ const AnimalInputScreen = props => {
               <View
                 style={{
                   backgroundColor: formState.inputValues.cats
-                    ? "#26547C"
+                    ? "#3281FF"
                     : "white",
                   ...styles.button
                 }}
               >
                 <Text
                   style={{
-                    color: formState.inputValues.cats ? "white" : "#26547C"
+                    color: formState.inputValues.cats ? "white" : "#3281FF"
                   }}
                 >
                   Good with Cats?
@@ -220,14 +220,14 @@ const AnimalInputScreen = props => {
               <View
                 style={{
                   backgroundColor: formState.inputValues.dogs
-                    ? "#26547C"
+                    ? "#3281FF"
                     : "white",
                   ...styles.button
                 }}
               >
                 <Text
                   style={{
-                    color: formState.inputValues.dogs ? "white" : "#26547C"
+                    color: formState.inputValues.dogs ? "white" : "#3281FF"
                   }}
                 >
                   Good with dogs?
@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
   input: {
     paddingHorizontal: 15,
     paddingVertical: 10,
-    backgroundColor: "#EAEAEA",
+    backgroundColor: "#D8E7FF",
     borderRadius: 5
   },
   label: {

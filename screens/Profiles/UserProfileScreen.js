@@ -33,7 +33,7 @@ const UserProfileScreen = props => {
                 style={{ alignItems: "center" }}
               >
                 <View style={styles.button}>
-                  <AntDesign name={"edit"} size={32} color="darkgrey" />
+                  <AntDesign name={"edit"} size={32} color="#3281FF" />
                   <Text style={styles.text}>Edit Shelter Details</Text>
                 </View>
               </TouchableOpacity>
@@ -44,7 +44,7 @@ const UserProfileScreen = props => {
                 }}
               >
                 <View style={styles.button}>
-                  <AntDesign name={"plussquareo"} size={32} color="darkgrey" />
+                  <AntDesign name={"plussquareo"} size={32} color="#3281FF" />
                   <Text style={styles.text}>Add an animal? </Text>
                 </View>
               </TouchableOpacity>
@@ -57,7 +57,7 @@ const UserProfileScreen = props => {
               style={{ alignItems: "center" }}
             >
               <View style={styles.button}>
-                <AntDesign name={"plussquareo"} size={32} color="darkgrey" />
+                <AntDesign name={"plussquareo"} size={32} color="#3281FF" />
                 <Text style={styles.text}>Create a Shelter!</Text>
               </View>
             </TouchableOpacity>
@@ -68,7 +68,7 @@ const UserProfileScreen = props => {
             style={{ alignItems: "center" }}
           >
             <View style={styles.button}>
-              <AntDesign name={"logout"} size={32} color="darkgrey" />
+              <AntDesign name={"logout"} size={32} color="#3281FF" />
               <Text style={styles.text}>Logout</Text>
             </View>
           </TouchableOpacity>

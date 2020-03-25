@@ -41,7 +41,7 @@ const ShelterNavigator = createStackNavigator(
       headerTitleStyle: {
         fontFamily: "source-sans-semi-bold",
         fontSize: 28,
-        color: "#357DED"
+        color: "#3281FF"
       },
       headerBackImage: () => {
         return <Icon />;
@@ -61,7 +61,7 @@ const LikesNavigator = createStackNavigator(
       headerTitleStyle: {
         fontFamily: "source-sans-semi-bold",
         fontSize: 28,
-        color: "#357DED"
+        color: "#3281FF"
       },
       headerBackImage: () => {
         return <Icon />;
@@ -83,7 +83,7 @@ const ProfileNavigator = createStackNavigator(
       headerTitleStyle: {
         fontFamily: "source-sans-semi-bold",
         fontSize: 28,
-        color: "#357DED"
+        color: "#3281FF"
       },
       headerBackImage: () => {
         return <Icon />;
@@ -102,7 +102,7 @@ const AuthScreenNavigator = createStackNavigator(
       headerTitleStyle: {
         fontFamily: "source-sans-semi-bold",
         fontSize: 28,
-        color: "#357DED"
+        color: "#3281FF"
       },
       headerBackImage: () => {
         return <Icon />;

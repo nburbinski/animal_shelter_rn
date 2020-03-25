@@ -90,7 +90,7 @@ const ShelterProfileScreen = props => {
 
         {isLoading ? (
           <View style={styles.mapStyle}>
-            <ActivityIndicator size="large" color="#0000ff" />
+            <ActivityIndicator size="large" color="#3281FF" />
           </View>
         ) : (
           <View style={styles.animalList}>

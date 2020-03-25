@@ -99,6 +99,11 @@ const AnimalProfileScreen = props => {
           </View>
         </View>
       </View>
+      <ImageModal
+        url={animal.image ? animal.image : url}
+        imageModalVisible={imageModalVisible}
+        setImageModalVisible={setImageModalVisible}
+      />
     </View>
   );
 };
