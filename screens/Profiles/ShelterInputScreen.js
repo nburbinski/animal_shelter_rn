@@ -129,7 +129,14 @@ const ShelterInputScreen = props => {
           </View>
           <View style={styles.inputContainer}>
             <Text style={{ ...styles.label, marginRight: 15 }}>Image</Text>
-            <ImageSelector textChangeHandler={textChangeHandler} />
+            {formState.inputValues.image.length === 0 ? (
+              <ImageSelector textChangeHandler={textChangeHandler} />
+            ) : (
+              <View>
+                <Text>Image goes here</Text>
+                <ImageSelector textChangeHandler={textChangeHandler} />
+              </View>
+            )}
           </View>
 
           <View

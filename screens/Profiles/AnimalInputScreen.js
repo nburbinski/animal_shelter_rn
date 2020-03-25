@@ -7,10 +7,12 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Image
 } from "react-native";
 import { useDispatch } from "react-redux";
 
+import ImageSelector from "../../components/ImageSelector";
 import { addAnimal } from "../../store/actions/shelterActions";
 
 const INPUT_UPDATE = "INPUT_UPDATE";
@@ -163,13 +165,18 @@ const AnimalInputScreen = props => {
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.label}>Image URL</Text>
-            <TextInput
-              style={styles.input}
-              value={formState.inputValues.image}
-              onChangeText={textChangeHandler.bind(this, "image")}
-              textContentType="URL"
-            />
+            <Text style={styles.label}>Image</Text>
+            {formState.inputValues.image.length === 0 ? (
+              <ImageSelector textChangeHandler={textChangeHandler} />
+            ) : (
+              <View>
+                <Image
+                  style={styles.selectedImage}
+                  source={{ uri: formState.inputValues.image }}
+                />
+                <ImageSelector textChangeHandler={textChangeHandler} />
+              </View>
+            )}
           </View>
 
           <View style={styles.inputContainer}>
@@ -277,7 +284,7 @@ AnimalInputScreen.navigationOptions = navigationData => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 25,
-    paddingBottom: 20,
+    paddingBottom: 10,
     flex: 1,
     alignItems: "center",
     backgroundColor: "#FFFFFF"
@@ -312,6 +319,11 @@ const styles = StyleSheet.create({
     paddingVertical: 7.5,
     margin: 5,
     borderRadius: 5
+  },
+  selectedImage: {
+    width: 340,
+    height: 100,
+    marginBottom: 10
   }
 });
 

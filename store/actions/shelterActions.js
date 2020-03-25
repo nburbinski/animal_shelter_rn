@@ -129,7 +129,7 @@ export const addShelter = shelter => {
         var storageRef = firebase.storage().ref();
 
         storageRef
-          .child(`uploads/${uID}.jpg`)
+          .child(`shelters/${uID}.jpg`)
           .put(blob, {
             contentType: "image/jpeg"
           })
@@ -184,8 +184,53 @@ export const addAnimal = animal => {
   return async (dispatch, getState) => {
     const token = getState().profile.token;
     const uID = getState().profile.userId;
-    const shelters = getState().shelters.shelters;
+    const shelters = getState().shelter.shelters;
     const shelter = shelters.find(shelter => shelter.uID === uID);
+
+    const uriToBlob = uri => {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+
+        xhr.onload = function() {
+          // return the blob
+          resolve(xhr.response);
+        };
+
+        xhr.onerror = function() {
+          // something went wrong
+          reject(new Error("uriToBlob failed"));
+        };
+
+        // this helps us get a blob
+        xhr.responseType = "blob";
+
+        xhr.open("GET", uri, true);
+        xhr.send(null);
+      });
+    };
+
+    const uploadToFirebase = blob => {
+      return new Promise((resolve, reject) => {
+        var storageRef = firebase.storage().ref();
+
+        storageRef
+          .child(`animals/${uID}/${animal.name}.jpg`)
+          .put(blob, {
+            contentType: "image/jpeg"
+          })
+          .then(snapshot => {
+            blob.close();
+
+            resolve(snapshot);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    };
+
+    const blob = await uriToBlob(animal.image);
+    await uploadToFirebase(blob);
 
     const res = await fetch(
       `https://animal-shelter-6a4a9.firebaseio.com/shelters/${shelter.id}/animals.json?auth=${token}`,
