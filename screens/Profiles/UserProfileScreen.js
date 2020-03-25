@@ -34,9 +34,7 @@ const UserProfileScreen = props => {
               >
                 <View style={styles.button}>
                   <AntDesign name={"edit"} size={32} color="darkgrey" />
-                  <Text style={styles.text}>
-                    {console.log(shelter)}Edit Shelter Details
-                  </Text>
+                  <Text style={styles.text}>Edit Shelter Details</Text>
                 </View>
               </TouchableOpacity>
               <TouchableOpacity

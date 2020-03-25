@@ -53,7 +53,6 @@ const ShelterEditScreen = props => {
   const [error, setError] = useState();
 
   const shelter = props.navigation.getParam("shelter");
-  console.log(shelter);
 
   const [formState, dispatchForm] = useReducer(formReducer, {
     inputValues: {

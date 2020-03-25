@@ -60,7 +60,6 @@ const AnimalInputScreen = props => {
       type: "",
       breed: "",
       image: "",
-      gallery: "",
       about: "",
       cats: false,
       dogs: false
@@ -70,7 +69,6 @@ const AnimalInputScreen = props => {
       type: false,
       breed: false,
       image: false,
-      gallery: false,
       about: false
     },
 
@@ -85,6 +83,7 @@ const AnimalInputScreen = props => {
 
   const textChangeHandler = (inputIdentifier, text) => {
     let isValid = false;
+    if (text === undefined) return;
     if (text.trim().length > 0) {
       isValid = true;
     }
@@ -169,23 +168,14 @@ const AnimalInputScreen = props => {
             {formState.inputValues.image.length === 0 ? (
               <ImageSelector textChangeHandler={textChangeHandler} />
             ) : (
-              <View>
+              <View style={{ flexDirection: "row" }}>
+                <ImageSelector textChangeHandler={textChangeHandler} />
                 <Image
                   style={styles.selectedImage}
                   source={{ uri: formState.inputValues.image }}
                 />
-                <ImageSelector textChangeHandler={textChangeHandler} />
               </View>
             )}
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Gallery Image URLs</Text>
-            <TextInput
-              style={styles.input}
-              value={formState.inputValues.gallery}
-              onChangeText={textChangeHandler.bind(this, "gallery")}
-            />
           </View>
 
           <View style={styles.inputContainer}>
@@ -321,9 +311,9 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   selectedImage: {
-    width: 340,
+    width: 100,
     height: 100,
-    marginBottom: 10
+    borderRadius: 5
   }
 });
 

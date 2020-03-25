@@ -9,12 +9,30 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
+import * as firebase from "firebase";
 
 import { toggleLike } from "../store/actions/shelterActions";
 import ImageModal from "./ImageModal";
 
 const Animal = props => {
   const [imageModalVisible, setImageModalVisible] = useState(false);
+  const [url, setUrl] = useState("");
+
+  var storage = firebase.storage();
+
+  const imageURL = async () => {
+    try {
+      const url = await storage
+        .ref()
+        .child(`animals/${props.shelter.uID}/${props.animal.name}.jpg`)
+        .getDownloadURL();
+
+      setUrl(url);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const dispatch = useDispatch();
 
   const handleCheckPress = useCallback(() => {
@@ -34,7 +52,10 @@ const Animal = props => {
 
   useEffect(() => {
     props.navigation.setParams({ toggleLike: handleCheckPress });
-  }, [dispatch]);
+
+    // Fetch image url from firebase storage
+    imageURL();
+  }, []);
 
   return (
     <View>
@@ -43,7 +64,8 @@ const Animal = props => {
           props.navigation.navigate({
             routeName: "AnimalProfile",
             params: {
-              animal: props.animal
+              animal: props.animal,
+              url: url
             }
           });
         }}
@@ -57,7 +79,13 @@ const Animal = props => {
             >
               <Image
                 style={styles.animalImage}
-                source={{ uri: props.animal.image }}
+                source={{
+                  uri: props.animal.image
+                    ? props.animal.image
+                    : url.length() === 0
+                    ? url
+                    : "./assets/default.png"
+                }}
               />
             </TouchableOpacity>
           </View>

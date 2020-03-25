@@ -32,10 +32,20 @@ const ShelterProfileScreen = props => {
     const response = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?&address=${shelter.address}&key=${GOOGLE_API_KEY}`
     );
+
+    if (!response.ok) {
+      return;
+    }
+
     const resData = await response.json();
-    const coordinates = await resData.results[0].geometry.location;
-    setLat(parseFloat(coordinates.lat));
-    setLng(parseFloat(coordinates.lng));
+    try {
+      const coordinates = await resData.results[0].geometry.location;
+      setLat(parseFloat(coordinates.lat));
+      setLng(parseFloat(coordinates.lng));
+    } catch (error) {
+      console.log(error);
+    }
+
     setIsMapLoading(false);
   };
 
@@ -89,6 +99,7 @@ const ShelterProfileScreen = props => {
               selectAnimal={props.selectAnimal}
               navigation={props.navigation}
               animals={animals}
+              shelter={shelter}
             />
           </View>
         )}

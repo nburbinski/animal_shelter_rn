@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  FlatList
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { useDispatch } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
@@ -17,6 +10,7 @@ import { toggleLike } from "../../store/actions/shelterActions";
 
 const AnimalProfileScreen = props => {
   const animal = props.navigation.getParam("animal");
+  const url = props.navigation.getParam("url");
 
   const [image, setImage] = useState(animal.image);
   const [imageModalVisible, setImageModalVisible] = useState(false);
@@ -41,7 +35,10 @@ const AnimalProfileScreen = props => {
               setImageModalVisible(true);
             }}
           >
-            <Image style={styles.animalImage} source={{ uri: animal.image }} />
+            <Image
+              style={styles.animalImage}
+              source={{ uri: animal.image ? animal.image : url }}
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.animalInfoContainer}>
@@ -86,38 +83,7 @@ const AnimalProfileScreen = props => {
             />
           </View>
         </View>
-
-        <View style={styles.animalDetailsContainer}>
-          <View style={styles.galleryContainer}>
-            <FlatList
-              horizontal={true}
-              data={animal.gallery}
-              renderItem={itemData => (
-                <View>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setImage(itemData.item);
-                      setImageModalVisible(true);
-                    }}
-                  >
-                    <Image
-                      style={styles.galleryImage}
-                      source={{ uri: itemData.item }}
-                    />
-                  </TouchableOpacity>
-                </View>
-              )}
-              keyExtractor={item => item}
-            />
-          </View>
-        </View>
       </View>
-
-      <ImageModal
-        url={image}
-        imageModalVisible={imageModalVisible}
-        setImageModalVisible={setImageModalVisible}
-      />
     </View>
   );
 };

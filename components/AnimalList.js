@@ -31,6 +31,7 @@ const AnimalList = props => {
               loadProfile={props.loadProfile}
               selectAnimal={props.selectAnimal}
               navigation={props.navigation}
+              shelter={props.shelter}
             />
           );
         }}
