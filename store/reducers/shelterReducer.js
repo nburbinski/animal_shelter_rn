@@ -2,7 +2,8 @@ import {
   TOGGLE_LIKE,
   SET_FILTERS,
   SET_SHELTERS,
-  SET_LIKES
+  SET_LIKES,
+  ADD_SHELTER
 } from "../actions/shelterActions";
 
 const initialState = {
@@ -23,6 +24,11 @@ export const shelterReducer = (state = initialState, action) => {
       return {
         ...state,
         shelters: action.shelters
+      };
+    case ADD_SHELTER:
+      return {
+        ...state,
+        shelters: state.shelters.concat(action.shelter)
       };
     case TOGGLE_LIKE:
       const existingIndex = state.liked.findIndex(

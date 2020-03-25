@@ -1,4 +1,12 @@
 import { AsyncStorage } from "react-native";
+import * as firebase from "firebase";
+import {
+  FIREBASE_API_KEY,
+  FB_STORAGE,
+  FB_DB_URL,
+  AUTH_DOMAIN,
+  PROJECT_ID
+} from "react-native-dotenv";
 
 import Shelter from "../../models/shelter";
 
@@ -8,8 +16,17 @@ export const SET_ANIMALS = "SET_ANIMALS";
 export const SET_SHELTERS = "SET_SHELTERS";
 export const ADD_ANIMAL = "ADD_ANIMAL";
 export const ADD_SHELTER = "ADD_SHELTER";
-
 export const SET_LIKES = "SET_LIKES";
+
+const firebaseConfig = {
+  apiKey: FIREBASE_API_KEY,
+  authDomain: AUTH_DOMAIN,
+  databaseURL: FB_DB_URL,
+  projectId: PROJECT_ID,
+  storageBucket: FB_STORAGE
+};
+
+firebase.initializeApp(firebaseConfig);
 
 export const fetchShelters = () => {
   return async dispatch => {
@@ -80,9 +97,55 @@ export const setFilters = (filtersSettings, animals) => {
   };
 };
 
-export const addShelter = animal => {
+export const addShelter = shelter => {
   return async (dispatch, getState) => {
     const token = getState().profile.token;
+    const uID = getState().profile.userId;
+
+    const uriToBlob = uri => {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+
+        xhr.onload = function() {
+          // return the blob
+          resolve(xhr.response);
+        };
+
+        xhr.onerror = function() {
+          // something went wrong
+          reject(new Error("uriToBlob failed"));
+        };
+
+        // this helps us get a blob
+        xhr.responseType = "blob";
+
+        xhr.open("GET", uri, true);
+        xhr.send(null);
+      });
+    };
+
+    const uploadToFirebase = blob => {
+      return new Promise((resolve, reject) => {
+        var storageRef = firebase.storage().ref();
+
+        storageRef
+          .child(`uploads/${uID}.jpg`)
+          .put(blob, {
+            contentType: "image/jpeg"
+          })
+          .then(snapshot => {
+            blob.close();
+
+            resolve(snapshot);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    };
+
+    const blob = await uriToBlob(shelter.image);
+    await uploadToFirebase(blob);
 
     const res = await fetch(
       `https://animal-shelter-6a4a9.firebaseio.com/shelters.json?auth=${token}`,
@@ -92,9 +155,9 @@ export const addShelter = animal => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          name: animal.name,
-          address: animal.address,
-          image: animal.image
+          name: shelter.name,
+          address: shelter.address,
+          uID: uID
         })
       }
     );
@@ -104,9 +167,15 @@ export const addShelter = animal => {
       throw new Error(resData.error.message);
     }
 
+    const newShelter = {
+      name: shelter.name,
+      address: shelter.address,
+      uID: uID
+    };
+
     dispatch({
       type: ADD_SHELTER,
-      animal: animal
+      shelter: newShelter
     });
   };
 };

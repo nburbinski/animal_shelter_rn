@@ -52,18 +52,17 @@ const formReducer = (state, action) => {
 const ShelterInputScreen = props => {
   const dispatch = useDispatch();
   const [error, setError] = useState();
-  const [imageTaken, setImageTaken] = useState("");
 
   const [formState, dispatchForm] = useReducer(formReducer, {
     inputValues: {
       name: "",
       address: "",
-      image: imageTaken
+      image: ""
     },
     inputValidities: {
       name: false,
       address: false,
-      image: true
+      image: false
     },
 
     formIsValid: false
@@ -89,15 +88,6 @@ const ShelterInputScreen = props => {
   };
 
   const submitHandler = useCallback(async () => {
-    try {
-      await fetch(formState.inputValues.image);
-    } catch (err) {
-      Alert.alert("Image URL Invalid!", "Please input a proper Image URL.", [
-        { text: "Okay" }
-      ]);
-      return;
-    }
-
     if (!formState.formIsValid) {
       Alert.alert("Input Invalid!", "Please check the errors in the form.", [
         { text: "Okay" }
@@ -137,12 +127,9 @@ const ShelterInputScreen = props => {
               onChangeText={textChangeHandler.bind(this, "address")}
             />
           </View>
-          <View style={{ ...styles.inputContainer, flexDirection: "row" }}>
+          <View style={styles.inputContainer}>
             <Text style={{ ...styles.label, marginRight: 15 }}>Image</Text>
-            <ImageSelector
-              imageTaken={imageTaken}
-              setImageTaken={setImageTaken}
-            />
+            <ImageSelector textChangeHandler={textChangeHandler} />
           </View>
 
           <View
