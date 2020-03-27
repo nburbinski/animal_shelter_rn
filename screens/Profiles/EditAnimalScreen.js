@@ -55,6 +55,7 @@ const EditAnimalScreen = props => {
   const dispatch = useDispatch();
   const [error, setError] = useState();
   const animal = props.navigation.getParam("animal");
+  console.log(animal);
 
   const [formState, dispatchForm] = useReducer(formReducer, {
     inputValues: {
@@ -70,14 +71,14 @@ const EditAnimalScreen = props => {
       shots: animal.shots
     },
     inputValidities: {
-      name: false,
-      type: false,
-      breed: false,
-      image: false,
-      about: false
+      name: true,
+      type: true,
+      breed: true,
+      image: true,
+      about: true
     },
 
-    formIsValid: false
+    formIsValid: true
   });
 
   useEffect(() => {
@@ -110,15 +111,6 @@ const EditAnimalScreen = props => {
   };
 
   const submitHandler = useCallback(async () => {
-    try {
-      await fetch(formState.inputValues.image);
-    } catch (err) {
-      Alert.alert("Image URL Invalid!", "Please input a proper Image URL.", [
-        { text: "Okay" }
-      ]);
-      return;
-    }
-
     if (!formState.formIsValid) {
       Alert.alert("Input Invalid!", "Please check the errors in the form.", [
         { text: "Okay" }
@@ -127,7 +119,7 @@ const EditAnimalScreen = props => {
     }
 
     try {
-      dispatch(editAnimal(formState.inputValues));
+      dispatch(editAnimal(formState.inputValues, animal.id));
       props.navigation.goBack();
     } catch (error) {
       setError(error.message);

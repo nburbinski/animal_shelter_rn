@@ -11,7 +11,8 @@ import { AntDesign } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import * as firebase from "firebase";
 
-import { toggleLike } from "../store/actions/shelterActions";
+import { deleteAnimal } from "../store/actions/shelterActions";
+
 import ImageModal from "./ImageModal";
 
 const EditAnimal = props => {
@@ -35,24 +36,11 @@ const EditAnimal = props => {
 
   const dispatch = useDispatch();
 
-  const handleCheckPress = useCallback(() => {
-    dispatch(toggleLike(props.animal));
-  });
-
-  const isLiked = () => {
-    const liked = useSelector(state => state.shelter.liked);
-    const existingIndex = liked.findIndex(a => a.name === props.animal.name);
-
-    if (existingIndex < 0) {
-      return false;
-    } else {
-      return true;
-    }
+  const handleDelete = () => {
+    dispatch(deleteAnimal(props.animal.id));
   };
 
   useEffect(() => {
-    props.navigation.setParams({ toggleLike: handleCheckPress });
-
     // Fetch image url from firebase storage
     imageURL();
   }, []);
@@ -70,7 +58,7 @@ const EditAnimal = props => {
           });
         }}
       >
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={handleDelete}>
           <View style={{ left: -20, top: -10 }}>
             <AntDesign name={"close"} size={26} color="#F2353E" />
           </View>

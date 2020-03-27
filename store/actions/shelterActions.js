@@ -19,6 +19,7 @@ export const ADD_SHELTER = "ADD_SHELTER";
 export const SET_LIKES = "SET_LIKES";
 export const EDIT_ANIMAL = "EDIT_ANIMAL";
 export const EDIT_SHELTER = "EDIT_SHELTER";
+export const DELETE_ANIMAL = "DELETE_ANIMAL";
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
@@ -104,28 +105,6 @@ export const addShelter = shelter => {
     const token = getState().profile.token;
     const uID = getState().profile.userId;
 
-    const uriToBlob = uri => {
-      return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-
-        xhr.onload = function() {
-          // return the blob
-          resolve(xhr.response);
-        };
-
-        xhr.onerror = function() {
-          // something went wrong
-          reject(new Error("uriToBlob failed"));
-        };
-
-        // this helps us get a blob
-        xhr.responseType = "blob";
-
-        xhr.open("GET", uri, true);
-        xhr.send(null);
-      });
-    };
-
     const uploadToFirebase = blob => {
       return new Promise((resolve, reject) => {
         var storageRef = firebase.storage().ref();
@@ -188,28 +167,6 @@ export const addAnimal = animal => {
     const uID = getState().profile.userId;
     const shelters = getState().shelter.shelters;
     const shelter = shelters.find(shelter => shelter.uID === uID);
-
-    const uriToBlob = uri => {
-      return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-
-        xhr.onload = function() {
-          // return the blob
-          resolve(xhr.response);
-        };
-
-        xhr.onerror = function() {
-          // something went wrong
-          reject(new Error("uriToBlob failed"));
-        };
-
-        // this helps us get a blob
-        xhr.responseType = "blob";
-
-        xhr.open("GET", uri, true);
-        xhr.send(null);
-      });
-    };
 
     const uploadToFirebase = blob => {
       return new Promise((resolve, reject) => {
@@ -277,20 +234,54 @@ export const setLikes = animals => {
   };
 };
 
-export const editAnimal = animal => {
+export const editAnimal = (animal, id) => {
   return async (dispatch, getState) => {
     const token = getState().profile.token;
+    const uID = getState().profile.userId;
+    const shelters = getState().shelter.shelters;
+    const shelter = shelters.find(shelter => shelter.uID === uID);
+
+    const uploadToFirebase = blob => {
+      return new Promise((resolve, reject) => {
+        var storageRef = firebase.storage().ref();
+
+        storageRef
+          .child(`animals/${uID}/${animal.name}.jpg`)
+          .put(blob, {
+            contentType: "image/jpeg"
+          })
+          .then(snapshot => {
+            blob.close();
+
+            resolve(snapshot);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    };
+
+    const blob = await uriToBlob(animal.image);
+    await uploadToFirebase(blob);
+
     const res = await fetch(
-      `https://animal-shelter-6a4a9.firebaseio.com/shelters.json?auth=${token}`,
+      `https://animal-shelter-6a4a9.firebaseio.com/shelters/${shelter.id}/animals/${id}.json?auth=${token}`,
       {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          name: shelter.name,
-          address: shelter.address,
-          uID: uID
+          name: animal.name,
+          type: animal.type,
+          breed: animal.breed,
+          about: animal.about,
+          image: animal.image,
+          cats: animal.cats,
+          dogs: animal.dogs,
+          shots: animal.shots,
+          chip: animal.chip,
+          sn: animal.sn
         })
       }
     );
@@ -309,28 +300,6 @@ export const editAnimal = animal => {
 export const editShelter = (shelter, id) => {
   return async (dispatch, getState) => {
     const token = getState().profile.token;
-
-    const uriToBlob = uri => {
-      return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-
-        xhr.onload = function() {
-          // return the blob
-          resolve(xhr.response);
-        };
-
-        xhr.onerror = function() {
-          // something went wrong
-          reject(new Error("uriToBlob failed"));
-        };
-
-        // this helps us get a blob
-        xhr.responseType = "blob";
-
-        xhr.open("GET", uri, true);
-        xhr.send(null);
-      });
-    };
 
     const uploadToFirebase = blob => {
       return new Promise((resolve, reject) => {
@@ -378,4 +347,56 @@ export const editShelter = (shelter, id) => {
       shelter: shelter
     });
   };
+};
+
+export const deleteAnimal = id => {
+  return async (dispatch, getState) => {
+    const token = getState().profile.token;
+    const uID = getState().profile.userId;
+    const shelters = getState().shelter.shelters;
+    const shelter = shelters.find(shelter => shelter.uID === uID);
+
+    const res = await fetch(
+      `https://animal-shelter-6a4a9.firebaseio.com/shelters/${shelter.id}/animals/${id}.json?auth=${token}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    if (!res.ok) {
+      const resData = await res.json();
+      throw new Error(resData.error.message);
+    }
+
+    dispatch({
+      type: DELETE_ANIMAL,
+      animalID: id,
+      shelter: shelter
+    });
+  };
+};
+
+const uriToBlob = uri => {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+
+    xhr.onload = function() {
+      // return the blob
+      resolve(xhr.response);
+    };
+
+    xhr.onerror = function() {
+      // something went wrong
+      reject(new Error("uriToBlob failed"));
+    };
+
+    // this helps us get a blob
+    xhr.responseType = "blob";
+
+    xhr.open("GET", uri, true);
+    xhr.send(null);
+  });
 };

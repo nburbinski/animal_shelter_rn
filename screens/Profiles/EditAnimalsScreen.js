@@ -8,7 +8,7 @@ const EditAnimalsScreen = props => {
   let animals = [];
 
   for (var id in shelter.animals) {
-    animals.push(shelter.animals[id]);
+    animals.push({ id: id, ...shelter.animals[id] });
   }
 
   if (animals.length === 0) {

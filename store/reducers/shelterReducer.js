@@ -4,7 +4,10 @@ import {
   SET_SHELTERS,
   SET_LIKES,
   ADD_SHELTER,
-  ADD_ANIMAL
+  ADD_ANIMAL,
+  DELETE_ANIMAL,
+  EDIT_SHELTER,
+  EDIT_ANIMAL
 } from "../actions/shelterActions";
 
 const initialState = {
@@ -46,6 +49,21 @@ export const shelterReducer = (state = initialState, action) => {
         ...state,
         shelters: newShelters
       };
+    case DELETE_ANIMAL:
+      const newSheltersState = [...state.shelters];
+
+      const shelter = newSheltersState.find(
+        shelter => shelter.id === action.shelter.id
+      );
+      const index = shelter.animals.findIndex(animal => animal.id === id);
+
+      shelter.splice(index, 1);
+
+      return {
+        ...state,
+        shelters: newSheltersState
+      };
+
     case TOGGLE_LIKE:
       const existingIndex = state.liked.findIndex(
         animal => animal.name === action.animal.name
