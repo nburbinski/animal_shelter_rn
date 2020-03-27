@@ -5,10 +5,11 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  Alert
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import * as firebase from "firebase";
 
 import { deleteAnimal } from "../store/actions/shelterActions";
@@ -37,7 +38,18 @@ const EditAnimal = props => {
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(deleteAnimal(props.animal.id));
+    Alert.alert(
+      `Delete ${props.animal.name}?`,
+      `Are you sure you want to delete ${props.animal.name}?`,
+      [
+        {
+          text: "Cancel",
+          onPress: () => {},
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => dispatch(deleteAnimal(props.animal.id)) }
+      ]
+    );
   };
 
   useEffect(() => {
@@ -116,7 +128,7 @@ const styles = StyleSheet.create({
   animalContainer: {
     marginTop: 40,
     marginBottom: 10,
-    marginHorizontal: 15,
+    marginHorizontal: 10,
     height: 125,
     width: 160,
     backgroundColor: "#ffffff",

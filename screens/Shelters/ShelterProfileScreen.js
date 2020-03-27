@@ -5,8 +5,8 @@ import {
   StyleSheet,
   ActivityIndicator,
   SafeAreaView,
-  Dimensions,
-  ScrollView
+  Linking,
+  TouchableOpacity
 } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import MapView, { Marker } from "react-native-maps";
@@ -76,21 +76,31 @@ const ShelterProfileScreen = props => {
               </View>
             ) : (
               <View style={{ width: "100%" }}>
-                <MapView
-                  style={styles.mapStyle}
-                  initialRegion={{
-                    latitude: lat,
-                    longitude: lng,
-                    latitudeDelta: 0.0421,
-                    longitudeDelta: 0.0421
+                <TouchableOpacity
+                  onPress={() => {
+                    Linking.openURL(`maps://app?saddr=${shelter.address}`);
                   }}
                 >
-                  <Marker
-                    coordinate={{ latitude: lat, longitude: lng }}
-                    title={shelter.name}
-                  />
-                </MapView>
-                <Text style={styles.address}>{shelter.address}</Text>
+                  <View>
+                    <MapView
+                      style={styles.mapStyle}
+                      initialRegion={{
+                        latitude: lat,
+                        longitude: lng,
+                        latitudeDelta: 0.0421,
+                        longitudeDelta: 0.0421
+                      }}
+                    >
+                      <Marker
+                        coordinate={{ latitude: lat, longitude: lng }}
+                        title={shelter.name}
+                      />
+                    </MapView>
+                    <View style={styles.addressContainer}>
+                      <Text style={styles.address}>{shelter.address}</Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
               </View>
             )
           }

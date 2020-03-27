@@ -55,9 +55,7 @@ export const shelterReducer = (state = initialState, action) => {
       const shelter = newSheltersState.find(
         shelter => shelter.id === action.shelter.id
       );
-      const index = shelter.animals.findIndex(animal => animal.id === id);
-
-      shelter.splice(index, 1);
+      shelter.animals.action.id = null;
 
       return {
         ...state,
