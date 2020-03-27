@@ -34,7 +34,6 @@ const ShelterListScreen = props => {
     const tryLogin = async () => {
       const userData = await AsyncStorage.getItem("userData");
       if (!userData) {
-        props.navigation.navigate("Shelters");
         return;
       }
       const transData = JSON.parse(userData);
@@ -42,14 +41,9 @@ const ShelterListScreen = props => {
       const expirationDate = new Date(expDate);
 
       if (expirationDate <= new Date() || !token || !userId) {
-        props.navigation.reset({
-          index: 0,
-          routes: [{ name: "Shelters" }]
-        });
         return;
       }
       dispatch(authenticate(token, userId));
-      props.navigation.navigate("Shelters");
     };
     tryLogin();
     checkLikes();
@@ -79,7 +73,7 @@ const ShelterListScreen = props => {
   );
 };
 
-ShelterListScreen.navigationOptions = ({ navigation }) => {
+ShelterListScreen.navigationOptions = () => {
   return {
     headerTitle: "Animal Shelters"
   };

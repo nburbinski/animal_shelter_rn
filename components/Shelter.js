@@ -2,26 +2,9 @@ import React, { useEffect, useCallback, useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import { toggleLike } from "../store/actions/shelterActions";
-import * as firebase from "firebase";
 
 const Shelter = props => {
-  const [url, setUrl] = useState("");
   const dispatch = useDispatch();
-
-  var storage = firebase.storage();
-
-  const imageURL = async () => {
-    try {
-      const url = await storage
-        .ref()
-        .child(`shelters/${props.shelter.id}.jpg`)
-        .getDownloadURL();
-
-      setUrl(url);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
 
   const handleCheckPress = useCallback(() => {
     dispatch(toggleLike(props.shelter.id, props.shelter.liked));
@@ -29,7 +12,6 @@ const Shelter = props => {
 
   useEffect(() => {
     props.navigation.setParams({ toggleLike: handleCheckPress });
-    imageURL();
   }, [dispatch]);
 
   return (
@@ -63,7 +45,11 @@ const Shelter = props => {
           <View style={styles.shelterImageContainer}>
             <Image
               style={styles.shelterImage}
-              source={{ uri: props.shelter.image ? props.shelter.image : url }}
+              source={{
+                uri: props.shelter.image
+                  ? props.shelter.image
+                  : props.shelter.url
+              }}
             />
           </View>
         </View>

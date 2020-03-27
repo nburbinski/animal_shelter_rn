@@ -54,12 +54,11 @@ const ShelterEditScreen = props => {
   const [error, setError] = useState();
 
   const shelter = props.navigation.getParam("shelter");
-
   const [formState, dispatchForm] = useReducer(formReducer, {
     inputValues: {
       name: shelter.name,
       address: shelter.address,
-      image: ""
+      image: shelter.image ? shelter.image : shelter.url
     },
     inputValidities: {
       name: true,
@@ -125,6 +124,7 @@ const ShelterEditScreen = props => {
             <Text style={styles.label}>Address</Text>
             <TextInput
               style={styles.input}
+              textContentType={"fullStreetAddress"}
               value={formState.inputValues.address}
               onChangeText={textChangeHandler.bind(this, "address")}
             />

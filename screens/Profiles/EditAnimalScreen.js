@@ -55,7 +55,6 @@ const EditAnimalScreen = props => {
   const dispatch = useDispatch();
   const [error, setError] = useState();
   const animal = props.navigation.getParam("animal");
-  console.log(animal);
 
   const [formState, dispatchForm] = useReducer(formReducer, {
     inputValues: {

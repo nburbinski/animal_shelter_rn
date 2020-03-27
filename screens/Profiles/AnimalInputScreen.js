@@ -62,6 +62,8 @@ const AnimalInputScreen = props => {
       breed: "",
       image: "",
       about: "",
+      gender: "",
+      age: "",
       cats: false,
       dogs: false,
       chip: false,
@@ -73,7 +75,9 @@ const AnimalInputScreen = props => {
       type: false,
       breed: false,
       image: false,
-      about: false
+      about: false,
+      gender: false,
+      age: false
     },
 
     formIsValid: false
@@ -191,6 +195,33 @@ const AnimalInputScreen = props => {
               value={formState.inputValues.about}
               onChangeText={textChangeHandler.bind(this, "about")}
             />
+          </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              marginLeft: 75
+            }}
+          >
+            <View style={styles.inputContainer}>
+              <Text style={{ ...styles.label, paddingLeft: 20 }}>Gender</Text>
+              <TextInput
+                style={{ ...styles.input, width: "40%" }}
+                value={formState.inputValues.gender}
+                onChangeText={textChangeHandler.bind(this, "gender")}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <Text style={{ ...styles.label, paddingLeft: 20 }}>Age</Text>
+              <TextInput
+                keyboardType={"number-pad"}
+                style={{ ...styles.input, width: "30%" }}
+                value={formState.inputValues.age}
+                onChangeText={textChangeHandler.bind(this, "age")}
+              />
+            </View>
           </View>
 
           <View style={{ width: "90%", marginBottom: 10 }}>

@@ -30,6 +30,7 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+var storage = firebase.storage();
 
 export const fetchShelters = () => {
   return async dispatch => {
@@ -41,6 +42,21 @@ export const fetchShelters = () => {
     const loadedShelters = [];
 
     for (const key in resData) {
+      const imageURL = async () => {
+        try {
+          const url = await storage
+            .ref()
+            .child(`shelters/${key}.jpg`)
+            .getDownloadURL();
+
+          return url;
+        } catch (error) {
+          console.log(error.message);
+        }
+      };
+
+      const url = await imageURL();
+
       loadedShelters.push(
         new Shelter(
           key,
@@ -48,11 +64,11 @@ export const fetchShelters = () => {
           resData[key].address,
           resData[key].image,
           resData[key].animals,
-          resData[key].uID
+          resData[key].uID,
+          url
         )
       );
     }
-
     dispatch({
       type: SET_SHELTERS,
       shelters: loadedShelters

@@ -123,6 +123,7 @@ const ShelterInputScreen = props => {
             <Text style={styles.label}>Address</Text>
             <TextInput
               style={styles.input}
+              textContentType={"fullStreetAddress"}
               value={formState.inputValues.address}
               onChangeText={textChangeHandler.bind(this, "address")}
             />

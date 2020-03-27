@@ -87,24 +87,19 @@ export const shelterReducer = (state = initialState, action) => {
       }
 
       const filteredAnimals = action.animals.filter(animal => {
-        if (
-          appliedFilters.isType &&
-          appliedFilters.isDog &&
-          appliedFilters.isCat &&
-          appliedFilters.isOther
-        ) {
-          if (appliedFilters.isDog && animal.type === "Dog") return true;
-          else if (appliedFilters.isCat && animal.type === "Cat") return true;
-          else if (appliedFilters.isOther && animal.type === "Other")
-            return true;
-          else {
-            return false;
-          }
-        } else if (appliedFilters.isBreed) {
+        if (appliedFilters.isBreed) {
           for (let id in appliedFilters.filteredBreeds) {
             if (appliedFilters.filteredBreeds[id] === animal.breed) {
               return true;
             }
+          }
+        } else if (appliedFilters.isType) {
+          if (appliedFilters.isDog && animal.type !== "Dog") return false;
+          else if (appliedFilters.isCat && animal.type !== "Cat") return false;
+          else if (appliedFilters.isOther && animal.type !== "Other")
+            return false;
+          else {
+            return true;
           }
         } else {
           return true;
