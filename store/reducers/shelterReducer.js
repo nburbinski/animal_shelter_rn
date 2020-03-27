@@ -42,7 +42,6 @@ export const shelterReducer = (state = initialState, action) => {
         shelter.name === newShelter.name ? newShelter : shelter
       );
 
-      console.log(newShelters);
       return {
         ...state,
         shelters: newShelters

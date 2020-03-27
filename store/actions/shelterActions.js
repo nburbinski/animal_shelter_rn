@@ -17,6 +17,8 @@ export const SET_SHELTERS = "SET_SHELTERS";
 export const ADD_ANIMAL = "ADD_ANIMAL";
 export const ADD_SHELTER = "ADD_SHELTER";
 export const SET_LIKES = "SET_LIKES";
+export const EDIT_ANIMAL = "EDIT_ANIMAL";
+export const EDIT_SHELTER = "EDIT_SHELTER";
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
@@ -272,5 +274,108 @@ export const setLikes = animals => {
   return {
     type: SET_LIKES,
     animals: animals
+  };
+};
+
+export const editAnimal = animal => {
+  return async (dispatch, getState) => {
+    const token = getState().profile.token;
+    const res = await fetch(
+      `https://animal-shelter-6a4a9.firebaseio.com/shelters.json?auth=${token}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: shelter.name,
+          address: shelter.address,
+          uID: uID
+        })
+      }
+    );
+
+    if (!res.ok) {
+      const resData = await res.json();
+      throw new Error(resData.error.message);
+    }
+    dispatch({
+      type: EDIT_ANIMAL,
+      animal: animal
+    });
+  };
+};
+
+export const editShelter = (shelter, id) => {
+  return async (dispatch, getState) => {
+    const token = getState().profile.token;
+
+    const uriToBlob = uri => {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+
+        xhr.onload = function() {
+          // return the blob
+          resolve(xhr.response);
+        };
+
+        xhr.onerror = function() {
+          // something went wrong
+          reject(new Error("uriToBlob failed"));
+        };
+
+        // this helps us get a blob
+        xhr.responseType = "blob";
+
+        xhr.open("GET", uri, true);
+        xhr.send(null);
+      });
+    };
+
+    const uploadToFirebase = blob => {
+      return new Promise((resolve, reject) => {
+        var storageRef = firebase.storage().ref();
+
+        storageRef
+          .child(`shelters/${id}.jpg`)
+          .put(blob, {
+            contentType: "image/jpeg"
+          })
+          .then(snapshot => {
+            blob.close();
+
+            resolve(snapshot);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    };
+
+    const blob = await uriToBlob(shelter.image);
+    await uploadToFirebase(blob);
+
+    const res = await fetch(
+      `https://animal-shelter-6a4a9.firebaseio.com/shelters/${id}.json?auth=${token}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: shelter.name,
+          address: shelter.address
+        })
+      }
+    );
+
+    if (!res.ok) {
+      const resData = await res.json();
+      throw new Error(resData.error.message);
+    }
+    dispatch({
+      type: EDIT_SHELTER,
+      shelter: shelter
+    });
   };
 };

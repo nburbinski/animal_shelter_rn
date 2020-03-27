@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 
+import ImageSelector from "../../components/ImageSelector";
 import { editShelter } from "../../store/actions/shelterActions";
 
 const INPUT_UPDATE = "INPUT_UPDATE";
@@ -58,12 +59,12 @@ const ShelterEditScreen = props => {
     inputValues: {
       name: shelter.name,
       address: shelter.address,
-      image: shelter.image
+      image: ""
     },
     inputValidities: {
-      name: false,
-      address: false,
-      image: false
+      name: true,
+      address: true,
+      image: true
     },
 
     formIsValid: false
@@ -89,15 +90,6 @@ const ShelterEditScreen = props => {
   };
 
   const submitHandler = useCallback(async () => {
-    try {
-      await fetch(formState.inputValues.image);
-    } catch (err) {
-      Alert.alert("Image URL Invalid!", "Please input a proper Image URL.", [
-        { text: "Okay" }
-      ]);
-      return;
-    }
-
     if (!formState.formIsValid) {
       Alert.alert("Input Invalid!", "Please check the errors in the form.", [
         { text: "Okay" }
@@ -106,7 +98,7 @@ const ShelterEditScreen = props => {
     }
 
     try {
-      dispatch(editShelter(formState.inputValues));
+      dispatch(editShelter(formState.inputValues, shelter.id));
       props.navigation.goBack();
     } catch (error) {
       setError(error.message);
@@ -139,13 +131,16 @@ const ShelterEditScreen = props => {
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.label}>Image URL</Text>
-            <TextInput
-              style={styles.input}
-              value={formState.inputValues.image}
-              onChangeText={textChangeHandler.bind(this, "image")}
-              textContentType="URL"
-            />
+            <Text style={{ ...styles.label, marginRight: 15 }}>Image</Text>
+            {formState.inputValues.image ||
+            formState.inputValues.image.length === 0 ? (
+              <ImageSelector textChangeHandler={textChangeHandler} />
+            ) : (
+              <View>
+                <Text>Image goes here</Text>
+                <ImageSelector textChangeHandler={textChangeHandler} />
+              </View>
+            )}
           </View>
 
           <View

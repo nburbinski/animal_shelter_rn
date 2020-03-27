@@ -161,7 +161,6 @@ const EditAnimalProfileScreen = props => {
 
 EditAnimalProfileScreen.navigationOptions = navigationData => {
   const animal = navigationData.navigation.getParam("animal");
-  console.log(animal);
   return {
     headerTitle: animal.name,
     headerRight: () => (
