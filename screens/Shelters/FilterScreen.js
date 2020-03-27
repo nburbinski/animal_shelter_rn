@@ -1,9 +1,18 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Switch, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Switch,
+  TouchableOpacity,
+  TextInput
+} from "react-native";
 import { useDispatch } from "react-redux";
+import { AntDesign } from "@expo/vector-icons";
 
 import Button from "../../components/Button";
 import { setFilters } from "../../store/actions/shelterActions";
+import { FlatList } from "react-native-gesture-handler";
 
 const FilterScreen = props => {
   const [isType, setIsType] = useState(false);
@@ -11,11 +20,17 @@ const FilterScreen = props => {
 
   const [isDog, setIsDog] = useState(false);
   const [isCat, setIsCat] = useState(false);
-  const [isNakedMoleRat, setIsNakedMoleRat] = useState(false);
+  const [isOther, setIsOther] = useState(false);
+  const [filteredBreeds, setFilteredBreeds] = useState([]);
 
   const animals = props.navigation.getParam("animals");
+  const breeds = [];
 
   const dispatch = useDispatch();
+
+  for (let id in animals) {
+    breeds.push(animals[id].breed);
+  }
 
   const handleApply = () => {
     const appliedFilters = {
@@ -23,25 +38,30 @@ const FilterScreen = props => {
       isBreed,
       isDog,
       isCat,
-      isNakedMoleRat
+      isOther,
+      filteredBreeds
     };
 
     dispatch(setFilters(appliedFilters, animals));
     props.navigation.goBack();
   };
 
-  const handleReset = () => {
-    setIsBreed(false);
-    setIsType(false);
-    const appliedFilters = {
-      isType,
-      isBreed,
-      isDog,
-      isCat,
-      isNakedMoleRat
-    };
+  const handleReset = async () => {
+    const appliedFilters = null;
     dispatch(setFilters(appliedFilters, animals));
     props.navigation.goBack();
+  };
+
+  const handleBreedChange = breed => {
+    const newBreeds = [...filteredBreeds];
+    const existingIndex = newBreeds.findIndex(b => b === breed);
+    if (existingIndex < 0) {
+      newBreeds.push(breed);
+      setFilteredBreeds(newBreeds);
+    } else {
+      newBreeds.splice(existingIndex, 1);
+      setFilteredBreeds(newBreeds);
+    }
   };
 
   return (
@@ -49,7 +69,6 @@ const FilterScreen = props => {
       <View style={styles.filterContainer}>
         <Text style={styles.filterTitle}>Type: </Text>
         <Switch
-          color="#3281FF"
           value={isType}
           onValueChange={newValue => setIsType(newValue)}
         />
@@ -62,8 +81,8 @@ const FilterScreen = props => {
         <Button isTrue={isCat} setIsTrue={setIsCat}>
           Cat
         </Button>
-        <Button isTrue={isNakedMoleRat} setIsTrue={setIsNakedMoleRat}>
-          Naked Mole Rat
+        <Button isTrue={isOther} setIsTrue={setIsOther}>
+          Other
         </Button>
       </View>
 
@@ -76,8 +95,43 @@ const FilterScreen = props => {
       </View>
 
       <View
-        style={{ display: isBreed ? "flex" : "none", ...styles.buttons }}
-      ></View>
+        style={{
+          display: isBreed ? "flex" : "none",
+          ...styles.buttons,
+          width: "80%"
+        }}
+      >
+        <FlatList
+          data={breeds}
+          numColumns={2}
+          renderItem={item => (
+            <TouchableOpacity onPress={() => handleBreedChange(item.item)}>
+              <View
+                style={{
+                  backgroundColor: filteredBreeds.find(
+                    breed => breed === item.item
+                  )
+                    ? "#3281FF"
+                    : "white",
+                  ...styles.buttonContainer
+                }}
+              >
+                <Text
+                  style={{
+                    color: filteredBreeds.find(breed => breed === item.item)
+                      ? "white"
+                      : "#3281FF",
+                    ...styles.buttonText
+                  }}
+                >
+                  {item.item}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          )}
+          keyExtractor={item => item}
+        />
+      </View>
 
       <View style={styles.buttons}>
         <TouchableOpacity onPress={handleApply}>
@@ -151,15 +205,36 @@ const styles = StyleSheet.create({
   },
   submitText: {
     color: "white",
-    fontFamily: "source-sans-semi-bold"
+    fontFamily: "source-sans-semi-bold",
+    fontSize: 22
   },
   resetText: {
     color: "#3281FF",
-    fontFamily: "source-sans-semi-bold"
+    fontFamily: "source-sans-semi-bold",
+    fontSize: 22
   },
   buttons: {
     flexDirection: "row",
     marginVertical: 10
+  },
+  buttonContainer: {
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+    marginHorizontal: 10,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
+  },
+  buttonText: {
+    fontFamily: "source-sans-semi-bold",
+    textAlign: "center"
   }
 });
 

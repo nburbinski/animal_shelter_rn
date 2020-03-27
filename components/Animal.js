@@ -58,7 +58,7 @@ const Animal = props => {
   }, []);
 
   return (
-    <View style={styles.animalContainer}>
+    <View>
       <TouchableOpacity
         onPress={() => {
           props.navigation.navigate({
@@ -70,57 +70,49 @@ const Animal = props => {
           });
         }}
       >
-        <View style={styles.imageContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              setImageModalVisible(true);
-            }}
-          >
-            <Image
-              style={styles.animalImage}
-              source={{
-                uri: props.animal.image
-                  ? props.animal.image
-                  : url.length() === 0
-                  ? url
-                  : "./assets/default.png"
+        <View style={styles.animalContainer}>
+          <View style={styles.imageContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                setImageModalVisible(true);
               }}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.animalInfo}>
-          <View>
-            <Text style={styles.animalNameText}>{props.animal.name}</Text>
-          </View>
-          <View
-            style={{
-              backgroundColor:
-                props.animal.type === "Dog"
-                  ? "#26547C"
-                  : props.animal.type === "Cat"
-                  ? "#06D6A0"
-                  : "#EF476F",
-              ...styles.animalType
-            }}
-          >
-            <Text style={styles.animalTypeText}>{props.animal.type}</Text>
-          </View>
-          <TouchableOpacity onPress={handleCheckPress}>
-            <View style={styles.likeButton}>
-              <AntDesign
-                name={isLiked() ? "heart" : "hearto"}
-                size={32}
-                color="#F2353E"
+            >
+              <Image
+                style={styles.animalImage}
+                source={{
+                  uri: props.animal.image
+                    ? props.animal.image
+                    : url.length() === 0
+                    ? url
+                    : "./assets/default.png"
+                }}
               />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.animalInfo}>
+            <View>
+              <Text style={styles.animalNameText}>{props.animal.name}</Text>
             </View>
-          </TouchableOpacity>
-        </View>
+            <View style={styles.animalBreed}>
+              <Text style={styles.animalBreedText}>{props.animal.breed}</Text>
+            </View>
+            <TouchableOpacity onPress={handleCheckPress}>
+              <View style={styles.likeButton}>
+                <AntDesign
+                  name={isLiked() ? "heart" : "hearto"}
+                  size={32}
+                  color="#F2353E"
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
 
-        <ImageModal
-          url={props.animal.image}
-          imageModalVisible={imageModalVisible}
-          setImageModalVisible={setImageModalVisible}
-        />
+          <ImageModal
+            url={props.animal.image}
+            imageModalVisible={imageModalVisible}
+            setImageModalVisible={setImageModalVisible}
+          />
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -167,12 +159,13 @@ const styles = StyleSheet.create({
   animalInfo: {
     alignItems: "center"
   },
-  animalType: {
+  animalBreed: {
     borderRadius: 3,
     paddingVertical: 2,
-    paddingHorizontal: 5
+    paddingHorizontal: 5,
+    backgroundColor: "#3281FF"
   },
-  animalTypeText: {
+  animalBreedText: {
     color: "white",
     textAlign: "center"
   },

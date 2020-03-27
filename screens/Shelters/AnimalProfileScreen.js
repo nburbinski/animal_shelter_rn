@@ -57,23 +57,12 @@ const AnimalProfileScreen = props => {
           </TouchableOpacity>
         </View>
         <View style={styles.animalInfoContainer}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View>
             <Text style={styles.animalName}>{animal.name}</Text>
-            <View
-              style={{
-                backgroundColor:
-                  animal.type === "Dog"
-                    ? "#26547C"
-                    : animal.type === "Cat"
-                    ? "#06D6A0"
-                    : "#EF476F",
-                ...styles.animalTypeContainer
-              }}
-            >
-              <Text style={styles.animalTypeText}>{animal.type}</Text>
-            </View>
           </View>
-          <Text>{animal.breed}</Text>
+          <View style={styles.animalBreedContainer}>
+            <Text style={styles.animalBreedText}>{animal.breed}</Text>
+          </View>
           <View style={styles.about}>
             <Text style={{ textAlign: "center", color: "#6e6e6e" }}>
               {animal.about ? animal.about : "No additional info added..."}
@@ -213,11 +202,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 10
   },
-  animalTypeContainer: {
+  animalBreedContainer: {
     borderRadius: 3,
     paddingVertical: 2,
     paddingHorizontal: 5,
-    marginHorizontal: 5
+    marginHorizontal: 5,
+    backgroundColor: "#3281FF"
   },
   animalDetailsContainer: {
     flexDirection: "row",
@@ -234,7 +224,7 @@ const styles = StyleSheet.create({
     width: "90%",
     marginTop: 10
   },
-  animalTypeText: {
+  animalBreedText: {
     color: "white"
   },
   galleryContainer: {

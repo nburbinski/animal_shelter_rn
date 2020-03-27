@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     backgroundColor: "#ffffff",
     marginTop: 10,
+    marginBottom: 20,
     marginHorizontal: 10,
     paddingVertical: 10,
     borderRadius: 5,
