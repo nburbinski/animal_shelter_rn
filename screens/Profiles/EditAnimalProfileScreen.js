@@ -8,7 +8,7 @@ import ImageModal from "../../components/ImageModal";
 import HeaderButton from "../../components/HeaderButton";
 import { toggleLike } from "../../store/actions/shelterActions";
 
-const AnimalProfileScreen = props => {
+const EditAnimalProfileScreen = props => {
   const animal = props.navigation.getParam("animal");
   const url = props.navigation.getParam("url");
   const liked = useSelector(state => state.shelter.liked);
@@ -159,19 +159,22 @@ const AnimalProfileScreen = props => {
   );
 };
 
-AnimalProfileScreen.navigationOptions = navigationData => {
+EditAnimalProfileScreen.navigationOptions = navigationData => {
   const animal = navigationData.navigation.getParam("animal");
-  const toggleLike = navigationData.navigation.getParam("toggleLike");
-  const isLiked = navigationData.navigation.getParam("isLiked");
-
+  console.log(animal);
   return {
     headerTitle: animal.name,
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
-          title="Like"
-          iconName={isLiked ? "heart" : "hearto"}
-          onPress={toggleLike}
+          title="Edit"
+          iconName={"edit"}
+          onPress={() =>
+            navigationData.navigation.navigate({
+              routeName: "EditAnimal",
+              params: { animal: animal }
+            })
+          }
         />
       </HeaderButtons>
     )
@@ -250,4 +253,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AnimalProfileScreen;
+export default EditAnimalProfileScreen;

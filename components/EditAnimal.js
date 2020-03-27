@@ -14,7 +14,7 @@ import * as firebase from "firebase";
 import { toggleLike } from "../store/actions/shelterActions";
 import ImageModal from "./ImageModal";
 
-const Animal = props => {
+const EditAnimal = props => {
   const [imageModalVisible, setImageModalVisible] = useState(false);
   const [url, setUrl] = useState("");
 
@@ -62,7 +62,7 @@ const Animal = props => {
       <TouchableOpacity
         onPress={() => {
           props.navigation.navigate({
-            routeName: "AnimalProfile",
+            routeName: "EditAnimalProfile",
             params: {
               animal: props.animal,
               url: url
@@ -70,6 +70,12 @@ const Animal = props => {
           });
         }}
       >
+        <TouchableOpacity onPress={() => {}}>
+          <View style={{ left: -20, top: -10 }}>
+            <AntDesign name={"close"} size={26} color="#F2353E" />
+          </View>
+        </TouchableOpacity>
+
         <View style={styles.imageContainer}>
           <TouchableOpacity
             onPress={() => {
@@ -88,6 +94,7 @@ const Animal = props => {
             />
           </TouchableOpacity>
         </View>
+
         <View style={styles.animalInfo}>
           <View>
             <Text style={styles.animalNameText}>{props.animal.name}</Text>
@@ -105,15 +112,6 @@ const Animal = props => {
           >
             <Text style={styles.animalTypeText}>{props.animal.type}</Text>
           </View>
-          <TouchableOpacity onPress={handleCheckPress}>
-            <View style={styles.likeButton}>
-              <AntDesign
-                name={isLiked() ? "heart" : "hearto"}
-                size={32}
-                color="#F2353E"
-              />
-            </View>
-          </TouchableOpacity>
         </View>
 
         <ImageModal
@@ -128,12 +126,11 @@ const Animal = props => {
 
 const styles = StyleSheet.create({
   animalContainer: {
-    paddingBottom: 20,
     marginTop: 40,
     marginBottom: 10,
     marginHorizontal: 15,
-    height: 150,
-    width: 150,
+    height: 125,
+    width: 160,
     backgroundColor: "#ffffff",
     borderRadius: 5,
     elevation: 2,
@@ -157,11 +154,13 @@ const styles = StyleSheet.create({
       height: 2
     },
     shadowOpacity: 0.25,
-    shadowRadius: 3.84
+    shadowRadius: 3.84,
+    top: -75,
+    marginBottom: -75
   },
   animalImage: {
-    height: 75,
-    width: 75,
+    height: 85,
+    width: 85,
     borderRadius: 50
   },
   animalInfo: {
@@ -182,7 +181,6 @@ const styles = StyleSheet.create({
   fullAnimalImage: {
     height: 500,
     width: 500,
-    marginHorizontal: "auto",
     marginVertical: Math.round(Dimensions.get("window").height) / 6
   },
   animalName: {
@@ -201,4 +199,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Animal;
+export default EditAnimal;

@@ -10,13 +10,13 @@ const Button = props => {
     >
       <View
         style={{
-          backgroundColor: props.isTrue ? "#26547C" : "white",
+          backgroundColor: props.isTrue ? "#3281FF" : "white",
           ...styles.buttonContainer
         }}
       >
         <Text
           style={{
-            color: props.isTrue ? "white" : "#26547C",
+            color: props.isTrue ? "white" : "#3281FF",
             ...styles.buttonText
           }}
         >

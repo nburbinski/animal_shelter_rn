@@ -3,7 +3,8 @@ import {
   SET_FILTERS,
   SET_SHELTERS,
   SET_LIKES,
-  ADD_SHELTER
+  ADD_SHELTER,
+  ADD_ANIMAL
 } from "../actions/shelterActions";
 
 const initialState = {
@@ -29,6 +30,22 @@ export const shelterReducer = (state = initialState, action) => {
       return {
         ...state,
         shelters: state.shelters.concat(action.shelter)
+      };
+    case ADD_ANIMAL:
+      const newAnimals = [action.shelter.animals];
+      newAnimals.push(action.animal);
+
+      const newShelter = { ...action.shelter, animals: newAnimals };
+      const newShelters = [...state.shelters];
+
+      newShelters.map(shelter =>
+        shelter.name === newShelter.name ? newShelter : shelter
+      );
+
+      console.log(newShelters);
+      return {
+        ...state,
+        shelters: newShelters
       };
     case TOGGLE_LIKE:
       const existingIndex = state.liked.findIndex(

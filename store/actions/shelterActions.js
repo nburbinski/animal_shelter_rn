@@ -247,7 +247,10 @@ export const addAnimal = animal => {
           image: animal.image,
           gallery: animal.gallery,
           cats: animal.cats,
-          dogs: animal.dogs
+          dogs: animal.dogs,
+          shots: animal.shots,
+          chip: animal.chip,
+          sn: animal.sn
         })
       }
     );
@@ -259,7 +262,8 @@ export const addAnimal = animal => {
 
     dispatch({
       type: ADD_ANIMAL,
-      animal: animal
+      animal: animal,
+      shelter: shelter
     });
   };
 };

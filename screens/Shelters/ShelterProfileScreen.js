@@ -5,7 +5,8 @@ import {
   StyleSheet,
   ActivityIndicator,
   SafeAreaView,
-  Dimensions
+  Dimensions,
+  ScrollView
 } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import MapView, { Marker } from "react-native-maps";
@@ -61,58 +62,61 @@ const ShelterProfileScreen = props => {
   }, []);
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
-      <View style={styles.shelterInfo}>
-        <Text style={styles.shelterName}>{shelter.name}</Text>
-        <Text>{shelter.address}</Text>
-      </View>
-      <SafeAreaView style={styles.profileContainer}>
-        {isMapLoading ? (
-          <View style={styles.mapStyle}>
-            <ActivityIndicator size="large" color="#0000ff" />
-          </View>
-        ) : (
-          <MapView
-            style={styles.mapStyle}
-            initialRegion={{
-              latitude: lat,
-              longitude: lng,
-              latitudeDelta: 0.0421,
-              longitudeDelta: 0.0421
-            }}
-          >
-            <Marker
-              coordinate={{ latitude: lat, longitude: lng }}
-              title={shelter.name}
-            />
-          </MapView>
-        )}
-
-        {isLoading ? (
-          <View style={styles.mapStyle}>
-            <ActivityIndicator size="large" color="#3281FF" />
-          </View>
-        ) : (
-          <View style={styles.animalList}>
-            <AnimalList
-              loadProfile={props.loadProfile}
-              selectAnimal={props.selectAnimal}
-              navigation={props.navigation}
-              animals={animals}
-              shelter={shelter}
-            />
-          </View>
-        )}
-      </SafeAreaView>
-    </View>
+    <SafeAreaView style={styles.profileContainer}>
+      {isLoading ? (
+        <View style={styles.mapStyle}>
+          <ActivityIndicator size="large" color="#3281FF" />
+        </View>
+      ) : (
+        <AnimalList
+          listHeader={
+            isMapLoading ? (
+              <View style={styles.loading}>
+                <ActivityIndicator size="large" color="#0000ff" />
+              </View>
+            ) : (
+              <View style={{ width: "100%" }}>
+                <MapView
+                  style={styles.mapStyle}
+                  initialRegion={{
+                    latitude: lat,
+                    longitude: lng,
+                    latitudeDelta: 0.0421,
+                    longitudeDelta: 0.0421
+                  }}
+                >
+                  <Marker
+                    coordinate={{ latitude: lat, longitude: lng }}
+                    title={shelter.name}
+                  />
+                </MapView>
+                <Text style={styles.address}>{shelter.address}</Text>
+              </View>
+            )
+          }
+          loadProfile={props.loadProfile}
+          selectAnimal={props.selectAnimal}
+          navigation={props.navigation}
+          animals={animals}
+          shelter={shelter}
+          isLoading={isLoading}
+        />
+      )}
+    </SafeAreaView>
   );
 };
 
 ShelterProfileScreen.navigationOptions = ({ navigation }) => {
   const animals = navigation.getParam("animals");
+  const shelter = navigation.getParam("shelter");
 
   return {
-    headerTitle: "Shelter Profile",
+    headerTitle: shelter.name,
+    headerTitleStyle: {
+      fontSize: 18,
+      fontFamily: "source-sans-semi-bold",
+      color: "#3281FF"
+    },
     headerRight: () =>
       animals ? (
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
@@ -134,10 +138,6 @@ ShelterProfileScreen.navigationOptions = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  animalList: {
-    flex: 1,
-    marginHorizontal: 5
-  },
   loading: {
     justifyContent: "center",
     alignItems: "center",
@@ -145,32 +145,22 @@ const styles = StyleSheet.create({
     backgroundColor: "white"
   },
   profileContainer: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "#FFFFFF"
   },
-  shelterInfo: {
-    alignItems: "center",
+  addressContainer: {
     paddingHorizontal: 5,
     paddingVertical: 10,
-    backgroundColor: "#FFFFFF",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 2
-  },
-  shelterName: {
-    fontSize: 25,
-    fontFamily: "source-sans-semi-bold"
+    backgroundColor: "#FFFFFF"
   },
   mapStyle: {
-    width: Dimensions.get("window").width,
+    width: "100%",
     height: 100,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "white"
+  },
+  address: {
+    textAlign: "center",
+    color: "darkgrey"
   }
 });
 

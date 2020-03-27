@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   ActivityIndicator,
-  Text,
   AsyncStorage
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
@@ -69,6 +68,8 @@ const ShelterListScreen = props => {
   return (
     <View style={styles.shelterList}>
       <ShelterList
+        loadShelters={loadShelters}
+        isLoading={isLoading}
         loadProfile={props.loadProfile}
         selectShelter={props.selectShelter}
         navigation={props.navigation}

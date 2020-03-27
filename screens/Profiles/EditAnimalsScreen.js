@@ -1,13 +1,14 @@
 import React from "react";
-import { FlatList, View, StyleSheet, Text } from "react-native";
+import { SafeAreaView, View, FlatList, StyleSheet } from "react-native";
+import EditAnimal from "../../components/EditAnimal";
 
-import Animal from "./Animal";
+const EditAnimalsScreen = props => {
+  const shelter = props.navigation.getParam("shelter");
 
-const AnimalList = props => {
   let animals = [];
 
-  for (var id in props.animals) {
-    animals.push(props.animals[id]);
+  for (var id in shelter.animals) {
+    animals.push(shelter.animals[id]);
   }
 
   if (animals.length === 0) {
@@ -19,17 +20,15 @@ const AnimalList = props => {
       </View>
     );
   }
+
   return (
-    <View style={styles.listContainer}>
+    <SafeAreaView style={styles.container}>
       <FlatList
-        refreshing={props.isLoading}
         data={animals}
         numColumns={2}
-        ListHeaderComponent={props.listHeader}
-        ListHeaderComponentStyle={styles.headerStyle}
         renderItem={animal => {
           return (
-            <Animal
+            <EditAnimal
               animal={animal.item}
               loadProfile={props.loadProfile}
               selectAnimal={props.selectAnimal}
@@ -40,16 +39,23 @@ const AnimalList = props => {
         }}
         keyExtractor={item => item.name}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
+EditAnimalsScreen.navigationOptions = ({ navigation }) => {
+  return {
+    headerTitle: "Edit Animal List"
+  };
+};
+
 const styles = StyleSheet.create({
-  listContainer: {
-    alignItems: "center",
+  container: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
     justifyContent: "center",
-    width: "100%"
+    alignItems: "center"
   }
 });
 
-export default AnimalList;
+export default EditAnimalsScreen;

@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 
 import ImageSelector from "../../components/ImageSelector";
-import { addAnimal } from "../../store/actions/shelterActions";
+import { editAnimal } from "../../store/actions/shelterActions";
 
 const INPUT_UPDATE = "INPUT_UPDATE";
 const BOOLEAN_UPDATE = "BOOLEAN_UPDATE";
@@ -51,22 +51,23 @@ const formReducer = (state, action) => {
   return state;
 };
 
-const AnimalInputScreen = props => {
+const EditAnimalScreen = props => {
   const dispatch = useDispatch();
   const [error, setError] = useState();
+  const animal = props.navigation.getParam("animal");
 
   const [formState, dispatchForm] = useReducer(formReducer, {
     inputValues: {
-      name: "",
-      type: "",
-      breed: "",
-      image: "",
-      about: "",
-      cats: false,
-      dogs: false,
-      chip: false,
-      sn: false,
-      shots: false
+      name: animal.name,
+      type: animal.type,
+      breed: animal.breed,
+      image: animal.image,
+      about: animal.about,
+      cats: animal.cats,
+      dogs: animal.dogs,
+      chip: animal.chip,
+      sn: animal.sn,
+      shots: animal.shots
     },
     inputValidities: {
       name: false,
@@ -126,7 +127,7 @@ const AnimalInputScreen = props => {
     }
 
     try {
-      dispatch(addAnimal(formState.inputValues));
+      dispatch(editAnimal(formState.inputValues));
       props.navigation.goBack();
     } catch (error) {
       setError(error.message);
@@ -332,9 +333,9 @@ const AnimalInputScreen = props => {
   );
 };
 
-AnimalInputScreen.navigationOptions = navigationData => {
+EditAnimalScreen.navigationOptions = navigationData => {
   return {
-    headerTitle: "Add an animal"
+    headerTitle: "Edit animal details"
   };
 };
 
@@ -402,4 +403,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AnimalInputScreen;
+export default EditAnimalScreen;

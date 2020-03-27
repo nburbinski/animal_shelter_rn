@@ -1,11 +1,13 @@
 import React from "react";
-import { FlatList, SafeAreaView } from "react-native";
+import { FlatList } from "react-native";
 
 import Shelter from "./Shelter";
 
 const AnimalList = props => {
   return (
     <FlatList
+      onRefresh={props.loadShelters}
+      refreshing={props.isLoading}
       data={props.shelters}
       renderItem={shelter => (
         <Shelter

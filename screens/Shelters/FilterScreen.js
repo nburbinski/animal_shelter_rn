@@ -49,6 +49,7 @@ const FilterScreen = props => {
       <View style={styles.filterContainer}>
         <Text style={styles.filterTitle}>Type: </Text>
         <Switch
+          color="#3281FF"
           value={isType}
           onValueChange={newValue => setIsType(newValue)}
         />
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
     fontFamily: "source-sans-semi-bold"
   },
   submitButton: {
-    backgroundColor: "blue",
+    backgroundColor: "#3281FF",
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 5,
@@ -153,7 +154,7 @@ const styles = StyleSheet.create({
     fontFamily: "source-sans-semi-bold"
   },
   resetText: {
-    color: "blue",
+    color: "#3281FF",
     fontFamily: "source-sans-semi-bold"
   },
   buttons: {

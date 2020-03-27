@@ -8,7 +8,7 @@ const CustomHeaderButton = props => {
       {...props}
       IconComponent={AntDesign}
       iconSize={23}
-      color="#F2353E"
+      color="#000000"
     />
   );
 };

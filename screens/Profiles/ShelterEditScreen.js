@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 
-import { addShelter } from "../../store/actions/shelterActions";
+import { editShelter } from "../../store/actions/shelterActions";
 
 const INPUT_UPDATE = "INPUT_UPDATE";
 const BOOLEAN_UPDATE = "BOOLEAN_UPDATE";
@@ -106,7 +106,7 @@ const ShelterEditScreen = props => {
     }
 
     try {
-      dispatch(addShelter(formState.inputValues));
+      dispatch(editShelter(formState.inputValues));
       props.navigation.goBack();
     } catch (error) {
       setError(error.message);
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     backgroundColor: "#D8E7FF",
-    borderRadius: 5
+    borderRadius: 25
   },
   label: {
     marginVertical: 8,
@@ -204,7 +204,8 @@ const styles = StyleSheet.create({
   inputContainer: {
     width: "100%",
     backgroundColor: "white",
-    padding: 10
+    paddingHorizontal: 10,
+    marginBottom: 10
   },
   button: {
     marginHorizontal: 20,

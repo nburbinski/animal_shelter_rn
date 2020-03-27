@@ -38,6 +38,20 @@ const UserProfileScreen = props => {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate({
+                    routeName: "EditAnimals",
+                    params: { shelter: shelter }
+                  });
+                }}
+                style={{ alignItems: "center" }}
+              >
+                <View style={styles.button}>
+                  <AntDesign name={"edit"} size={32} color="#3281FF" />
+                  <Text style={styles.text}>Edit Animal List</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
                 style={{ alignItems: "center" }}
                 onPress={() => {
                   props.navigation.navigate("AnimalForm");
