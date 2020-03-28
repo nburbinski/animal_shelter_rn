@@ -99,18 +99,8 @@ const EditAnimal = props => {
           <View>
             <Text style={styles.animalNameText}>{props.animal.name}</Text>
           </View>
-          <View
-            style={{
-              backgroundColor:
-                props.animal.type === "Dog"
-                  ? "#26547C"
-                  : props.animal.type === "Cat"
-                  ? "#06D6A0"
-                  : "#EF476F",
-              ...styles.animalType
-            }}
-          >
-            <Text style={styles.animalTypeText}>{props.animal.type}</Text>
+          <View style={styles.animalBreed}>
+            <Text style={styles.animalBreedText}>{props.animal.breed}</Text>
           </View>
         </View>
 
@@ -166,12 +156,13 @@ const styles = StyleSheet.create({
   animalInfo: {
     alignItems: "center"
   },
-  animalType: {
+  animalBreed: {
     borderRadius: 3,
     paddingVertical: 2,
-    paddingHorizontal: 5
+    paddingHorizontal: 5,
+    backgroundColor: "#3281FF"
   },
-  animalTypeText: {
+  animalBreedText: {
     color: "white",
     textAlign: "center"
   },

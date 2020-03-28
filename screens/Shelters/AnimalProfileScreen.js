@@ -63,12 +63,32 @@ const AnimalProfileScreen = props => {
           <View style={styles.animalBreedContainer}>
             <Text style={styles.animalBreedText}>{animal.breed}</Text>
           </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              width: "40%",
+              marginTop: 7.5
+            }}
+          >
+            <View style={{ flexDirection: "row" }}>
+              <Text>Age: </Text>
+              <Text>{animal.age ? animal.age : "N/A"}</Text>
+            </View>
+            <View style={{ flexDirection: "row" }}>
+              <Text>Gender: </Text>
+              <Text>{animal.gender ? animal.gender : "N/A"}</Text>
+            </View>
+          </View>
+
           <View style={styles.about}>
             <Text style={{ textAlign: "center", color: "#6e6e6e" }}>
               {animal.about ? animal.about : "No additional info added..."}
             </Text>
           </View>
         </View>
+
         <View style={styles.goodWithContainer}>
           <View style={styles.animalDetailsContainer}>
             <Text style={styles.animalDetailsTitle}>Good with Cats? </Text>
@@ -186,8 +206,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   imageContainer: {
-    alignItems: "center",
-    marginVertical: 10
+    alignItems: "center"
   },
   animalImage: {
     height: 150,

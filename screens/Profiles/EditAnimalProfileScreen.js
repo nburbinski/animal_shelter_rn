@@ -1,44 +1,17 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import { useDispatch, useSelector } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 
 import ImageModal from "../../components/ImageModal";
 import HeaderButton from "../../components/HeaderButton";
-import { toggleLike } from "../../store/actions/shelterActions";
 
 const EditAnimalProfileScreen = props => {
   const animal = props.navigation.getParam("animal");
   const url = props.navigation.getParam("url");
-  const liked = useSelector(state => state.shelter.liked);
 
   const [image, setImage] = useState(animal.image);
   const [imageModalVisible, setImageModalVisible] = useState(false);
-
-  const dispatch = useDispatch();
-
-  const handleCheckPress = useCallback(() => {
-    dispatch(toggleLike(animal));
-  });
-
-  const checkIfLiked = () => {
-    const existingIndex = liked.findIndex(a => a.name === animal.name);
-
-    if (existingIndex < 0) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
-  useEffect(() => {
-    const isLiked = checkIfLiked();
-    props.navigation.setParams({
-      toggleLike: handleCheckPress,
-      isLiked: isLiked
-    });
-  }, [liked]);
 
   return (
     <View style={styles.profileContainer}>
@@ -59,95 +32,102 @@ const EditAnimalProfileScreen = props => {
         <View style={styles.animalInfoContainer}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text style={styles.animalName}>{animal.name}</Text>
-            <View
-              style={{
-                backgroundColor:
-                  animal.type === "Dog"
-                    ? "#26547C"
-                    : animal.type === "Cat"
-                    ? "#06D6A0"
-                    : "#EF476F",
-                ...styles.animalTypeContainer
-              }}
-            >
-              <Text style={styles.animalTypeText}>{animal.type}</Text>
+            <View style={styles.animalBreedContainer}>
+              <Text style={styles.animalBreedText}>{animal.breed}</Text>
             </View>
           </View>
-          <Text>{animal.breed}</Text>
-          <View style={styles.about}>
-            <Text style={{ textAlign: "center", color: "#6e6e6e" }}>
-              {animal.about ? animal.about : "No additional info added..."}
-            </Text>
-          </View>
-        </View>
-        <View style={styles.goodWithContainer}>
-          <View style={styles.animalDetailsContainer}>
-            <Text style={styles.animalDetailsTitle}>Good with Cats? </Text>
-            <AntDesign
-              name={animal.cats ? "check" : "close"}
-              size={20}
-              color={animal.cats ? "#06D6A0" : "#F2353E"}
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center"
-            }}
-          >
-            <Text style={styles.animalDetailsTitle}>Good with Dogs? </Text>
-            <AntDesign
-              name={animal.dogs ? "check" : "close"}
-              size={20}
-              color={animal.dogs ? "#06D6A0" : "#F2353E"}
-            />
-          </View>
-        </View>
 
-        <View style={styles.goodWithContainer}>
           <View
             style={{
               flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center"
+              justifyContent: "space-around",
+              width: "40%",
+              marginTop: 7.5
             }}
           >
-            <Text style={styles.animalDetailsTitle}>Microchipped? </Text>
-            <AntDesign
-              name={animal.chip ? "check" : "close"}
-              size={20}
-              color={animal.chip ? "#06D6A0" : "#F2353E"}
-            />
+            <View style={{ flexDirection: "row" }}>
+              <Text>Age: </Text>
+              <Text>{animal.age ? animal.age : "N/A"}</Text>
+            </View>
+            <View style={{ flexDirection: "row" }}>
+              <Text>Gender: </Text>
+              <Text>{animal.gender ? animal.gender : "N/A"}</Text>
+            </View>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center"
-            }}
-          >
-            <Text style={styles.animalDetailsTitle}>Immunization Shots? </Text>
-            <AntDesign
-              name={animal.shots ? "check" : "close"}
-              size={20}
-              color={animal.shots ? "#06D6A0" : "#F2353E"}
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center"
-            }}
-          >
-            <Text style={styles.animalDetailsTitle}>Spayed/Neutered?</Text>
-            <AntDesign
-              name={animal.sn ? "check" : "close"}
-              size={20}
-              color={animal.sn ? "#06D6A0" : "#F2353E"}
-            />
-          </View>
+        </View>
+        <View style={styles.about}>
+          <Text style={{ textAlign: "center", color: "#6e6e6e" }}>
+            {animal.about ? animal.about : "No additional info added..."}
+          </Text>
+        </View>
+      </View>
+      <View style={styles.goodWithContainer}>
+        <View style={styles.animalDetailsContainer}>
+          <Text style={styles.animalDetailsTitle}>Good with Cats? </Text>
+          <AntDesign
+            name={animal.cats ? "check" : "close"}
+            size={20}
+            color={animal.cats ? "#06D6A0" : "#F2353E"}
+          />
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center"
+          }}
+        >
+          <Text style={styles.animalDetailsTitle}>Good with Dogs? </Text>
+          <AntDesign
+            name={animal.dogs ? "check" : "close"}
+            size={20}
+            color={animal.dogs ? "#06D6A0" : "#F2353E"}
+          />
+        </View>
+      </View>
+
+      <View style={styles.goodWithContainer}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center"
+          }}
+        >
+          <Text style={styles.animalDetailsTitle}>Microchipped? </Text>
+          <AntDesign
+            name={animal.chip ? "check" : "close"}
+            size={20}
+            color={animal.chip ? "#06D6A0" : "#F2353E"}
+          />
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center"
+          }}
+        >
+          <Text style={styles.animalDetailsTitle}>Immunization Shots? </Text>
+          <AntDesign
+            name={animal.shots ? "check" : "close"}
+            size={20}
+            color={animal.shots ? "#06D6A0" : "#F2353E"}
+          />
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center"
+          }}
+        >
+          <Text style={styles.animalDetailsTitle}>Spayed/Neutered?</Text>
+          <AntDesign
+            name={animal.sn ? "check" : "close"}
+            size={20}
+            color={animal.sn ? "#06D6A0" : "#F2353E"}
+          />
         </View>
       </View>
       <ImageModal
@@ -215,11 +195,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 10
   },
-  animalTypeContainer: {
+  animalBreedContainer: {
     borderRadius: 3,
     paddingVertical: 2,
     paddingHorizontal: 5,
-    marginHorizontal: 5
+    marginHorizontal: 5,
+    backgroundColor: "#3281FF"
   },
   animalDetailsContainer: {
     flexDirection: "row",
@@ -236,7 +217,7 @@ const styles = StyleSheet.create({
     width: "90%",
     marginTop: 10
   },
-  animalTypeText: {
+  animalBreedText: {
     color: "white"
   },
   galleryContainer: {

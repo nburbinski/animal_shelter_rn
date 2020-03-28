@@ -19,7 +19,6 @@ const Animal = props => {
   const [url, setUrl] = useState("");
 
   var storage = firebase.storage();
-  console.log(props.shelter);
 
   const imageURL = async () => {
     try {
