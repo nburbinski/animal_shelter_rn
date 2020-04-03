@@ -72,13 +72,25 @@ const AnimalProfileScreen = props => {
               marginTop: 7.5
             }}
           >
-            <View style={{ flexDirection: "row" }}>
-              <Text>Age: </Text>
-              <Text>{animal.age ? animal.age : "N/A"}</Text>
+            <View style={{ flexDirection: "row", marginRight: 10 }}>
+              <Text
+                style={{ fontFamily: "source-sans-semi-bold", fontSize: 15 }}
+              >
+                Age:{" "}
+              </Text>
+              <Text style={{ fontFamily: "source-sans", fontSize: 15 }}>
+                {animal.age ? animal.age : "N/A"}
+              </Text>
             </View>
             <View style={{ flexDirection: "row" }}>
-              <Text>Gender: </Text>
-              <Text>{animal.gender ? animal.gender : "N/A"}</Text>
+              <Text
+                style={{ fontFamily: "source-sans-semi-bold", fontSize: 15 }}
+              >
+                Gender:{" "}
+              </Text>
+              <Text style={{ fontFamily: "source-sans", fontSize: 15 }}>
+                {animal.gender ? animal.gender : "N/A"}
+              </Text>
             </View>
           </View>
 

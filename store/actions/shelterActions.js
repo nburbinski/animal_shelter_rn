@@ -225,7 +225,9 @@ export const addAnimal = animal => {
           dogs: animal.dogs,
           shots: animal.shots,
           chip: animal.chip,
-          sn: animal.sn
+          sn: animal.sn,
+          age: animal.age,
+          gender: animal.gender
         })
       }
     );
@@ -316,6 +318,7 @@ export const editAnimal = (animal, id) => {
 export const editShelter = (shelter, id) => {
   return async (dispatch, getState) => {
     const token = getState().profile.token;
+    console.log(id);
 
     const uploadToFirebase = blob => {
       return new Promise((resolve, reject) => {
@@ -339,6 +342,7 @@ export const editShelter = (shelter, id) => {
 
     const blob = await uriToBlob(shelter.image);
     await uploadToFirebase(blob);
+    console.log("uploaded");
 
     const res = await fetch(
       `https://animal-shelter-6a4a9.firebaseio.com/shelters/${id}.json?auth=${token}`,

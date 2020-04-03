@@ -143,11 +143,60 @@ const EditAnimalScreen = props => {
 
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Type</Text>
-            <TextInput
-              style={styles.input}
-              value={formState.inputValues.type}
-              onChangeText={textChangeHandler.bind(this, "type")}
-            />
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-around" }}
+            >
+              <TouchableOpacity
+                onPress={() => textChangeHandler("type", "Cat")}
+              >
+                <View
+                  style={{
+                    backgroundColor:
+                      formState.inputValues.type == "Cat"
+                        ? "#3281FF"
+                        : "#FFFFFF",
+                    ...styles.typeContainer
+                  }}
+                >
+                  <Text
+                    style={{
+                      color:
+                        formState.inputValues.type == "Cat"
+                          ? "#FFFFFF"
+                          : "#3281FF",
+                      ...styles.typeText
+                    }}
+                  >
+                    Cat
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => textChangeHandler("type", "Dog")}
+              >
+                <View
+                  style={{
+                    backgroundColor:
+                      formState.inputValues.type == "Dog"
+                        ? "#3281FF"
+                        : "#FFFFFF",
+                    ...styles.typeContainer
+                  }}
+                >
+                  <Text
+                    style={{
+                      color:
+                        formState.inputValues.type == "Dog"
+                          ? "#FFFFFF"
+                          : "#3281FF",
+                      ...styles.typeText
+                    }}
+                  >
+                    Dog
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
 
           <View style={styles.inputContainer}>
@@ -391,6 +440,23 @@ const styles = StyleSheet.create({
     borderColor: "#3281FF",
     justifyContent: "center",
     alignItems: "center"
+  },
+  typeContainer: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
+  },
+  typeText: {
+    fontFamily: "source-sans-semi-bold",
+    fontSize: 15
   }
 });
 

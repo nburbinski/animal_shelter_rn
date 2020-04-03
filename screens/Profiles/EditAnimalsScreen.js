@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, View, FlatList, StyleSheet } from "react-native";
+import { SafeAreaView, View, FlatList, StyleSheet, Text } from "react-native";
 import EditAnimal from "../../components/EditAnimal";
 
 const EditAnimalsScreen = props => {
